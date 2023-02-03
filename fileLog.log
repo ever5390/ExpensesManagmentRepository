@@ -1,0 +1,23 @@
+2023-02-03 14:40:25.366  INFO 13656 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Starting ExpenseManagerApplication using Java 17.0.5 on DESKTOP-F4NTJ95 with PID 13656 (C:\Projects\workspace-backend\expense-manager\target\classes started by Ever in C:\Projects\workspace-backend\expense-manager)
+2023-02-03 14:40:25.391  INFO 13656 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-02-03 14:40:25.709  INFO 13656 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-03 14:40:25.710  INFO 13656 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-03 14:40:29.520  INFO 13656 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-03 14:40:29.960  INFO 13656 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 416 ms. Found 23 JPA repository interfaces.
+2023-02-03 14:40:31.924  INFO 13656 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-02-03 14:40:31.951  INFO 13656 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-03 14:40:31.953  INFO 13656 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2023-02-03 14:40:32.243  INFO 13656 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-03 14:40:32.244  INFO 13656 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6532 ms
+2023-02-03 14:40:32.724  INFO 13656 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-03 14:40:32.971  INFO 13656 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-02-03 14:40:33.525  INFO 13656 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-03 14:40:33.889  INFO 13656 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-03 14:40:34.379  INFO 13656 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-03 14:40:34.423  INFO 13656 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-02-03 14:40:37.342  INFO 13656 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-03 14:40:37.358  INFO 13656 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-03 14:40:40.314  WARN 13656 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-03 14:40:41.331  INFO 13656 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-02-03 14:40:42.724  INFO 13656 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-02-03 14:40:45.762  INFO 13656 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Started ExpenseManagerApplication in 22.456 seconds (JVM running for 24.242)
