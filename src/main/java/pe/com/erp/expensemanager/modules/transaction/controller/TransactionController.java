@@ -1,4 +1,4 @@
-package pe.com.erp.expensemanager.modules.expense.controller;
+package pe.com.erp.expensemanager.modules.transaction.controller;
 
 import java.util.List;
 
@@ -20,12 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.erp.expensemanager.exception.CustomException;
-import pe.com.erp.expensemanager.modules.expense.model.Expense;
-import pe.com.erp.expensemanager.modules.expense.model.Reposition;
-import pe.com.erp.expensemanager.modules.expense.model.Tag;
-import pe.com.erp.expensemanager.modules.expense.repository.ExpenseRepository;
-import pe.com.erp.expensemanager.modules.expense.services.interfaz.IExpenseService;
-import pe.com.erp.expensemanager.modules.expense.services.interfaz.ITagService;
+import pe.com.erp.expensemanager.modules.transaction.model.Expense;
+import pe.com.erp.expensemanager.modules.transaction.model.Tag;
+import pe.com.erp.expensemanager.modules.transaction.repository.TransactionRepository;
+import pe.com.erp.expensemanager.modules.transaction.services.interfaz.ITransactionService;
+import pe.com.erp.expensemanager.modules.transaction.services.interfaz.ITagService;
 import pe.com.erp.expensemanager.modules.owner.repository.OwnerRepository;
 import pe.com.erp.expensemanager.properties.PropertiesExtern;
 import pe.com.erp.expensemanager.shared.model.Response;
@@ -35,18 +34,18 @@ import pe.com.erp.expensemanager.utils.Utils;
 @EnableTransactionManagement
 @CrossOrigin(origins = {"http://localhost:4200", "*"})
 @RequestMapping(path="/api/v1")
-public class ExpenseController {
+public class TransactionController {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ExpenseController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(TransactionController.class);
 	
 	@Autowired
 	PropertiesExtern properties;
 	
 	@Autowired
-	IExpenseService expenseService;
+    ITransactionService expenseService;
 	
 	@Autowired
-	ExpenseRepository expenseRepo;
+	TransactionRepository expenseRepo;
 	
 	@Autowired
 	OwnerRepository ownerRepo;

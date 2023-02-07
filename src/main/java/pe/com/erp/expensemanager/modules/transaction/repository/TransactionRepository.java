@@ -1,4 +1,4 @@
-package pe.com.erp.expensemanager.modules.expense.repository;
+package pe.com.erp.expensemanager.modules.transaction.repository;
 
 import java.util.Date;
 import java.util.List;
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.com.erp.expensemanager.modules.account.model.Account;
-import pe.com.erp.expensemanager.modules.expense.model.Expense;
+import pe.com.erp.expensemanager.modules.transaction.model.Expense;
 
 @Repository
-public interface ExpenseRepository extends CrudRepository<Expense, Long>{
+public interface TransactionRepository extends CrudRepository<Expense, Long>{
 
 	@Query("Select COALESCE(sum(amount),0) from Expense e where e.period.id =:idPeriod")
 	double totalSpentedByDatePeriodId(Long idPeriod);

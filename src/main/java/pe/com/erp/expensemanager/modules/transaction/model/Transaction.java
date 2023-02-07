@@ -20,8 +20,8 @@ import pe.com.erp.expensemanager.shared.model.Vouchers;
 @Getter
 @Setter
 @Entity
-@Table(name = "expense")
-public class Expense {
+@Table
+public class Transaction {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,16 +31,16 @@ public class Expense {
 	private Double amount;
 
 	@Column(nullable = false)
-	private Double amountShow;
+	private Double amountPayed;
+
+	private double amountToRecover;
 
 	private boolean pendingPay;
 
 	private boolean enabled;
 
-	private double amountToRecover;
-
 	@Enumerated(value = EnumType.STRING)
-	private ExpenseType expenseType;
+	private TransactionType transactionType;
 
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "CREATE_AT")
@@ -51,7 +51,6 @@ public class Expense {
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "FK_VOUCHERS_ID")
 	private List<Vouchers> vouchers;
-
 
 	@ManyToOne
 	@JoinColumn(name = "FK_CATEGORY_ID")
@@ -73,31 +72,27 @@ public class Expense {
 	@JoinColumn(name = "FK_PERIOD_ID", nullable = true)
 	private Period period;
 
-	@ManyToOne
-	@JoinColumn(name = "fk_partner_id")
-	private Partner partner;
-
 	private Long idExpenseToPay;
-
 
 	@Override
 	public String toString() {
-		return "Expense{" +
+		return "Transaction{" +
 				"id=" + id +
 				", amount=" + amount +
-				", amountShow=" + amountShow +
+				", amountPayed=" + amountPayed +
+				", amountToRecover=" + amountToRecover +
 				", pendingPay=" + pendingPay +
 				", enabled=" + enabled +
-				", amountToRecover=" + amountToRecover +
-				", expenseType=" + expenseType +
+				", transactionType=" + transactionType +
 				", createAt=" + createAt +
 				", description='" + description + '\'' +
 				", vouchers=" + vouchers +
 				", category=" + category +
 				", account=" + account +
+				", reposition=" + reposition +
 				", tag=" + tag +
 				", period=" + period +
-				", partner=" + partner +
 				", idExpenseToPay=" + idExpenseToPay +
 				'}';
-	}}
+	}
+}

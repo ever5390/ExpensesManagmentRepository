@@ -7,7 +7,7 @@ import pe.com.erp.expensemanager.exception.CustomException;
 import pe.com.erp.expensemanager.modules.expense.model.Expense;
 import pe.com.erp.expensemanager.shared.model.Response;
 
-public interface IExpenseService {
+public interface ITransactionService {
 
 	Response saveExpense(Expense expenseRequest, String messageLog) throws CustomException;
 

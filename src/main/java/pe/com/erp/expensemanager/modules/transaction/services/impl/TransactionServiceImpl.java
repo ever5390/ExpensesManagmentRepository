@@ -3,9 +3,6 @@ package pe.com.erp.expensemanager.modules.expense.services.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.xml.bind.ValidationException;
 
@@ -20,7 +17,6 @@ import pe.com.erp.expensemanager.modules.account.model.Account;
 import pe.com.erp.expensemanager.modules.expense.model.ExpenseType;
 import pe.com.erp.expensemanager.modules.account.model.TypeStatusAccountOPC;
 import pe.com.erp.expensemanager.modules.account.repository.AccountRepository;
-import pe.com.erp.expensemanager.modules.categories.model.Category;
 import pe.com.erp.expensemanager.modules.categories.repository.CategoryRepository;
 import pe.com.erp.expensemanager.modules.expense.model.Expense;
 import pe.com.erp.expensemanager.modules.expense.model.Reposition;
@@ -28,7 +24,7 @@ import pe.com.erp.expensemanager.modules.expense.model.Tag;
 import pe.com.erp.expensemanager.modules.expense.repository.ExpenseRepository;
 import pe.com.erp.expensemanager.modules.expense.repository.RepositionRepo;
 import pe.com.erp.expensemanager.modules.expense.repository.TagRepository;
-import pe.com.erp.expensemanager.modules.expense.services.interfaz.IExpenseService;
+import pe.com.erp.expensemanager.modules.expense.services.interfaz.ITransactionService;
 import pe.com.erp.expensemanager.modules.notifications.model.NotificationExpense;
 import pe.com.erp.expensemanager.modules.notifications.model.TypeStatusNotificationExpense;
 import pe.com.erp.expensemanager.modules.notifications.repository.NotificationRepository;
@@ -37,7 +33,6 @@ import pe.com.erp.expensemanager.modules.owner.repository.OwnerRepository;
 import pe.com.erp.expensemanager.modules.partners.model.Partner;
 import pe.com.erp.expensemanager.modules.partners.model.StatusInvitationsPartner;
 import pe.com.erp.expensemanager.modules.partners.repository.PartnerRepository;
-import pe.com.erp.expensemanager.modules.period.model.Period;
 import pe.com.erp.expensemanager.modules.period.repository.PeriodRepository;
 import pe.com.erp.expensemanager.properties.PropertiesExtern;
 import pe.com.erp.expensemanager.shared.model.Response;
@@ -46,9 +41,9 @@ import pe.com.erp.expensemanager.shared.repository.VoucherRepository;
 import pe.com.erp.expensemanager.utils.Utils;
 
 @Service
-public class ExpenseServiceImpl implements IExpenseService {
+public class TransactionServiceImpl implements ITransactionService {
 
-	public static final Logger LOG = LoggerFactory.getLogger(ExpenseServiceImpl.class);
+	public static final Logger LOG = LoggerFactory.getLogger(TransactionServiceImpl.class);
 
 	@Autowired
 	PropertiesExtern properties;
