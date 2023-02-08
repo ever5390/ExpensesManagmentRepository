@@ -8,7 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import pe.com.erp.expensemanager.modules.account.model.Account;
 import pe.com.erp.expensemanager.modules.account.model.TypeStatusAccountOPC;
-import pe.com.erp.expensemanager.modules.expense.model.Expense;
 
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Long>{

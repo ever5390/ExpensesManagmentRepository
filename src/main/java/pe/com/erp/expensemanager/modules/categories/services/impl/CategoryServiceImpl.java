@@ -13,7 +13,7 @@ import pe.com.erp.expensemanager.modules.account.repository.AccountRepository;
 import pe.com.erp.expensemanager.modules.categories.model.Category;
 import pe.com.erp.expensemanager.modules.categories.repository.CategoryRepository;
 import pe.com.erp.expensemanager.modules.categories.services.interfaz.ICategoryService;
-import pe.com.erp.expensemanager.modules.expense.repository.ExpenseRepository;
+import pe.com.erp.expensemanager.modules.transaction.repository.TransactionRepository;
 import pe.com.erp.expensemanager.properties.PropertiesExtern;
 import pe.com.erp.expensemanager.shared.model.Response;
 
@@ -32,7 +32,7 @@ public class CategoryServiceImpl implements ICategoryService {
 	AccountRepository accountRepo;
 	
 	@Autowired
-	ExpenseRepository expensesRepo;
+    TransactionRepository expensesRepo;
 	
 	@Override
 	@Transactional

@@ -1,35 +1,25 @@
-package pe.com.erp.expensemanager.modules.expense.services.interfaz;
+package pe.com.erp.expensemanager.modules.transaction.services.interfaz;
 
 import java.util.Date;
 import java.util.List;
 
 import pe.com.erp.expensemanager.exception.CustomException;
-import pe.com.erp.expensemanager.modules.expense.model.Expense;
+import pe.com.erp.expensemanager.modules.transaction.model.Transaction;
 import pe.com.erp.expensemanager.shared.model.Response;
 
 public interface ITransactionService {
 
-	Response saveExpense(Expense expenseRequest, String messageLog) throws CustomException;
+	Response saveTransaction(Transaction transactionRequest, String messageLog) throws CustomException;
 
-	Response savePay(Expense payRequest, String messageLog) throws CustomException;
-	
-	//List<Expense> findExpensesByIdPeriodAndIStatusPay(Long idPeriod, boolean statusPay);
+	Response savePay(Transaction payRequest, String messageLog) throws CustomException;
 
-	// List<String> findPayerDistinctNamesExpensessByWorskpaceId(Long idWorkspace);
-	
-	//Response updateStatusPay(Long idExpenseUpdate);
+	Response deleteTransactionById(Long idExpense, String messageLog);
 
-	Response deleteExpenseById(Long idExpense, String messageLog);
+	Response updateTransactionById(Transaction transactionRequest, Long idTransaction, String messageLog);
 
-	Response updateExpense(Expense expenseRequest, Long idExpenseUpdateReq, String messageLog);
+	List<Transaction> findTransactionByWorskpaceIdAndDateRange(Long idWorkspace, String dateBegin, String dateEnd );
 
-    //Expense updateVouchers(Expense expenseRequest);
-	
-	
-	//List<Expense> findExpensesByIdWorkspaceAndIdPeriod(Long idWorkspace, Long idPeriod);
-	//List<Expense> findExpensesByIdWorkspaceAndIdPeriod(Long idWorkspace, Long idPeriod);
-
-	List<Expense> findExpensessByWorskpaceIdAndDateRange(Long idWorkspace, Date dateBegin, Date dateEnd );
+	List<Transaction> findTransactionByAccountIdAndPeriodId(Long idAccount, Long idPeriod );
 
 	
 }

@@ -34,8 +34,7 @@ public class Period {
 	//statusPeriod :: 0 CERRADO , 1 ABIERTO
 	private boolean statusPeriod;
 	
-	private boolean isActivate;
-	
+	private boolean active;
 	@Temporal(value=TemporalType.TIMESTAMP)
     @Column(name="START_DATE")
 	private Date startDate;

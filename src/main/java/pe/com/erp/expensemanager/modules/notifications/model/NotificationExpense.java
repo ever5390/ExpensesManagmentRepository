@@ -18,8 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import pe.com.erp.expensemanager.modules.expense.model.Expense;
 import pe.com.erp.expensemanager.modules.owner.model.Owner;
+import pe.com.erp.expensemanager.modules.transaction.model.Transaction;
 import pe.com.erp.expensemanager.shared.model.Vouchers;
 
 @Entity
@@ -31,7 +31,7 @@ public class NotificationExpense {
 	private Long id;
 	
 	@OneToOne
-	private Expense expenseShared;
+	private Transaction expenseShared;
 	
 	@Enumerated(value = EnumType.STRING)
 	private TypeStatusNotificationExpense statusNotification;
@@ -51,7 +51,7 @@ public class NotificationExpense {
 
 	public NotificationExpense() {}
     
-	public NotificationExpense(Long id, Expense expenseShared, TypeStatusNotificationExpense statusNotification,
+	public NotificationExpense(Long id, Transaction expenseShared, TypeStatusNotificationExpense statusNotification,
 			List<Vouchers> vouchers, String comentarios, Owner payer, Date createAt) {
 		super();
 		this.id = id;
@@ -79,11 +79,11 @@ public class NotificationExpense {
 		this.id = id;
 	}
 
-	public Expense getExpenseShared() {
+	public Transaction getExpenseShared() {
 		return expenseShared;
 	}
 
-	public void setExpenseShared(Expense expenseShared) {
+	public void setExpenseShared(Transaction expenseShared) {
 		this.expenseShared = expenseShared;
 	}
 

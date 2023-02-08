@@ -1,7 +1,5 @@
 package pe.com.erp.expensemanager.modules.notifications.services.impl;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import pe.com.erp.expensemanager.modules.account.model.Account;
 import pe.com.erp.expensemanager.modules.account.model.TypeStatusAccountOPC;
 import pe.com.erp.expensemanager.modules.account.repository.AccountRepository;
-import pe.com.erp.expensemanager.modules.expense.model.According;
-import pe.com.erp.expensemanager.modules.expense.model.Expense;
-import pe.com.erp.expensemanager.modules.expense.repository.AccordingRepository;
-import pe.com.erp.expensemanager.modules.expense.repository.ExpenseRepository;
+import pe.com.erp.expensemanager.modules.transaction.model.Transaction;
+import pe.com.erp.expensemanager.modules.transaction.repository.TransactionRepository;
 import pe.com.erp.expensemanager.modules.notifications.model.NotificationExpense;
 import pe.com.erp.expensemanager.modules.notifications.model.TypeStatusNotificationExpense;
 import pe.com.erp.expensemanager.modules.notifications.repository.NotificationRepository;
@@ -30,12 +26,10 @@ public class NotificationServiceImpl implements INotificationService {
 
 	@Autowired
 	NotificationRepository notifRepo;
+
 	
 	@Autowired
-	AccordingRepository accordingRepo;
-	
-	@Autowired
-	ExpenseRepository expenseRepo;
+	TransactionRepository expenseRepo;
 	
 	@Autowired
 	VoucherRepository voucherRepo;
@@ -58,14 +52,12 @@ public class NotificationServiceImpl implements INotificationService {
 	    // 5 = RECLAMAR :: STATUS = RECLAMADO => 
 		
 		NotificationExpense notificationExpenseUpdate = new NotificationExpense();
-		Expense expenseReq = new Expense();
-		According according = new According();
+		Transaction expenseReq = new Transaction();
 
 		notificationExpenseUpdate = notifRepo.findById(notificationExpenseRequest.getId()).orElse(null);
 		if(notificationExpenseUpdate == null) return notificationExpenseUpdate;
 		notificationExpenseUpdate.setComentarios(notificationExpenseRequest.getComentarios());
 		notificationExpenseUpdate.setCreateAt(notificationExpenseRequest.getCreateAt());
-		notificationExpenseUpdate.setExpenseShared(notificationExpenseRequest.getExpenseShared());
 		notificationExpenseUpdate.setPayer(notificationExpenseRequest.getPayer());
 		notificationExpenseUpdate.setStatusNotification(notificationExpenseRequest.getStatusNotification());
 		notificationExpenseUpdate.setVouchers(notificationExpenseRequest.getVouchers());
@@ -74,9 +66,6 @@ public class NotificationServiceImpl implements INotificationService {
 		LOG.info(notificationExpenseUpdate.toString());
 
 		if(notificationExpenseRequest.getStatusNotification().equals(TypeStatusNotificationExpense.CANCELADO)) {
-			according = accordingRepo.findById(1L).orElse(new According(1L, "PROPIO","",""));
-			LOG.info("According");
-			LOG.info(according.toString());
 			expenseReq = notificationExpenseRequest.getExpenseShared();
 			//expenseReq.setPendingPayment(false);
 			//expenseReq.setAccordingType(according);
@@ -102,7 +91,7 @@ public class NotificationServiceImpl implements INotificationService {
 	}
 	
 	@Transactional
-	public void updateAccountIfExists(Expense expenseUpdateReq) {
+	public void updateAccountIfExists(Transaction expenseUpdateReq) {
 		
 		if(expenseUpdateReq.getAccount() == null) {
 			//caso account de expense sea NULL

@@ -1,4 +1,4 @@
-package pe.com.erp.expensemanager.modules.expense.services.impl;
+package pe.com.erp.expensemanager.modules.transaction.services.impl;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.com.erp.expensemanager.modules.expense.model.Tag;
-import pe.com.erp.expensemanager.modules.expense.repository.TagRepository;
-import pe.com.erp.expensemanager.modules.expense.services.interfaz.ITagService;
+import pe.com.erp.expensemanager.modules.transaction.model.Tag;
+import pe.com.erp.expensemanager.modules.transaction.repository.TagRepository;
+import pe.com.erp.expensemanager.modules.transaction.services.interfaz.ITagService;
 
 @Service
 public class TagServiceImpl implements ITagService {

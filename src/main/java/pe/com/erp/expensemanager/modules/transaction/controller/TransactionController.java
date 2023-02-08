@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.erp.expensemanager.exception.CustomException;
-import pe.com.erp.expensemanager.modules.transaction.model.Expense;
 import pe.com.erp.expensemanager.modules.transaction.model.Tag;
+import pe.com.erp.expensemanager.modules.transaction.model.Transaction;
 import pe.com.erp.expensemanager.modules.transaction.repository.TransactionRepository;
 import pe.com.erp.expensemanager.modules.transaction.services.interfaz.ITransactionService;
 import pe.com.erp.expensemanager.modules.transaction.services.interfaz.ITagService;
@@ -42,11 +42,8 @@ public class TransactionController {
 	PropertiesExtern properties;
 	
 	@Autowired
-    ITransactionService expenseService;
-	
-	@Autowired
-	TransactionRepository expenseRepo;
-	
+    ITransactionService iTransactionService;
+
 	@Autowired
 	OwnerRepository ownerRepo;
 	
@@ -59,17 +56,14 @@ public class TransactionController {
 	}
 	*/
 	@PostMapping(path="/expense")
-	public ResponseEntity<Response> save( @RequestBody Expense expenseRequest) {
+	public ResponseEntity<Response> save( @RequestBody Transaction expenseRequest) {
 		
 		Response response =  new Response();
 		String ownerInfoMessage = "[X10598] EXPENSE SAVE ::";
 		try {
 			LOG.info(ownerInfoMessage + " BEGIN " );
-			response = expenseService.saveExpense(expenseRequest, ownerInfoMessage);
-			if(!response.getStatus().equals(properties.RESPONSE_GENERIC_SUCCESS_STATUS)) {
-				return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
-			}
-			
+			response = iTransactionService.saveTransaction(expenseRequest, ownerInfoMessage);
+
 		} catch (CustomException ce) {
 			response.setTitle(properties.RESPONSE_GENERIC_INFO_TITLE);
 			response.setStatus(properties.RESPONSE_GENERIC_INFO_STATUS);
@@ -132,11 +126,11 @@ public class TransactionController {
 	}
 	*/
 	@PutMapping("/expense/{idExpense}")
-	ResponseEntity<Response> updateExpense(@RequestBody Expense expenseRequest, @PathVariable Long idExpense) {
+	ResponseEntity<Response> updateExpense(@RequestBody Transaction expenseRequest, @PathVariable Long idExpense) {
 		Response response = new Response();
 		String ownerInfoMessage = "[X10598] EXPENSE SAVE ::";
 		try {
-			response = expenseService.updateExpense(expenseRequest, idExpense, ownerInfoMessage);
+			response = iTransactionService.updateTransactionById(expenseRequest, idExpense, ownerInfoMessage);
 			if(!response.getStatus().equals(properties.RESPONSE_GENERIC_SUCCESS_STATUS)) {
 				return new ResponseEntity<Response>(response, HttpStatus.CONFLICT);
 			}
@@ -163,7 +157,7 @@ public class TransactionController {
 		Response response = new Response();
 		String ownerInfoMessage = "[X10598] EXPENSE SAVE ::";
 		try {
-			response =  expenseService.deleteExpenseById(idExpense, ownerInfoMessage);
+			response =  iTransactionService.deleteTransactionById(idExpense, ownerInfoMessage);
 			if(!response.getStatus().equals(properties.RESPONSE_GENERIC_SUCCESS_STATUS)) {
 				return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
 			}
@@ -194,14 +188,12 @@ public class TransactionController {
 	}
 */
 	@GetMapping("/workspace/{idWorkspace}/expenses/date-range")
-	public ResponseEntity<List<Expense>> findExpensessByWorskpaceIdAndDateRange(@PathVariable("idWorkspace") Long idWorkspace, @RequestParam String dateBegin,
-			@RequestParam String dateEnd) {
-				
-		return new ResponseEntity<>(expenseService.findExpensessByWorskpaceIdAndDateRange(
-				idWorkspace, 
-				Utils.convertStringToDate(dateBegin), 
-				Utils.convertStringToDate(dateEnd)
-			), HttpStatus.OK);
+	public List<Transaction> findExpensessByWorskpaceIdAndDateRange(@PathVariable("idWorkspace") Long idWorkspace, @RequestParam String dateBegin,
+																				   @RequestParam String dateEnd) {
+		return iTransactionService.findTransactionByWorskpaceIdAndDateRange(idWorkspace, dateBegin, dateEnd);
 	}
-
+	@GetMapping("/period/{idPeriod}/account/{idAccount}/expenses")
+	public List<Transaction> findTransactionByAccountIdAndPeriodId( @PathVariable Long idPeriod, @PathVariable Long idAccount) {
+		return iTransactionService.findTransactionByAccountIdAndPeriodId(idAccount, idPeriod);
+	}
 }

@@ -1,10 +1,8 @@
 package pe.com.erp.expensemanager.modules.period.services.impl;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +16,7 @@ import pe.com.erp.expensemanager.modules.account.model.TypeStatusAccountOPC;
 import pe.com.erp.expensemanager.modules.account.repository.AccountRepository;
 import pe.com.erp.expensemanager.modules.categories.model.Category;
 import pe.com.erp.expensemanager.modules.categories.repository.CategoryRepository;
-import pe.com.erp.expensemanager.modules.expense.model.Expense;
-import pe.com.erp.expensemanager.modules.expense.repository.ExpenseRepository;
+import pe.com.erp.expensemanager.modules.transaction.repository.TransactionRepository;
 import pe.com.erp.expensemanager.modules.period.dao.PeriodDetailDao;
 import pe.com.erp.expensemanager.modules.period.model.Period;
 import pe.com.erp.expensemanager.modules.period.repository.PeriodRepository;
@@ -44,7 +41,7 @@ public class PeriodServiceImpl implements IPeriodService {
 	CategoryRepository categRepo;
 	
 	@Autowired
-	ExpenseRepository expensRepo;
+    TransactionRepository expensRepo;
 	
 	@Autowired
 	PropertiesExtern propertiesExtern;
@@ -59,7 +56,7 @@ public class PeriodServiceImpl implements IPeriodService {
 		Period periodSummarySave = new Period();
 		periodSummarySave.setStartDate(new Date());
 		periodSummarySave.setFinalDate(Utils.getNextLocalDate(new Date(),"final", 1));
-		periodSummarySave.setActivate(false);
+		periodSummarySave.setActive(false);
 		periodSummarySave.setStatusPeriod(true);
 		periodSummarySave.setWorkspace(period.getWorkspace());
 		return periodoRepo.save(periodSummarySave);
@@ -81,7 +78,7 @@ public class PeriodServiceImpl implements IPeriodService {
 			account = accountRepo.findAccountByTypeAccountAndStatusAccountAndPeriodId(
 					1L, TypeStatusAccountOPC.INITIAL, periodSummary.getId());
 
-			totalSpent = expensRepo.totalSpentedByDatePeriodId(periodSummary.getId());
+			//totalSpent = expensRepo.totalSpentedByDatePeriodId(periodSummary.getId());
 			 
 			periodDetail = new PeriodDetailDao();
 			periodDetail.setPeriod(periodSummary);
@@ -122,7 +119,7 @@ public class PeriodServiceImpl implements IPeriodService {
 			throw new CustomException(propertiesExtern.RESPONSE_CUSTOMIZED_MESSAGE_PERIOD_NOT_FOUND);
 		
 		account = accountRepo.findAccountByTypeAccountAndStatusAccountAndPeriodId(1L, TypeStatusAccountOPC.INITIAL, periodSummary.getId());
-		totalSpent = expensRepo.totalSpentedByDatePeriodId(periodSummary.getId());		
+		//totalSpent = expensRepo.totalSpentedByDatePeriodId(periodSummary.getId());
 		periodDetailHeader.setPeriod(periodSummary);
 		periodDetailHeader.setTotalSpent(totalSpent);
 		periodDetailHeader.setAmountEstimado(account!=null?account.getBalance():totalSpent);
@@ -142,7 +139,7 @@ public class PeriodServiceImpl implements IPeriodService {
 		Double totalSpentPendingIfExist = 0.0;
 
 		//Update status period :: closed
-		periodRequest.setActivate(true);
+		//periodRequest.setActivate(true);
 		periodRequest.setStatusPeriod(false);
 		periodRequest.setFinalDate(periodRequest.getFinalDate());
 		periodoRepo.save(periodRequest);
@@ -209,7 +206,7 @@ public class PeriodServiceImpl implements IPeriodService {
 		int difMonth = Utils.extracted(periodOrigin.getFinalDate()) - Utils.extracted(periodOrigin.getStartDate());
 		int difMonthSend = (difMonth==0)?1:(difMonth);
 		
-		newPeriod.setActivate(true);
+		//newPeriod.setActivate(true);
 		newPeriod.setStatusPeriod(true);
 		newPeriod.setWorkspace(periodOrigin.getWorkspace());
 		newPeriod.setStartDate(Utils.getNextLocalDate(periodOrigin.getFinalDate(),"start", 5));

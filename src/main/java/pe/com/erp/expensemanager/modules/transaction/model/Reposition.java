@@ -1,4 +1,4 @@
-package pe.com.erp.expensemanager.modules.expense.model;
+package pe.com.erp.expensemanager.modules.transaction.model;
 
 import pe.com.erp.expensemanager.modules.partners.model.Partner;
 

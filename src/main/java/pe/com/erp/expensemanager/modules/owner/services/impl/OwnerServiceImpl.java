@@ -122,7 +122,7 @@ public class OwnerServiceImpl implements IOwnerService {
 		Period periodSummarySave = new Period();
 		periodSummarySave.setStartDate(new Date());
 		periodSummarySave.setFinalDate(Utils.getNextLocalDate(new Date(),"final", 1));
-		periodSummarySave.setActivate(false);
+		periodSummarySave.setActive(false);
 		periodSummarySave.setStatusPeriod(true);
 		periodSummarySave.setWorkspace(workspaceDefault);
 		periodRepo.save(periodSummarySave);

@@ -1,4 +1,4 @@
-package pe.com.erp.expensemanager.modules.expense.model;
+package pe.com.erp.expensemanager.modules.transaction.model;
 
 import java.util.Date;
 import java.util.List;
@@ -9,9 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import pe.com.erp.expensemanager.modules.account.model.Account;
 import pe.com.erp.expensemanager.modules.categories.model.Category;
-import pe.com.erp.expensemanager.modules.partners.model.Partner;
 import pe.com.erp.expensemanager.modules.period.model.Period;
 import pe.com.erp.expensemanager.shared.model.Vouchers;
 

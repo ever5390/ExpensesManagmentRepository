@@ -5,7 +5,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PropertiesExtern {
-	@Value("${response.customized.message.expense.expenseassocdontexists}")
+	@Value("${response.customized.message.transfer.availableaccounttoreversalisnotsufficientfordiscountamounttransference}")
+	public String RESPONSE_CUSTOMIZED_TRANSFER_INFO_AVAILABLE_ACCOUNT_ITS_INSUFFICIENT_FOR_DISCOUNT_AMOUNT_TRANSFERENCE_DONT_POSSIBLE_REVERSAL;
+	@Value("${response.customized.message.expenseassocbycreditcarddontexist}")
+    public String RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_ASSOC_CREDIT_CARD_DONT_EXIST;
+    @Value("${response.customized.message.expense.expenseassocdontexists}")
 	public String RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_ASSOC_DONT_EXIST;
 	@Value("${response.customized.message.expense.payregisterdontexist}")
 	public String RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_PAYREGISTER_DONT_EXIST;
@@ -183,8 +187,13 @@ public class PropertiesExtern {
 	
 	@Value("${response.customized.account.error.name.repeat}")
 	public String RESPONSE_CUSTOMIZED_MESSAGE_ACCOUNT_NAME_REPEAT;
-	
-	//Delete
+
+	@Value("(\"${response.customized.account.error.newamountexpenseisgreatherthanamountpayedtoexpenseupdate}\")")
+	public String RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_NEW_AMOUNT_IS_GRATHER_THAN_AMOUNT_PAYED_TO_UPDATE;
+	@Value("${response.customized.account.error.save.amountexpenseisgreatherthanamountavailableaccount}")
+	public String RESPONSE_AMOUNT_TO_EXPENSE_IS_GRATHER_THAN_TO_AVAILABLE_AMOUNT_ACCOUNT;
+	@Value("${response.customized.account.error.save.amountpaymentisgreatherthanamountpendingexpense}")
+	public String RESPONSE_AMOUNT_TO_PAYMENT_IS_GRATHER_THAN_TO_AMOUNT_PENDING_EXPENSE;
 	@Value("${response.customized.account.success.delete}")
 	public String RESPONSE_CUSTOMIZED_ACCOUNT_SUCCESS_DELETE;
 	

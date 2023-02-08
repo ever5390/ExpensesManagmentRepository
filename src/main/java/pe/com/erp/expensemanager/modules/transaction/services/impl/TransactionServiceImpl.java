@@ -1,4 +1,4 @@
-package pe.com.erp.expensemanager.modules.expense.services.impl;
+package pe.com.erp.expensemanager.modules.transaction.services.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,26 +14,21 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pe.com.erp.expensemanager.exception.CustomException;
 import pe.com.erp.expensemanager.modules.account.model.Account;
-import pe.com.erp.expensemanager.modules.expense.model.ExpenseType;
-import pe.com.erp.expensemanager.modules.account.model.TypeStatusAccountOPC;
+import pe.com.erp.expensemanager.modules.account.model.StatusAccountTransfer;
+import pe.com.erp.expensemanager.modules.account.model.Transference;
+import pe.com.erp.expensemanager.modules.account.model.TypeTransference;
 import pe.com.erp.expensemanager.modules.account.repository.AccountRepository;
-import pe.com.erp.expensemanager.modules.categories.repository.CategoryRepository;
-import pe.com.erp.expensemanager.modules.expense.model.Expense;
-import pe.com.erp.expensemanager.modules.expense.model.Reposition;
-import pe.com.erp.expensemanager.modules.expense.model.Tag;
-import pe.com.erp.expensemanager.modules.expense.repository.ExpenseRepository;
-import pe.com.erp.expensemanager.modules.expense.repository.RepositionRepo;
-import pe.com.erp.expensemanager.modules.expense.repository.TagRepository;
-import pe.com.erp.expensemanager.modules.expense.services.interfaz.ITransactionService;
-import pe.com.erp.expensemanager.modules.notifications.model.NotificationExpense;
-import pe.com.erp.expensemanager.modules.notifications.model.TypeStatusNotificationExpense;
-import pe.com.erp.expensemanager.modules.notifications.repository.NotificationRepository;
-import pe.com.erp.expensemanager.modules.owner.model.Owner;
-import pe.com.erp.expensemanager.modules.owner.repository.OwnerRepository;
-import pe.com.erp.expensemanager.modules.partners.model.Partner;
+import pe.com.erp.expensemanager.modules.account.repository.TransferenceRepository;
 import pe.com.erp.expensemanager.modules.partners.model.StatusInvitationsPartner;
 import pe.com.erp.expensemanager.modules.partners.repository.PartnerRepository;
-import pe.com.erp.expensemanager.modules.period.repository.PeriodRepository;
+import pe.com.erp.expensemanager.modules.transaction.model.Reposition;
+import pe.com.erp.expensemanager.modules.transaction.model.Tag;
+import pe.com.erp.expensemanager.modules.transaction.model.Transaction;
+import pe.com.erp.expensemanager.modules.transaction.model.TransactionType;
+import pe.com.erp.expensemanager.modules.transaction.repository.RepositionRepo;
+import pe.com.erp.expensemanager.modules.transaction.repository.TagRepository;
+import pe.com.erp.expensemanager.modules.transaction.repository.TransactionRepository;
+import pe.com.erp.expensemanager.modules.transaction.services.interfaz.ITransactionService;
 import pe.com.erp.expensemanager.properties.PropertiesExtern;
 import pe.com.erp.expensemanager.shared.model.Response;
 import pe.com.erp.expensemanager.shared.model.Vouchers;
@@ -49,20 +44,7 @@ public class TransactionServiceImpl implements ITransactionService {
 	PropertiesExtern properties;
 
 	@Autowired
-	PeriodRepository periodRepo;
-
-	@Autowired
-	AccountRepository accountRepo;
-
-	@Autowired
-	ExpenseRepository expenseRepo;
-
-	@Autowired
-	CategoryRepository categoryRepo;
-
-	@Autowired
-	OwnerRepository ownerRepo;
-
+	TransactionRepository transactionRepository;
 	@Autowired
 	TagRepository tagRepo;
 
@@ -70,122 +52,159 @@ public class TransactionServiceImpl implements ITransactionService {
 	VoucherRepository voucherRepo;
 
 	@Autowired
-	NotificationRepository notifRepo;
+	RepositionRepo repositionRepo;
 
 	@Autowired
 	PartnerRepository partnerRepository;
+
 	@Autowired
-	private RepositionRepo repositionRepo;
+	TransferenceRepository transferenceRepository;
+	@Autowired
+	private AccountRepository accountRepository;
 
 	@Override
 	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
-	public Response saveExpense(Expense expenseRequest, String messageLog) throws CustomException {
+	public Response saveTransaction(Transaction transactionRequest, String messageLog) throws CustomException {
 
 		Response response = new Response();
-		Account accountAffected = new Account();
-		Expense expenseSaved = new Expense();
-		boolean goToDiscountAccount = true;
-		boolean goToNotifyCounterpart = false;
-		Owner userRegister = new Owner();
-		LOG.info(messageLog + expenseRequest.getAccount().getBalanceAvailable());
-		LOG.info(messageLog + expenseRequest.getExpenseType());
-		userRegister = expenseRequest.getPeriod().getWorkspace().getOwner();
-		accountAffected = accountRepo.findById(expenseRequest.getAccount().getId()).orElse(null);
+		boolean modifyAccount = true;
+		Transaction transactionToSave = new Transaction();
 
-		if((expenseRequest.getAmount() > accountAffected.getBalanceAvailable()) && !expenseRequest.getExpenseType().equals(ExpenseType.REMINDER)) {
-			LOG.info(messageLog + " AMOUNT IS GREATER THAN AMOUNT AVAILABLE ACCOUNT ");
-			throw new CustomException(properties.RESPONSE_CUSTOMIZED_AMOUNT_MAYOR_SALDODISPONIBLE.replace("{0}",
-					expenseRequest.getAccount().getBalanceAvailable().toString()));
-		}
-		LOG.info(messageLog + expenseRequest.getAmount());
-		LOG.info(expenseRequest.getCategory().toString());
-
-		if(expenseRequest.getCategory().getName().isEmpty()) {
-			new CustomException(properties.RESPONSE_CUSTOMIZED_EXPENSE_WITHOUT_CATEGPRY);
-		}
-
-		if(expenseRequest.getCategory().getId() == 0) {
-			expenseRequest.setCategory(categoryRepo.save(expenseRequest.getCategory()));
-		}
-
-		LOG.info(messageLog + expenseRequest.getAccount().getBalanceAvailable());
-		LOG.info(messageLog + accountAffected.getBalanceAvailable());
-		if(accountAffected == null) {
-			LOG.info(messageLog + " ACCOUNT IS NULL ");
-			throw new CustomException("Account IS NULL");
-		}
-		expenseRequest.setPendingPay(false);
-
-		if(expenseRequest.getExpenseType().equals(ExpenseType.REMINDER)) {
-			expenseRequest.setPendingPay(true);
-			goToDiscountAccount = false;
-		}
-		/*
-		if(!expenseRequest.getPartner().getName().isBlank() && !expenseRequest.getPartner().getEmail().equals(userRegister.getEmail())) {
-			expenseRequest.setPendingPay(true);
-			if(expenseRequest.getPartner().getId() == 0) {
-				//Save new partner, don't notified
-				Partner partnerSaved = saveNewPartner(expenseRequest);
-				expenseRequest.setPartner(partnerSaved);
-			} else if(expenseRequest.getPartner().getStatusRequest().equals(StatusInvitationsPartner.ACCEPTED)) {
-				//Send notification
-				goToNotifyCounterpart = true;
+		LOG.info(messageLog + "La transacción recibida es de tipo: " + TransactionType.EXPENSE);
+		if(transactionRequest.getTransactionType().equals(TransactionType.EXPENSE)) {
+			if(transactionRequest.getAmount() > transactionRequest.getAccount().getBalanceAvailable()){
+				throw new CustomException(properties.RESPONSE_AMOUNT_TO_EXPENSE_IS_GRATHER_THAN_TO_AVAILABLE_AMOUNT_ACCOUNT);
 			}
-		}*/
-		expenseRequest.setTag(validateTagsAndSaveIfNotExists(expenseRequest, messageLog));
-		expenseRequest.setVouchers(validateVouchersAndSaveIfNotExists(expenseRequest, messageLog));
-		expenseRequest.setReposition(saveOrUpdateRepositions(expenseRequest, messageLog));
 
-		if(goToDiscountAccount) {
-			LOG.info(messageLog + " UPDATING AVAILABLE AMOUNT ACCOUNT ");
-			LOG.info(messageLog + accountAffected.getBalanceAvailable());
-			LOG.info(messageLog + expenseRequest.getAmount());
-			accountAffected.setBalanceAvailable(accountAffected.getBalanceAvailable() - expenseRequest.getAmount());
-			accountRepo.save(accountAffected);
+			if(transactionRequest.getAmountToRecover() > 0) {
+				LOG.info(messageLog + "La transacción se maracará como PENDIENTE DE PAGO, ya que su monto a devolver es nayor que CERO");
+				transactionRequest.setPendingPay(true);
+				transactionRequest.setReposition(saveOrUpdateRepositions(transactionRequest, messageLog));
+			}
+
+			transactionRequest.setAmountToRecover(transactionRequest.getAmount());
+			transactionRequest.setAmountPayed(0.0);
 		}
 
-		LOG.info(messageLog + " STEP 1 ");
-		expenseRequest.setAmount((-1)*expenseRequest.getAmount());
-		expenseSaved = expenseRepo.save(expenseRequest);
-		LOG.info(messageLog + " STEP 2 ");
-		if(goToNotifyCounterpart) {
-			LOG.info(messageLog + " NOTIFYING COUNTERPART IF EXIST ");
-			saveNotificationRegister(expenseSaved);
+		if(transactionRequest.getTransactionType().equals(TransactionType.REMINDER)) {
+			LOG.info(messageLog + "La transacción se marcará como PENDIENTE DE PAGO, por ser recoradotorio");
+			transactionRequest.setPendingPay(true);
+			modifyAccount = false;
 		}
 
-		LOG.info(messageLog + " ::: ACCOUNT SAVED SUCCESSFULLY ::: ");
+		if(transactionRequest.getTransactionType().equals(TransactionType.PAYMENT)) {
+
+			Transaction expenseAssocToPay = transactionRepository.findById(transactionRequest.getIdExpenseToPay()).orElse(null);
+
+			if(expenseAssocToPay == null) {
+				throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_PAY_DONT_EXIST);
+			}
+
+			if(transactionRequest.getAmount() > (expenseAssocToPay.getAmountToRecover() - expenseAssocToPay.getAmountPayed())){
+				throw new CustomException(properties.RESPONSE_AMOUNT_TO_PAYMENT_IS_GRATHER_THAN_TO_AMOUNT_PENDING_EXPENSE);
+			}
+
+			expenseAssocToPay.setAmountPayed(expenseAssocToPay.getAmountPayed() + transactionRequest.getAmount());
+
+			if(expenseAssocToPay.getAmountToRecover() == expenseAssocToPay.getAmountPayed()) {
+				expenseAssocToPay.setPendingPay(false);
+			}
+
+			transactionRepository.save(expenseAssocToPay);
+			LOG.info(messageLog + "El gasto asociado al pago ha sido actualizado correctamente");
+		}
+
+		transactionRequest.setTag(validateTagsAndSaveIfNotExists(transactionRequest, messageLog));
+		transactionRequest.setVouchers(validateVouchersAndSaveIfNotExists(transactionRequest, messageLog));
+
+		transactionToSave = transactionRepository.save(transactionRequest);
+
+		LOG.info(messageLog + "Modificando los montos de las cuentas.");
+		if(modifyAccount)
+			modifyAmountAccountFromTransaction(transactionRequest, "SAVE");
+
+		LOG.info(messageLog + properties.RESPONSE_GENERIC_SAVE_SUCCESS_MESSAGE);
 
 		response.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
 		response.setStatus(properties.RESPONSE_GENERIC_SUCCESS_STATUS);
 		response.setMessage(properties.RESPONSE_GENERIC_SAVE_SUCCESS_MESSAGE);
-		response.setObject(expenseSaved);
+		response.setObject(transactionToSave);
 
 		return response;
 	}
 
-	private void saveNotificationRegister(Expense expenseSaved) {
-		NotificationExpense notificationExpense = new NotificationExpense();
-		notificationExpense.setExpenseShared(expenseSaved);
-		//notificationExpense.setPayer();
-		notificationExpense.setStatusNotification(TypeStatusNotificationExpense.PENDIENTE_PAGO);
-		notificationExpense.setVouchers(expenseSaved.getVouchers());
-		notificationExpense.setCreateAt(new Date());
-		notificationExpense.setComentarios("Ever realizaó un gasto en name_category que ascendió a amount_expense, " +
-				" y le corresponde pagar el monto completo.");
-		notifRepo.save(notificationExpense);
+	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
+	private void modifyAmountAccountFromTransaction(Transaction transactionRequest, String action) {
+		Account accountAssoc = new Account();
+		accountAssoc = transactionRequest.getAccount();
+
+		if(action.equals("SAVE")) {
+			if(transactionRequest.getTransactionType().equals(TransactionType.EXPENSE)) {
+				accountAssoc.setBalanceAvailable(accountAssoc.getBalanceAvailable() - transactionRequest.getAmount());
+			}
+
+			if(transactionRequest.getTransactionType().equals(TransactionType.PAYMENT)) {
+				accountAssoc.setBalanceAvailable(accountAssoc.getBalanceAvailable() + transactionRequest.getAmount());
+			}
+
+			if(transactionRequest.getTransactionType().equals(TransactionType.INCOME) ) {
+				accountAssoc.setBalanceAvailable(accountAssoc.getBalanceAvailable() + transactionRequest.getAmount());
+				accountAssoc.setBalance(accountAssoc.getBalance() + transactionRequest.getAmount());
+			}
+		} else if(action.equals("DELETE") || action.equals("UPDATE")) {
+			if(transactionRequest.getTransactionType().equals(TransactionType.EXPENSE)) {
+				accountAssoc.setBalanceAvailable(accountAssoc.getBalanceAvailable() + transactionRequest.getAmount());
+			}
+
+			if(transactionRequest.getTransactionType().equals(TransactionType.PAYMENT)) {
+				accountAssoc.setBalanceAvailable(accountAssoc.getBalanceAvailable() - transactionRequest.getAmount());
+			}
+
+			if(transactionRequest.getTransactionType().equals(TransactionType.INCOME) ) {
+				accountAssoc.setBalanceAvailable(accountAssoc.getBalanceAvailable() - transactionRequest.getAmount());
+				accountAssoc.setBalance(accountAssoc.getBalance() - transactionRequest.getAmount());
+			}
+		}
+
+		accountRepository.save(accountAssoc);
 	}
 
-	private Partner saveNewPartner(Expense expenseRequest) {
-		LOG.info(" SAVING PARTNER");
-		Partner partnerNotRegisterApp = new Partner();
-		partnerNotRegisterApp = expenseRequest.getPartner();
-		partnerNotRegisterApp.setOwnerId(expenseRequest.getPeriod().getWorkspace().getOwner().getId());
-		partnerNotRegisterApp.setStatusRequest(StatusInvitationsPartner.NOSENDED);
-		LOG.info(" SAVING PARTNER 2");
-		return partnerRepository.save(partnerNotRegisterApp);
+	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
+	private void modifyAmountAccountFromTransference(Transference transferenceToDelete) {
+		Account accountOrigin;
+		Account accountDestiny;
+
+		accountDestiny = transferenceToDelete.getAccountDestiny();
+		accountOrigin = transferenceToDelete.getAccountOrigin();
+
+		if(!transferenceToDelete.getTypeTransference().equals(TypeTransference.EXTERN)) {
+			accountOrigin.setBalanceAvailable(accountOrigin.getBalanceAvailable() + transferenceToDelete.getAmount());
+			accountDestiny.setBalanceAvailable(accountDestiny.getBalanceAvailable() - transferenceToDelete.getAmount());
+
+			if (accountOrigin.getAccountType().getTypeName().equals("PARENT") &&
+					accountDestiny.getAccountType().getTypeName().equals("PARENT")) {
+				accountOrigin.setBalance(accountOrigin.getBalance() + transferenceToDelete.getAmount());
+				accountDestiny.setBalance(accountDestiny.getBalance() - transferenceToDelete.getAmount());
+			} else if (accountOrigin.getAccountType().getTypeName().equals("PARENT")) {
+				accountDestiny.setBalance(accountDestiny.getBalance() - transferenceToDelete.getAmount());
+			} else if (accountDestiny.getAccountType().getTypeName().equals("PARENT")) {
+				accountOrigin.setBalance(accountOrigin.getBalance() + transferenceToDelete.getAmount());
+			} else {
+				accountOrigin.setBalance(accountOrigin.getBalance() + transferenceToDelete.getAmount());
+				accountDestiny.setBalance(accountDestiny.getBalance() - transferenceToDelete.getAmount());
+			}
+
+			accountRepository.save(accountOrigin);
+			accountRepository.save(accountDestiny);
+		} else {
+			accountDestiny.setBalance(accountDestiny.getBalance() - transferenceToDelete.getAmount());
+			accountDestiny.setBalanceAvailable(accountDestiny.getBalanceAvailable() - transferenceToDelete.getAmount());
+			accountRepository.save(accountDestiny);
+		}
+
 	}
 
-	private List<Tag> validateTagsAndSaveIfNotExists(Expense expenseRequest, String messageLog) {
+	private List<Tag> validateTagsAndSaveIfNotExists(Transaction expenseRequest, String messageLog) {
 
 		List<Tag> tagsSave = new ArrayList<>();
 		if (expenseRequest.getTag().size() > 0) {
@@ -198,20 +217,20 @@ public class TransactionServiceImpl implements ITransactionService {
 		return tagsSave;
 	}
 
-	private List<Vouchers> validateVouchersAndSaveIfNotExists(Expense expenseRequest, String messageLog) {
+	private List<Vouchers> validateVouchersAndSaveIfNotExists(Transaction expenseRequest, String messageLog) {
 		List<Vouchers> voucherToSave = new ArrayList<>();
 		if(expenseRequest.getVouchers().size() > 0) {
 			for ( Vouchers voucher: expenseRequest.getVouchers()) {
 				//if(voucher.getId() == 0) {
-					LOG.info(messageLog + " SAVING VOUCHERS TO DB");
-					voucherToSave.add(voucherRepo.save(voucher));
+				LOG.info(messageLog + " SAVING VOUCHERS TO DB");
+				voucherToSave.add(voucherRepo.save(voucher));
 				//}
 			}
 		}
 		return voucherToSave;
 	}
 
-	private List<Reposition> saveOrUpdateRepositions(Expense expenseRequest, String messageLog) {
+	private List<Reposition> saveOrUpdateRepositions(Transaction expenseRequest, String messageLog) {
 		List<Reposition> repositions = new ArrayList<>();
 		if(expenseRequest.getReposition().size() > 0) {
 			for ( Reposition reposition: expenseRequest.getReposition()) {
@@ -229,269 +248,129 @@ public class TransactionServiceImpl implements ITransactionService {
 	}
 
 	@Override
+	public Response savePay(Transaction payRequest, String messageLog) throws CustomException {
+		return null;
+	}
+
+	@Override
 	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
-	public Response savePay(Expense payRequest, String messageLog) throws CustomException {
+	public Response deleteTransactionById(Long idTransaction, String messageLog) {
 
 		Response response = new Response();
-		Account accountAffected = new Account();
-		Expense payResponse = new Expense();
-
-		payRequest.setPendingPay(false);
-		accountAffected = payRequest.getAccount();
-
-		Expense expenseToPay = expenseRepo.findById(payRequest.getIdExpenseToPay()).orElse(null);
-
-		if(expenseToPay == null) {
-			LOG.info(messageLog + " ::: EXPENSE TO PAY DON'T EXIST ::: ");
-			throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_PAY_DONT_EXIST);
+		Transaction transactionDeleted = transactionRepository.findById(idTransaction).orElse(null);
+		if(transactionDeleted == null) {
+			throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_ASSOC_DONT_EXIST);
 		}
 
-		if(payRequest.getAmount() > expenseToPay.getAmountToRecover()) {
-			LOG.info(messageLog + " ::: AMOUNT TO PAY IT´S GREATER THAN AMOUNT EXPENSE ::: ");
-			throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_AMOUNT_TO_PAY_ITS_GREATER_THAN_AMOUNT_EXPENSE);
-		}
+		if(!transactionDeleted.getAccount().getTypeCard().getName().equals("CREDIT")) {
 
-		if(payRequest.getAmount() ==  Math.abs(expenseToPay.getAmountToRecover())) {
-			LOG.info(messageLog + " ::: AMOUNT TO PAY ITS LOWER THAN AMOUNT TO RECOVER ::: ");
-			expenseToPay.setPendingPay(false);
-		}
-
-		expenseToPay.setReposition(saveOrUpdateRepositions(payRequest, messageLog));
-
-		if(expenseToPay.getAccount().getTypeCard().getName().toUpperCase().equals("CREDIT")) {
-			//subtraction amount to account destiny pay && subtraction amount to expense pay
-			LOG.info(messageLog + " ::: IT'S CREDIT CARD ::: ");
-			if(expenseToPay.getAmount() > accountAffected.getBalanceAvailable()) {
-				LOG.info(messageLog + " AMOUNT TO PAY IS GREATER THAN AMOUNT CREDIT CARD AVAILABLE ACCOUNT");
-				throw new CustomException(properties.RESPONSE_CUSTOMIZED_AMOUNT_MAYOR_SALDODISPONIBLE.replace("{0}",
-						expenseToPay.getAccount().getBalanceAvailable().toString()));
+			if(transactionDeleted.getTransactionType().equals(TransactionType.EXPENSE)) {
+				if((transactionDeleted.isPendingPay() && transactionDeleted.getAmountPayed() > 0 ) || !transactionDeleted.isPendingPay() ) {
+					List<Transaction> paymentsAssocToExpenseToDelete = transactionRepository.findPaymentsAssocToExpenseDeleteByExpenseId(idTransaction, transactionDeleted.getPeriod().getId());
+					for ( Transaction paymentAssocToDelete : paymentsAssocToExpenseToDelete) {
+						modifyAmountAccountFromTransaction(paymentAssocToDelete, "DELETE");
+						transactionRepository.deleteById(paymentAssocToDelete.getId());
+					}
+				}
 			}
-			LOG.info(messageLog + " ::: SUBTRACTION AMOUNT TO ACCOUNT PAYED && SUBTRACTION TO RECOVER EXPENSE PAY ::: ");
-			accountAffected.setBalanceAvailable(accountAffected.getBalanceAvailable() - payRequest.getAmount());
-			expenseToPay.setAmount((-1)*(Math.abs(expenseToPay.getAmount()) - payRequest.getAmount()));
 
-			payRequest.setAmount((-1)*payRequest.getAmount());
+			if(transactionDeleted.getTransactionType().equals(TransactionType.PAYMENT)) {
+				Transaction expenseAssocToPayment = transactionRepository.findExpenseAssocToPaymentByIdExpenseToPayment(transactionDeleted.getIdExpenseToPay(), transactionDeleted.getPeriod().getId());
+				expenseAssocToPayment.setAmountPayed(expenseAssocToPayment.getAmountPayed() - transactionDeleted.getAmount());
+				expenseAssocToPayment.setPendingPay(true);
+				transactionRepository.save(expenseAssocToPayment);
+			}
 
 		} else {
-			//Sum amount to account destiny pay : available & origin
-			LOG.info(messageLog + " ::: SUM AMOUNT TO ACCOUNT PAYED ::: ");
-			accountAffected.setBalance(accountAffected.getBalance() + payRequest.getAmount());
-			accountAffected.setBalanceAvailable(accountAffected.getBalanceAvailable() + payRequest.getAmount());
-		}
-
-		LOG.info(messageLog + " ::: UPDATE EXPENSE RECOVER AMOUNT TO PAY ::: ");
-		expenseToPay.setAmountToRecover(expenseToPay.getAmountToRecover() - payRequest.getAmount());
-
-		LOG.info(messageLog + " ::: UPDATE EXPENSE TO PAY ::: ");
-		expenseRepo.save(expenseToPay);
-		LOG.info(messageLog + " ::: UPDATE AMOUNT OF ACCOUNT TO PAY ::: ");
-		accountRepo.save(accountAffected);
-		LOG.info(messageLog + " ::: SAVE TAG & VOUCHERS IF EXISTS ::: ");
-		validateTagsAndSaveIfNotExists(payRequest, messageLog);
-		LOG.info(messageLog + " ::: SAVE REGISTER PAY ::: ");
-		payResponse = expenseRepo.save(payRequest);
-
-		response.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
-		response.setStatus(properties.RESPONSE_GENERIC_SUCCESS_STATUS);
-		response.setMessage(properties.RESPONSE_GENERIC_SAVE_SUCCESS_MESSAGE);
-		response.setObject(payResponse);
-
-		return response;
-	}
-
-	private Response validationInputParams(Expense expenseRequest) {
-		Response response = new Response();
-
-		response.setTitle(properties.RESPONSE_GENERIC_INFO_TITLE);
-		response.setStatus(properties.RESPONSE_GENERIC_INFO_STATUS);
-		
-		if(expenseRequest.getAmount() == null) {
-			response.setMessage(properties.RESPONSE_CUSTOMIZED_EXPENSE_WITHOUT_AMOUNT);
-			return response;
-		}
-
-		LOG.info("5");
-		response.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
-		response.setStatus(properties.RESPONSE_GENERIC_SUCCESS_STATUS);
-		return response;
-	}
-
-
-	public Account updateAccountIfExists(Expense expenseUpdateReq) {
-		LOG.info("Update Account");
-		//If not exist account in request --> setea Parent account
-		if (expenseUpdateReq.getAccount() == null) {
-			Account accountMainExist = accountRepo
-					.findAccountByTypeAccountAndStatusAccountAndPeriodId(1L,
-							TypeStatusAccountOPC.PROCESS,
-							expenseUpdateReq.getPeriod().getId());
-
-			if (accountMainExist == null) return null;
-			expenseUpdateReq.setAccount(accountMainExist);
-		}
-
-		Account accountUpdate = expenseUpdateReq.getAccount();
-		double amountBalanceAvailableUpdate = expenseUpdateReq.getAccount().getBalanceAvailable();
-		double amountSpentReq = expenseUpdateReq.getAmount();
-		accountUpdate.setBalanceAvailable(Utils.roundTwoDecimals(amountBalanceAvailableUpdate + amountSpentReq));
-		accountUpdate = accountRepo.save(accountUpdate);
-
-		LOG.info("Update saldo nuevo: " + accountUpdate.getBalanceAvailable());
-		return accountUpdate;
-	}
-
-	@Override
-	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
-	public Response updateExpense(Expense transactionRegister, Long idExpenseUpdateReq, String messageLog) {
-
-		Response response = new Response();
-		Account accountAffected = new Account();
-
-		Expense expenseAssocToTransaction = expenseRepo.findById(transactionRegister.getIdExpenseToPay()).orElse(null);
-
-		if(expenseAssocToTransaction == null) {
-			LOG.info(messageLog + " ::: EXPENSE TO ASSOC DON'T EXIST ::: ");
-			throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_ASSOC_DONT_EXIST);
-		}
-
-		if(transactionRegister.getExpenseType().equals(ExpenseType.REMINDER)) {
-			this.saveExpense(transactionRegister, messageLog);
-		}
-
-		if(expenseAssocToTransaction.getExpenseType().equals(ExpenseType.EXPENSE)) {
-			//Validar que el gasto a editar no tenga pagos asociados a este.
-
-
-			// -------------------------------------
-
-			accountAffected.setBalanceAvailable(accountAffected.getBalanceAvailable() + expenseAssocToTransaction.getAmount());
-
-			//IF EXISTS NOTIFICATION, DELETE REGISTER ASSOC TO EXPENSE
-			NotificationExpense notificationAssocToExpense = notifRepo.findByExpenseId(expenseAssocToTransaction.getId());
-			if(notificationAssocToExpense != null) {
-				notifRepo.deleteById(notificationAssocToExpense.getId());
+			List<Transference> transferencesAssocToExpenseDeleteWithAccCreditCard = transactionRepository.findTransferencesAssocExpenseToDeleteWithAccountCreditCardByExpenseId(idTransaction, transactionDeleted.getPeriod().getId());
+			for ( Transference transferenceAssocToDelete : transferencesAssocToExpenseDeleteWithAccCreditCard) {
+				modifyAmountAccountFromTransference(transferenceAssocToDelete);
+				transferenceRepository.deleteById(transferenceAssocToDelete.getId());
 			}
-
-			accountRepo.save(accountAffected);
-			response = this.saveExpense(transactionRegister, messageLog);
 		}
 
-		if(expenseAssocToTransaction.getExpenseType().equals(ExpenseType.PAYMENT)) {
-			Expense payRegisterExist = expenseRepo.findById(idExpenseUpdateReq).orElse(null);
-			if(payRegisterExist == null) {
-				LOG.info(messageLog + " ::: REGISTER TO UPDATE DON'T EXIST ::: ");
-				throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_PAYREGISTER_DONT_EXIST);
-			}
+		modifyAmountAccountFromTransaction(transactionDeleted, "DELETE");
+		transactionRepository.deleteById(transactionDeleted.getId());
 
-			expenseAssocToTransaction.setAmountToRecover(expenseAssocToTransaction.getAmountToRecover() + payRegisterExist.getAmount());
-			expenseAssocToTransaction.setPendingPay(true);
-
-			if(expenseAssocToTransaction.getAccount().getTypeCard().getName().toUpperCase().equals("CREDIT")) {
-				accountAffected.setBalanceAvailable(accountAffected.getBalanceAvailable() + payRegisterExist.getAmount());
-				expenseAssocToTransaction.setAmount((-1)*(Math.abs(expenseAssocToTransaction.getAmount()) + payRegisterExist.getAmount()));
-			} else {
-				accountAffected.setBalanceAvailable(accountAffected.getBalanceAvailable() - payRegisterExist.getAmount());
-			}
-
-			accountRepo.save(accountAffected);
-			expenseRepo.save(expenseAssocToTransaction);
-
-			response = this.savePay(transactionRegister, messageLog);
-		}
-
-		if(!response.getStatus().equals(properties.RESPONSE_GENERIC_SUCCESS_STATUS)) {
-			throw new CustomException(properties.RESPONSE_CUSTOMIZED_EXPENSE_MESSAGE_ERROR_UPDATE);
-		}
-
-		response.setMessage(properties.RESPONSE_GENERIC_UPDATE_SUCCESS_MESSAGE);
-		return response;
-	}
-
-	@Override
-	@Transactional
-	public Response deleteExpenseById(Long idExpense, String messageLog) {
-
-		Response response = new Response();
-		Account accountAffected = new Account();
-
-		Expense expenseAssocToTransaction = expenseRepo.findById(idExpense).orElse(null);
-
-		if(expenseAssocToTransaction == null) {
-			LOG.info(messageLog + " ::: EXPENSE TO ASSOC DON'T EXIST ::: ");
-			throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_ASSOC_DONT_EXIST);
-		}
-
-		if(expenseAssocToTransaction.getExpenseType().equals(ExpenseType.REMINDER)) {
-			expenseRepo.deleteById(expenseAssocToTransaction.getId());
-		}
-
-		if(expenseAssocToTransaction.getExpenseType().equals(ExpenseType.EXPENSE)) {
-			//Validar que el gasto a editar no tenga pagos asociados a este.
-
-
-			// -------------------------------------
-
-			accountAffected.setBalanceAvailable(accountAffected.getBalanceAvailable() + expenseAssocToTransaction.getAmount());
-
-			//IF EXISTS NOTIFICATION, DELETE REGISTER ASSOC TO EXPENSE
-			NotificationExpense notificationAssocToExpense = notifRepo.findByExpenseId(expenseAssocToTransaction.getId());
-			if(notificationAssocToExpense != null) {
-				notifRepo.deleteById(notificationAssocToExpense.getId());
-			}
-
-			accountRepo.save(accountAffected);
-			expenseRepo.deleteById(expenseAssocToTransaction.getId());
-		}
-
-		if(expenseAssocToTransaction.getExpenseType().equals(ExpenseType.PAYMENT)) {
-			Expense expensePayed = expenseRepo.findById(expenseAssocToTransaction.getIdExpenseToPay()).orElse(null);
-			if(expensePayed == null) {
-				LOG.info(messageLog + " ::: REGISTER TO UPDATE DON'T EXIST ::: ");
-				throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_PAYREGISTER_DONT_EXIST);
-			}
-
-			expensePayed.setAmountToRecover(expensePayed.getAmountToRecover() + expenseAssocToTransaction.getAmount());
-			expensePayed.setPendingPay(true);
-
-			if(expensePayed.getAccount().getTypeCard().getName().toUpperCase().equals("CREDIT")) {
-				accountAffected.setBalanceAvailable(accountAffected.getBalanceAvailable() + expenseAssocToTransaction.getAmount());
-				expensePayed.setAmount((-1)*(Math.abs(expensePayed.getAmount()) + expenseAssocToTransaction.getAmount()));
-			} else {
-				accountAffected.setBalanceAvailable(accountAffected.getBalanceAvailable() - expenseAssocToTransaction.getAmount());
-			}
-
-			accountRepo.save(accountAffected);
-			expenseRepo.save(expensePayed);
-			expenseRepo.deleteById(expenseAssocToTransaction.getId());
-		}
+		LOG.info(messageLog + properties.RESPONSE_GENERIC_DELETE_SUCCESS_MESSAGE);
 
 		response.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
 		response.setStatus(properties.RESPONSE_GENERIC_SUCCESS_STATUS);
 		response.setMessage(properties.RESPONSE_GENERIC_DELETE_SUCCESS_MESSAGE);
+
 		return response;
 	}
 
-	/*
 	@Override
-	public List<Expense> findExpensesByIdPeriodAndIStatusPay(Long idPeriod, boolean statusPay) {
-		//Validate if not exists expenses pending pay
-		List<Expense> listExpenses = expenseRepo.findExpensesBypIdPeriodAndIsPendingPay(idPeriod, statusPay);
-		return listExpenses;
+	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
+	public Response updateTransactionById(Transaction transactionRequest, Long idTransaction, String messageLog) {
+
+		Response response = new Response();
+		Transaction transactionToSave = new Transaction();
+
+		Transaction transactionFounded = transactionRepository.findById(idTransaction).orElse(null);
+
+		if(transactionFounded == null) {
+			throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_ASSOC_DONT_EXIST);
+		}
+
+		modifyAmountAccountFromTransaction(transactionFounded, "UPDATE");
+
+		if(transactionFounded.getTransactionType().equals(TransactionType.EXPENSE)) {
+			if(transactionRequest.getAmount() < transactionFounded.getAmountPayed()) {
+				throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_NEW_AMOUNT_IS_GRATHER_THAN_AMOUNT_PAYED_TO_UPDATE);
+			}
+
+			if(transactionRequest.getAmount() > transactionRequest.getAccount().getBalanceAvailable()){
+				throw new CustomException(properties.RESPONSE_AMOUNT_TO_EXPENSE_IS_GRATHER_THAN_TO_AVAILABLE_AMOUNT_ACCOUNT);
+			}
+
+			transactionRequest.setAmountToRecover(transactionRequest.getAmount());
+
+			if(transactionRequest.getAmountToRecover() > transactionFounded.getAmountPayed()) {
+				LOG.info(messageLog + "La transacción se maracará como PENDIENTE DE PAGO, ya que su monto a devolver es mayor que el monto pagado.");
+				transactionRequest.setPendingPay(true);
+				transactionRequest.setReposition(saveOrUpdateRepositions(transactionRequest, messageLog));
+			}
+		}
+
+		if(transactionFounded.getTransactionType().equals(TransactionType.PAYMENT)) {
+			Transaction expenseAssocToPayment = transactionRepository.findExpenseAssocToPaymentByIdExpenseToPayment(transactionFounded.getIdExpenseToPay(), transactionFounded.getPeriod().getId());
+			expenseAssocToPayment.setAmountPayed(expenseAssocToPayment.getAmountPayed() - transactionFounded.getAmount());
+			expenseAssocToPayment.setPendingPay(true);
+			transactionRepository.save(expenseAssocToPayment);
+
+			Response responseEditPayment = saveTransaction(transactionFounded, messageLog);
+			responseEditPayment.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
+			responseEditPayment.setMessage(properties.RESPONSE_GENERIC_UPDATE_SUCCESS_MESSAGE);
+			return response;
+		}
+
+		transactionRequest.setTag(validateTagsAndSaveIfNotExists(transactionRequest, messageLog));
+		transactionRequest.setVouchers(validateVouchersAndSaveIfNotExists(transactionRequest, messageLog));
+
+		modifyAmountAccountFromTransaction(transactionRequest, "SAVE");
+
+		transactionToSave = transactionRepository.save(transactionRequest);
+		LOG.info(messageLog + properties.RESPONSE_GENERIC_SAVE_SUCCESS_MESSAGE);
+
+		response.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
+		response.setStatus(properties.RESPONSE_GENERIC_SUCCESS_STATUS);
+		response.setMessage(properties.RESPONSE_GENERIC_UPDATE_SUCCESS_MESSAGE);
+		response.setObject(transactionToSave);
+
+		return response;
 	}
 
 	@Override
-	public List<Expense> findExpensesByIdWorkspaceAndIdPeriod(Long idWorkspace, Long idPeriod) {
-		List<Expense> listExpenses = expenseRepo.findExpensesByIdWorkspaceAndIdperiod(idWorkspace, idPeriod);
-		return listExpenses;
+	public List<Transaction> findTransactionByWorskpaceIdAndDateRange(Long idWorkspace, String dateBegin, String dateEnd) {
+
+		return transactionRepository.findTransactionByWorskpaceIdAndDateRange(idWorkspace,
+				Utils.convertStringToDate(dateBegin), Utils.convertStringToDate(dateEnd));
 	}
-*/
+
 	@Override
-	public List<Expense> findExpensessByWorskpaceIdAndDateRange(Long idWorkspace, Date dateBegin, Date dateEnd) {
-		List<Expense> listExpenses = expenseRepo.findExpensessByWorskpaceIdAndDateRange(idWorkspace, dateBegin,
-				dateEnd);
-		return listExpenses;
+	public List<Transaction> findTransactionByAccountIdAndPeriodId(Long idAccount, Long idPeriod) {
+		return transactionRepository.findTransactionByAccountIdAndPeriodId(idAccount, idPeriod);
 	}
-
-
-
 }

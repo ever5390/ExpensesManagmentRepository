@@ -20,8 +20,8 @@ import pe.com.erp.expensemanager.modules.account.repository.TransferenceReposito
 import pe.com.erp.expensemanager.modules.account.services.interfaz.IAccountService;
 import pe.com.erp.expensemanager.modules.categories.model.Category;
 import pe.com.erp.expensemanager.modules.categories.repository.CategoryRepository;
-import pe.com.erp.expensemanager.modules.expense.model.Expense;
 import pe.com.erp.expensemanager.modules.partners.repository.PartnerRepository;
+import pe.com.erp.expensemanager.modules.transaction.model.Transaction;
 import pe.com.erp.expensemanager.properties.PropertiesExtern;
 import pe.com.erp.expensemanager.shared.model.Response;
 import pe.com.erp.expensemanager.utils.Utils;
@@ -426,16 +426,16 @@ public class AccountServiceImpl implements IAccountService {
 	}
 
 	private void validExistsTransferencesByAccountId(Account accountChild, String messageLog, String meessageException) throws CustomException {
-		List<Transference> transferencesRowsByAccountId = accountTransferencesRepo.findTransferencesByAccountId(accountChild.getId());
-		if(transferencesRowsByAccountId.size() > 0) {
-			transferRepo.deleteAll(transferencesRowsByAccountId);
-			//LOG.error(messageLog + " ::: EXIST´S EXPENSES FOR ALL ACCOUNT´S BELONG TO THE SELECTED BUDGET, DELETE IT´S IMPOSSIBLE ::: ");
-			//throw new CustomException(meessageException);
+		List<Transference> transfersFounded = accountTransferencesRepo.findTransferencesByAccountIdAndPeriodId(accountChild.getId(), accountChild.getPeriod().getId());
+		if(transfersFounded.size() == 0) return;
+
+		for (Transference transferenceToDelete : transfersFounded) {
+			transferRepo.deleteById(transferenceToDelete.getId());
 		}
 	}
 
 	private void validExistsExpensesByAccountId(Account accountChild, String messageLog, String meessageException) throws CustomException {
-		List<Expense> expenseRowsForAccountSelected = accountExpenseRepo.findExpensesByAccountId(accountChild.getId());
+		List<Transaction> expenseRowsForAccountSelected = accountExpenseRepo.findTransactionByAccountId(accountChild.getId());
 		if(expenseRowsForAccountSelected.size() > 0) {
 			LOG.error(messageLog + " ::: EXIST´S EXPENSES FOR ALL ACCOUNT´S BELONG TO THE SELECTED BUDGET, DELETE IT´S IMPOSSIBLE ::: ");
 			throw new CustomException(meessageException);

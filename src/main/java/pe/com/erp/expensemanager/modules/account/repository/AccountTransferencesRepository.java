@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface AccountTransferencesRepository extends CrudRepository<Transference, Long> {
 
-    @Query("SELECT t FROM Transference t WHERE t.accountOrigin.id = :idAccount or t.accountDestiny.id = :idAccount")
-    List<Transference> findTransferencesByAccountId(Long idAccount);
+    @Query("SELECT t FROM Transference t WHERE (t.accountOrigin.id =:idAccount or t.accountDestiny.id =:idAccount) and t.period.id = :periodId")
+    List<Transference> findTransferencesByAccountIdAndPeriodId(Long idAccount, Long periodId);
 }

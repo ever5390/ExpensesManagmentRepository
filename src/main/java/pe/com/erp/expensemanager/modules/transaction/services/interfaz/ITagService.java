@@ -1,8 +1,8 @@
-package pe.com.erp.expensemanager.modules.expense.services.interfaz;
+package pe.com.erp.expensemanager.modules.transaction.services.interfaz;
 
 import java.util.List;
 
-import pe.com.erp.expensemanager.modules.expense.model.Tag;
+import pe.com.erp.expensemanager.modules.transaction.model.Tag;
 
 public interface ITagService {
 

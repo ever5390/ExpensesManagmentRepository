@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import pe.com.erp.expensemanager.exception.CustomException;
 import pe.com.erp.expensemanager.modules.account.model.Transference;
+import pe.com.erp.expensemanager.modules.account.model.TransferenceRequest;
 import pe.com.erp.expensemanager.modules.account.services.interfaz.ITransferenceService;
 import pe.com.erp.expensemanager.properties.PropertiesExtern;
 import pe.com.erp.expensemanager.shared.model.Response;
@@ -38,18 +39,22 @@ public class TransferenceController {
 	@Autowired
 	ITransferenceService itransferenceService;
 	
-	@GetMapping(path="period/{idPeriod}/transference")
+	@GetMapping(path="period/{idPeriod}/transferences")
 	public List<Transference> listAllCategoryByIdPeriod(@PathVariable Long idPeriod) {
 		return itransferenceService.listTransferencesByIdPeriod(idPeriod);
 	}
-	
+	@GetMapping(path="period/{idPeriod}/account/{idAccount}/transferences")
+	public List<Transference> listTransferencesByIdAccountAndIdPeriod(Long idPeriod, Long idAccount) {
+		return itransferenceService.listTransferencesByIdAccountAndIdPeriod(idAccount, idPeriod);
+	}
+
 	@PostMapping(path="/transference")
 	public ResponseEntity<Response> save(@RequestBody Transference transferenceRequest) {
 		
 		Response response = new Response();
 		String ownerInfoMessage = "[X10598] TRANSFERENCE :: ";
 		try {
-			response = itransferenceService.save(transferenceRequest, ownerInfoMessage);
+			response = itransferenceService.saveTransference(transferenceRequest, ownerInfoMessage);
 
 		} catch (CustomException e) {
 			response.setTitle(properties.RESPONSE_GENERIC_INFO_TITLE);
@@ -77,11 +82,11 @@ public class TransferenceController {
 	}
 
 	@DeleteMapping("/transference/{id}")
-	public ResponseEntity<Response> deleteRegisterTransference(@PathVariable Long id) {
+	public ResponseEntity<Response> deleteRegisterTransference(@PathVariable Long idTransference) {
 		Response response = new Response();
 		String ownerInfoMessage = "[X10598] TRANSFERENCE :: ";
 		try {
-			response = itransferenceService.deleteTransferenceById(id, ownerInfoMessage);
+			response = itransferenceService.deleteTransferenceByIdTransfer(idTransference, ownerInfoMessage);
 			if(!response.getStatus().equals(properties.RESPONSE_GENERIC_SUCCESS_STATUS))
 				return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (CustomException ce) {
@@ -102,5 +107,36 @@ public class TransferenceController {
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 
+	@PutMapping(path="/transference/{idTransference}")
+	ResponseEntity<Response> updateTransferenceByIdTransference(@RequestBody Transference transferenceUpdateRequest, @PathVariable Long idTransference) {
+		Response response = new Response();
+		String ownerInfoMessage = "[X10598] TRANSFERENCE :: ";
+		try {
+			response = itransferenceService.updateTransferenceByIdTransference(transferenceUpdateRequest, idTransference, ownerInfoMessage);
+
+		} catch (CustomException e) {
+			response.setTitle(properties.RESPONSE_GENERIC_INFO_TITLE);
+			response.setStatus(properties.RESPONSE_GENERIC_INFO_STATUS);
+			response.setMessage(e.getMessage());
+			response.setObject(null);
+			return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (DataAccessException e) {
+			response.setTitle(properties.RESPONSE_GENERIC_ERROR_TITLE);
+			response.setStatus(properties.RESPONSE_GENERIC_ERROR_STATUS);
+			response.setMessage(properties.
+					RESPONSE_GENERIC_SAVE_ERROR_INTERNALSERVER_MESSAGE + " " +
+					e.getMostSpecificCause().getMessage());
+			response.setObject(null);
+			return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch(RuntimeException  e) {
+			response.setTitle(properties.RESPONSE_GENERIC_ERROR_TITLE);
+			response.setStatus(properties.RESPONSE_GENERIC_ERROR_STATUS);
+			response.setMessage(properties.RESPONSE_GENERIC_SAVE_ERROR_INTERNALSERVER_MESSAGE);
+			response.setObject(null);
+			return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		LOG.error(ownerInfoMessage + " ::: TRANSFERENCE SAVE END  ::: ");
+		return new ResponseEntity<Response>(response, HttpStatus.OK);
+	}
 
 }

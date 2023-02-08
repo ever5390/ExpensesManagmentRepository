@@ -62,11 +62,7 @@ public class Account {
 	@NotNull(message = "El campo periodo no puede ser nulo")
 	@JoinColumn(name = "FK_PERIOD_ID", updatable = true, nullable = false)
 	private Period period;
-	/*
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FK_PAYMENT_METHOD_ID", updatable = true, nullable = true)
-	private PaymentMethod paymentMethod;
-	*/
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@NotNull(message = "El campo financialEntity no puede ser nulo")
 	@JoinColumn(name = "FK_FINANCIAL_ENTITY_ID", updatable = true, nullable = true)
@@ -89,10 +85,6 @@ public class Account {
 	public void setAccountParentId(Long accountParentId) {
 		this.accountParentId = accountParentId;
 	}
-
-	//@ManyToOne(fetch = FetchType.LAZY)
-	//@JoinColumn(name = "FK_ACCOUNT_PARENT_ID", updatable = true, nullable = true)
-	//private Account accountParent;
 
 	@PrePersist
 	public void prePersistCreateAt() {
@@ -186,15 +178,7 @@ public class Account {
 	public void setPeriod(Period period) {
 		this.period = period;
 	}
-/*
-	public PaymentMethod getPaymentMethod() {
-		return paymentMethod;
-	}
 
-	public void setPaymentMethod(PaymentMethod paymentMethod) {
-		this.paymentMethod = paymentMethod;
-	}
-*/
 	public FinancialEntity getFinancialEntity() {
 		return financialEntity;
 	}
@@ -233,7 +217,6 @@ public class Account {
 				", createAt=" + createAt +
 				", accountType=" + accountType +
 				", period=" + period +
-				//", paymentMethod=" + paymentMethod +
 				", financialEntity=" + financialEntity +
 				", typeCard=" + typeCard +
 				", accountParentId=" + accountParentId +

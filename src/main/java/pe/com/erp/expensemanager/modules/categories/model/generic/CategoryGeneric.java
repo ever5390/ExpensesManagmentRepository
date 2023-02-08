@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+
+import pe.com.erp.expensemanager.modules.categories.model.GroupCategory;
+import pe.com.erp.expensemanager.modules.categories.model.SubCategory;
 import pe.com.erp.expensemanager.modules.owner.model.Owner;
 
 @Entity
@@ -20,27 +23,48 @@ public class CategoryGeneric {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank(message = "El campo nombre no puede estar vacío")
 	@NotNull(message = "El campo nombre no puede ser nulo")
 	@Column(unique = true)
 	private String name;
-	
+
 	@Column(name = "active")
 	private boolean active;
-	
+
 	@NotBlank
 	private String image;
 
-	@Override
-	public String toString() {
-		return "Category [id=" + id + ", name=" + name + ", active=" + active + ", image=" + image + "]";
+	@ManyToOne
+	@JoinColumn(name = "group_category_id")
+	private GroupCategory groupCategory;
+
+	@ManyToOne
+	@JoinColumn(name = "sub_category_id")
+	private SubCategory subCategory;
+
+	public SubCategory getSubCategory() {
+		return subCategory;
 	}
 
-	public CategoryGeneric(Long id,
-			@NotBlank(message = "El campo nombre no puede estar vacío") @NotNull(message = "El campo nombre no puede ser nulo") String name,
-			boolean active, @NotBlank String image) {
-		super();
+	public void setSubCategory(SubCategory subCategory) {
+		this.subCategory = subCategory;
+	}
+
+	public GroupCategory getGroupCategory() {
+		return groupCategory;
+	}
+
+	public void setGroupCategory(GroupCategory groupCategory) {
+		this.groupCategory = groupCategory;
+	}
+
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", active=" + active + ", image=" + image +  "]";
+	}
+
+	public CategoryGeneric(Long id, String name, boolean active, @NotBlank String image) {
 		this.id = id;
 		this.name = name;
 		this.active = active;
@@ -81,5 +105,5 @@ public class CategoryGeneric {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	 
+
 }

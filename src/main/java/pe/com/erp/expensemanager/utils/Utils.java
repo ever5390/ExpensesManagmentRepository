@@ -17,6 +17,9 @@ public class Utils {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Utils.class);
 
+	public static int getGeneratorNumber() {
+		return (int) (Math.random() * (999999999 - 100000000 + 1) + 100000000);
+	}
 	public static Double roundTwoDecimals(Double amountShow) {
 		return Math.round(amountShow * 100) / 100d;
 	}
