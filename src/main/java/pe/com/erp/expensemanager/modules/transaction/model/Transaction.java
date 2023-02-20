@@ -48,8 +48,8 @@ public class Transaction {
 
 	private String description;
 
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "FK_VOUCHERS_ID")
+	@OneToMany
+	@JoinColumn(name = "FK_TRANSACTION_ID")
 	private List<Vouchers> vouchers;
 
 	@ManyToOne
@@ -60,8 +60,8 @@ public class Transaction {
 	@JoinColumn(name = "FK_ACCOUNT_ID", updatable = true)
 	private Account account;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "reposition_id")
+	@OneToMany
+	@JoinColumn(name = "FK_TRANSACTION_ID")
 	private List<Reposition> reposition;
 
 	@ManyToMany

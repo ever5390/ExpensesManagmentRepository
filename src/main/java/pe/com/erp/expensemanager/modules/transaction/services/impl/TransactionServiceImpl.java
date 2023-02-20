@@ -69,7 +69,7 @@ public class TransactionServiceImpl implements ITransactionService {
 		Response response = new Response();
 		boolean modifyAccount = true;
 		Transaction transactionToSave = new Transaction();
-
+		LOG.info(messageLog + "transaction request: " + transactionRequest.toString());
 		LOG.info(messageLog + "La transacción recibida es de tipo: " + TransactionType.EXPENSE);
 		if(transactionRequest.getTransactionType().equals(TransactionType.EXPENSE)) {
 			if(transactionRequest.getAmount() > transactionRequest.getAccount().getBalanceAvailable()){
@@ -81,9 +81,6 @@ public class TransactionServiceImpl implements ITransactionService {
 				transactionRequest.setPendingPay(true);
 				transactionRequest.setReposition(saveOrUpdateRepositions(transactionRequest, messageLog));
 			}
-
-			transactionRequest.setAmountToRecover(transactionRequest.getAmount());
-			transactionRequest.setAmountPayed(0.0);
 		}
 
 		if(transactionRequest.getTransactionType().equals(TransactionType.REMINDER)) {
@@ -100,8 +97,9 @@ public class TransactionServiceImpl implements ITransactionService {
 				throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_PAY_DONT_EXIST);
 			}
 
-			if(transactionRequest.getAmount() > (expenseAssocToPay.getAmountToRecover() - expenseAssocToPay.getAmountPayed())){
-				throw new CustomException(properties.RESPONSE_AMOUNT_TO_PAYMENT_IS_GRATHER_THAN_TO_AMOUNT_PENDING_EXPENSE);
+			double expensePendingAmount = expenseAssocToPay.getAmountToRecover() - expenseAssocToPay.getAmountPayed();
+			if(transactionRequest.getAmount() > expensePendingAmount){
+				throw new CustomException(properties.RESPONSE_AMOUNT_TO_PAYMENT_IS_GRATHER_THAN_TO_AMOUNT_PENDING_EXPENSE + " [ de S./" + expensePendingAmount + "]");
 			}
 
 			expenseAssocToPay.setAmountPayed(expenseAssocToPay.getAmountPayed() + transactionRequest.getAmount());
@@ -115,7 +113,7 @@ public class TransactionServiceImpl implements ITransactionService {
 		}
 
 		transactionRequest.setTag(validateTagsAndSaveIfNotExists(transactionRequest, messageLog));
-		transactionRequest.setVouchers(validateVouchersAndSaveIfNotExists(transactionRequest, messageLog));
+		//transactionRequest.setVouchers(validateVouchersAndSaveIfNotExists(transactionRequest, messageLog));
 
 		transactionToSave = transactionRepository.save(transactionRequest);
 
@@ -235,13 +233,14 @@ public class TransactionServiceImpl implements ITransactionService {
 		if(expenseRequest.getReposition().size() > 0) {
 			for ( Reposition reposition: expenseRequest.getReposition()) {
 				LOG.info(messageLog + " SAVING PARTNER TO DB");
+				//reposition.setTransaction(expenseSaved);
 				reposition.setPartnerToPay(partnerRepository.save(reposition.getPartnerToPay()));
-				LOG.info(messageLog + " SAVING NOTIFICATIONS WHEN PARTNER ITS SENDED STATUS TO DB");
-				if(reposition.getPartnerToPay().getStatusRequest().equals(StatusInvitationsPartner.SENDED)) {
+				//LOG.info(messageLog + " SAVING NOTIFICATIONS WHEN PARTNER ITS SENDED STATUS TO DB");
+				//if(reposition.getPartnerToPay().getStatusRequest().equals(StatusInvitationsPartner.SENDED)) {
 					//notifRepo.save();
-				}
+				//}
 				LOG.info(messageLog + " SAVING REPOSITION TO DB");
-				repositionRepo.save(reposition);
+				repositions.add(repositionRepo.save(reposition));
 			}
 		}
 		return repositions;
@@ -352,6 +351,7 @@ public class TransactionServiceImpl implements ITransactionService {
 		modifyAmountAccountFromTransaction(transactionRequest, "SAVE");
 
 		transactionToSave = transactionRepository.save(transactionRequest);
+
 		LOG.info(messageLog + properties.RESPONSE_GENERIC_SAVE_SUCCESS_MESSAGE);
 
 		response.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
@@ -372,5 +372,17 @@ public class TransactionServiceImpl implements ITransactionService {
 	@Override
 	public List<Transaction> findTransactionByAccountIdAndPeriodId(Long idAccount, Long idPeriod) {
 		return transactionRepository.findTransactionByAccountIdAndPeriodId(idAccount, idPeriod);
+	}
+
+	@Override
+	public Transaction updateVouchers(Transaction transactionUpdateVoucher, String messageLog) {
+		LOG.info(messageLog + " Se procede a almacenar los vouchers y asignarlos a la transacción previamente almacenada");
+		LOG.info("request: " + transactionUpdateVoucher.getVouchers());
+		List<Vouchers> vouchersSaved = new ArrayList<>();
+		for ( Vouchers voucherToSave : transactionUpdateVoucher.getVouchers()) {
+			vouchersSaved.add(voucherRepo.save(voucherToSave));
+		}
+		transactionUpdateVoucher.setVouchers(vouchersSaved);
+		return transactionRepository.save(transactionUpdateVoucher);
 	}
 }

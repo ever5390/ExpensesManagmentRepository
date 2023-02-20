@@ -36,11 +36,11 @@ public class CategoryGeneric {
 	private String image;
 
 	@ManyToOne
-	@JoinColumn(name = "group_category_id")
+	@JoinColumn(name = "FK_GROUP_CATEGORY_ID")
 	private GroupCategory groupCategory;
 
 	@ManyToOne
-	@JoinColumn(name = "sub_category_id")
+	@JoinColumn(name = "FK_SUB_CATEGORY_ID")
 	private SubCategory subCategory;
 
 	public SubCategory getSubCategory() {

@@ -13,6 +13,6 @@ public interface TransferenceRepository extends CrudRepository<Transference, Lon
 
 	@Query("SELECT t FROM Transference t WHERE t.period.id = :idPeriod")
 	List<Transference> listTransferencesByIdPeriod(Long idPeriod);
-	@Query("SELECT t FROM Transference t WHERE (t.accountOrigin.id = :idAccount or t.accountDestiny.id = :idAccount) and t.period.id = :idPeriod")
+	@Query("SELECT t FROM Transference t WHERE (t.accountOrigin.id =:idAccount or t.accountDestiny.id =:idAccount) and t.period.id = :idPeriod")
 	List<Transference> listTransferencesByIdAccountAndIdPeriod(Long idAccount, Long idPeriod);
 }

@@ -44,7 +44,7 @@ public class TransferenceController {
 		return itransferenceService.listTransferencesByIdPeriod(idPeriod);
 	}
 	@GetMapping(path="period/{idPeriod}/account/{idAccount}/transferences")
-	public List<Transference> listTransferencesByIdAccountAndIdPeriod(Long idPeriod, Long idAccount) {
+	public List<Transference> listTransferencesByIdAccountAndIdPeriod(@PathVariable Long idPeriod, @PathVariable Long idAccount) {
 		return itransferenceService.listTransferencesByIdAccountAndIdPeriod(idAccount, idPeriod);
 	}
 

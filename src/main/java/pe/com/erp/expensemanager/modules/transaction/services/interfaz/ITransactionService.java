@@ -21,5 +21,5 @@ public interface ITransactionService {
 
 	List<Transaction> findTransactionByAccountIdAndPeriodId(Long idAccount, Long idPeriod );
 
-	
+	Transaction updateVouchers(Transaction expenseRequest, String messageLog);
 }

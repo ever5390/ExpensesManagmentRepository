@@ -119,12 +119,21 @@ public class TransactionController {
 		
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
-	/*
+
 	@PutMapping("/expense/update-vouchers")
-	Expense updateVouchers(@RequestBody Expense expenseRequest) {
-		return expenseService.updateVouchers(expenseRequest);
+	Transaction updateVouchers(@RequestBody Transaction expenseRequest) {
+		Transaction transactionSaved = new Transaction();
+		String ownerInfoMessage = "[X10598] EXPENSE UPDATE VOUCHER ::";
+		try {
+			transactionSaved = iTransactionService.updateVouchers(expenseRequest, ownerInfoMessage);
+			LOG.error("Se actualizaron los vouchers a la transacción almacenada previamente!!");
+		} catch(Exception e) {
+			LOG.error(e.getMessage());
+			transactionSaved = new Transaction();
+		}
+		return transactionSaved;
 	}
-	*/
+
 	@PutMapping("/expense/{idExpense}")
 	ResponseEntity<Response> updateExpense(@RequestBody Transaction expenseRequest, @PathVariable Long idExpense) {
 		Response response = new Response();
