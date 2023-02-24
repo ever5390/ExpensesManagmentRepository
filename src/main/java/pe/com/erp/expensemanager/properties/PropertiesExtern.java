@@ -5,7 +5,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PropertiesExtern {
-	@Value("${response.customized.message.transfer.availableaccounttoreversalisnotsufficientfordiscountamounttransference}")
+	@Value("${response.customized.message.expense.notfound.payments.assoctoexpense.todelete}")
+    public String RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_NOTFOUND_PAYMENTS_ASSOC_TO_EXPENSE_TO_DELETE;
+	@Value("${response.customized.message.expense.notfound.expenses.assoctopayment.todelete}")
+	public String  RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_NOTFOUND_EXPENSE_ASSOC_TO_PAYMENT_TO_DELETE;
+    @Value("${response.customized.message.transfer.availableaccounttoreversalisnotsufficientfordiscountamounttransference}")
 	public String RESPONSE_CUSTOMIZED_TRANSFER_INFO_AVAILABLE_ACCOUNT_ITS_INSUFFICIENT_FOR_DISCOUNT_AMOUNT_TRANSFERENCE_DONT_POSSIBLE_REVERSAL;
 	@Value("${response.customized.message.expenseassocbycreditcarddontexist}")
     public String RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_ASSOC_CREDIT_CARD_DONT_EXIST;

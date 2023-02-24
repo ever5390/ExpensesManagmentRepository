@@ -207,20 +207,17 @@ public class Account {
 	public String toString() {
 		return "Account{" +
 				"id=" + id +
-				", accountNumber='" + accountNumber + '\'' +
-				", accountName='" + accountName + '\'' +
-				", balance=" + balance +
-				", balanceOnlyInitial=" + balanceOnlyInitial +
-				", balanceAvailable=" + balanceAvailable +
-				", enabled=" + enabled +
-				", statusAccount=" + statusAccount +
-				", createAt=" + createAt +
-				", accountType=" + accountType +
-				", period=" + period +
-				", financialEntity=" + financialEntity +
-				", typeCard=" + typeCard +
-				", accountParentId=" + accountParentId +
-				", categories=" + categories +
+				", accountNumber='" + accountNumber + '\n' +
+				", accountName='" + accountName + '\n' +
+				", balance=" + balance + '\n' +
+				", balanceOnlyInitial=" + balanceOnlyInitial + '\n' +
+				", balanceAvailable=" + balanceAvailable + '\n' +
+				", statusAccount=" + statusAccount + '\n' +
+				", createAt=" + createAt + '\n' +
+				", accountType=" + accountType.getTypeName() + '\n' +
+				", financialEntity=" + financialEntity.getName() + '\n' +
+				", typeCard=" + typeCard.getName() + '\n' +
+				", accountParentId=" + accountParentId + '\n' +
 				'}';
 	}
 }

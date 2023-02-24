@@ -41,7 +41,7 @@ public class WorkSpace {
 
 	@Override
 	public String toString() {
-		return "WorkSpace [id=" + id + ", name=" + name + ", typeWSPC=" + typeWSPC + ", owner=" + owner + "]";
+		return "WorkSpace [id=" + id + ", name=" + name + ", typeWSPC=" + typeWSPC + ", owner=" + owner.getName() + "]";
 	}
 	
 }

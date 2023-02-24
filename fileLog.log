@@ -1,586 +1,86 @@
-2023-02-19 10:51:39.748  WARN 1688 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11h22m3s539ms168µs800ns).
-2023-02-19 11:19:23.168  INFO 1688 --- [http-nio-8081-exec-1] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: BEGIN SAVE ACCOUNT ::: 
-2023-02-19 11:19:23.169  INFO 1688 --- [http-nio-8081-exec-1] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: ACCOUNT TYPE : PARENT ::: 
-2023-02-19 11:19:23.170  INFO 1688 --- [http-nio-8081-exec-1] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: ACCOUNT VALIDATION NAME REPEATED ::: 
-2023-02-19 11:19:23.170  INFO 1688 --- [http-nio-8081-exec-1] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: ACCOUNT PARENT ::: 
-2023-02-19 11:19:23.187  INFO 1688 --- [http-nio-8081-exec-1] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: ACCOUNT UPDATING AMOUNT PARENT WITH ID ITSELF ::: 
-2023-02-19 11:19:23.187  INFO 1688 --- [http-nio-8081-exec-1] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: ACCOUNT SAVED SUCCESSFULLY ::: 
-2023-02-19 11:19:37.167  INFO 1688 --- [http-nio-8081-exec-7] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ACCOUNT ::  ::: BEGIN DELETE ACCOUNT  ::: 
-2023-02-19 11:19:37.167  INFO 1688 --- [http-nio-8081-exec-6] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ACCOUNT ::  ::: BEGIN DELETE ACCOUNT  ::: 
-2023-02-19 11:19:37.171 ERROR 1688 --- [http-nio-8081-exec-7] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ACCOUNT ::  ::: ACCOUNT TO DELETE DON'T EXIST  ::: null
-2023-02-19 11:19:37.172 ERROR 1688 --- [http-nio-8081-exec-7] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ACCOUNT ::  ::: ACCOUNT TO DELETE DON'T EXIST  ::: 
-2023-02-19 11:19:37.178 ERROR 1688 --- [http-nio-8081-exec-6] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ACCOUNT ::  ::: ACCOUNT TO DELETE DON'T EXIST  ::: Account{id=9, accountNumber='836137095', accountName='EFECTIVO', balance=60.0, balanceOnlyInitial=60.0, balanceAvailable=60.0, enabled=true, statusAccount=INITIAL, createAt=2023-02-19 11:19:23.177, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=2023-01-01 00:00:00.0,
- finalDate=2023-03-30 00:00:00.0,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=2010-02-02 00:00:00.0, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=7, enabled=true, name=EFECTIVO, image=EFECTIVO_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=2010-02-02 00:00:00.0, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@49b7ed51, accountParentId=9, categories=[]}
-2023-02-19 11:19:37.179 ERROR 1688 --- [http-nio-8081-exec-6] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ACCOUNT ::  ::: VALIDATING IF EXIST´S EXPENSE OR TRANSFERENCE FOR THIS ACCOUNT SPECIFICALLY ::: 
-2023-02-19 11:19:37.188 ERROR 1688 --- [http-nio-8081-exec-6] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ACCOUNT ::  ::: VALIDATING OK, PROCEED TO DELETE ::: 
-2023-02-19 11:19:49.858  INFO 1688 --- [http-nio-8081-exec-9] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: BEGIN SAVE ACCOUNT ::: 
-2023-02-19 11:19:49.858  INFO 1688 --- [http-nio-8081-exec-9] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: ACCOUNT TYPE : PARENT ::: 
-2023-02-19 11:19:49.858  INFO 1688 --- [http-nio-8081-exec-9] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: ACCOUNT VALIDATION NAME REPEATED ::: 
-2023-02-19 11:19:49.859  INFO 1688 --- [http-nio-8081-exec-9] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: ACCOUNT PARENT ::: 
-2023-02-19 11:19:49.863  INFO 1688 --- [http-nio-8081-exec-9] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: ACCOUNT UPDATING AMOUNT PARENT WITH ID ITSELF ::: 
-2023-02-19 11:19:49.864  INFO 1688 --- [http-nio-8081-exec-9] p.c.e.e.m.a.s.impl.AccountServiceImpl    : [X10598] ::: ACCOUNT SAVED SUCCESSFULLY ::: 
-2023-02-19 13:04:17.754  INFO 1688 --- [http-nio-8081-exec-5] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 13:04:17.757  INFO 1688 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=120.0, amountPayed=0.0, amountToRecover=120.0, pendingPay=false, enabled=true, transactionType=EXPENSE, createAt=Sun Feb 19 13:04:03 PET 2023, description='', vouchers=[], category=Category [id=1, name=LUZ, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fluz.jpg?alt=media&token=2aa07c13-62d2-4ab3-bb9d-9d08bf9e8632, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=3, accountNumber='171854232', accountName='Sustento', balance=665.0, balanceOnlyInitial=700.0, balanceAvailable=100.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:36:08 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=2, enabled=true, name=BBVA, image=BBVA_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@7a1c4f6f, accountParentId=3, categories=[]}, reposition=[Reposition{id=4, amountToRepo='100.0', partnerToPay=Partner(id=2, name=Juan, email=, statusRequest=NOSENDED, dateSendRequest=Fri Feb 17 17:19:22 PET 2023, dateReceivedResponse=Fri Feb 17 17:19:22 PET 2023, ownerId=1)}, Reposition{id=5, amountToRepo='20.0', partnerToPay=Partner(id=1, name=CINTHIA MARIA, email=, statusRequest=NOSENDED, dateSendRequest=Wed Feb 15 22:39:18 PET 2023, dateReceivedResponse=Wed Feb 15 22:39:18 PET 2023, ownerId=1)}], tag=[], period=
+2023-02-24 09:40:13.151  WARN 24240 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9h52m32s40ms998µs300ns).
+2023-02-24 10:03:32.830  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
+2023-02-24 10:03:32.837  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
+2023-02-24 10:03:32.897  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0
+, amount=150.0
+, amountPayed=0.0
+, amountToRecover=100.0
+, pendingPay=false
+, enabled=true
+, transactionType=EXPENSE
+, createAt=Fri Feb 24 10:03:11 PET 2023
+, description=''
+, vouchers=0
+, category=INTERNET Y TELF
+, account=Account{id=13, accountNumber='726743898
+, accountName='saldo
+, balance=3000.0
+, balanceOnlyInitial=3000.0
+, balanceAvailable=1000.0
+, statusAccount=INITIAL
+, createAt=Wed Feb 22 19:11:46 PET 2023
+, accountType=PARENT
+, financialEntity=BBVA
+, typeCard=DEBIT
+, accountParentId=13
+}
+, reposition=[Reposition{id=0, amountToRepo='100.0'}]
+, tag=[]
+, period=
  AccountingPeriodSummary 
 [Id=1,
  statusPeriod=true,
  startDate=Sun Jan 01 00:00:00 PET 2023,
  finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=17}
-2023-02-19 13:04:17.757  INFO 1688 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 13:04:17.760  INFO 1688 --- [http-nio-8081-exec-5] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 13:06:01.575  INFO 1688 --- [http-nio-8081-exec-8] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 13:06:01.577  INFO 1688 --- [http-nio-8081-exec-8] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=120.0, amountPayed=0.0, amountToRecover=120.0, pendingPay=false, enabled=true, transactionType=EXPENSE, createAt=Sun Feb 19 13:05:39 PET 2023, description='', vouchers=[], category=Category [id=1, name=LUZ, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fluz.jpg?alt=media&token=2aa07c13-62d2-4ab3-bb9d-9d08bf9e8632, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=3, accountNumber='171854232', accountName='Sustento', balance=665.0, balanceOnlyInitial=700.0, balanceAvailable=100.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:36:08 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
+ owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner=Ever Rosales Peña]]
+, idExpenseToPay=0
+}
+2023-02-24 10:03:32.897  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Validando parámetros de cuenta y montos
+2023-02-24 10:03:32.898  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción se marcará como PENDIENTE DE PAGO, ya que su monto a devolver es mayor que CERO
+2023-02-24 10:03:32.916  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se procede a modificar los montos de las cuentas afectadas de la transacción principal de tipo : EXPENSE
+2023-02-24 10:03:32.926  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se actualizaron los montos de las cuentas correctamente
+2023-02-24 10:03:32.940  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
+2023-02-24 10:03:32.956  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
+2023-02-24 10:05:09.087  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
+2023-02-24 10:05:09.089  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: PAYMENT
+2023-02-24 10:05:09.090  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0
+, amount=99.0
+, amountPayed=0.0
+, amountToRecover=100.0
+, pendingPay=false
+, enabled=true
+, transactionType=PAYMENT
+, createAt=Fri Feb 24 10:03:42 PET 2023
+, description=''
+, vouchers=0
+, category=INTERNET Y TELF
+, account=Account{id=36, accountNumber='638329338
+, accountName='lñklñk
+, balance=899.0
+, balanceOnlyInitial=899.0
+, balanceAvailable=899.0
+, statusAccount=INITIAL
+, createAt=Thu Feb 23 21:02:12 PET 2023
+, accountType=PARENT
+, financialEntity=INTERBANK
+, typeCard=RECARGABLE
+, accountParentId=36
+}
+, reposition=[]
+, tag=[]
+, period=
  AccountingPeriodSummary 
 [Id=1,
  statusPeriod=true,
  startDate=Sun Jan 01 00:00:00 PET 2023,
  finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=2, enabled=true, name=BBVA, image=BBVA_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@2889beed, accountParentId=3, categories=[]}, reposition=[Reposition{id=4, amountToRepo='100.0', partnerToPay=Partner(id=2, name=Juan, email=, statusRequest=NOSENDED, dateSendRequest=Fri Feb 17 17:19:22 PET 2023, dateReceivedResponse=Fri Feb 17 17:19:22 PET 2023, ownerId=1)}, Reposition{id=5, amountToRepo='20.0', partnerToPay=Partner(id=1, name=CINTHIA MARIA, email=, statusRequest=NOSENDED, dateSendRequest=Wed Feb 15 22:39:18 PET 2023, dateReceivedResponse=Wed Feb 15 22:39:18 PET 2023, ownerId=1)}], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=17}
-2023-02-19 13:06:01.624  INFO 1688 --- [http-nio-8081-exec-8] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 13:06:01.625  INFO 1688 --- [http-nio-8081-exec-8] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 13:17:52.881  INFO 1688 --- [http-nio-8081-exec-2] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 13:17:52.883  INFO 1688 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=120.0, amountPayed=0.0, amountToRecover=120.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 13:17:38 PET 2023, description='', vouchers=[], category=Category [id=1, name=LUZ, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fluz.jpg?alt=media&token=2aa07c13-62d2-4ab3-bb9d-9d08bf9e8632, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=10, accountNumber='847193951', accountName='EFECTIVO', balance=60.0, balanceOnlyInitial=60.0, balanceAvailable=60.0, enabled=true, statusAccount=INITIAL, createAt=Sun Feb 19 11:19:49 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=7, enabled=true, name=EFECTIVO, image=EFECTIVO_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@42a5b150, accountParentId=10, categories=[]}, reposition=[Reposition{id=4, amountToRepo='100.0', partnerToPay=Partner(id=2, name=Juan, email=, statusRequest=NOSENDED, dateSendRequest=Fri Feb 17 17:19:22 PET 2023, dateReceivedResponse=Fri Feb 17 17:19:22 PET 2023, ownerId=1)}, Reposition{id=5, amountToRepo='20.0', partnerToPay=Partner(id=1, name=CINTHIA MARIA, email=, statusRequest=NOSENDED, dateSendRequest=Wed Feb 15 22:39:18 PET 2023, dateReceivedResponse=Wed Feb 15 22:39:18 PET 2023, ownerId=1)}], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=17}
-2023-02-19 13:17:52.884  INFO 1688 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 13:17:52.900  INFO 1688 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::El gasto asociado al pago ha sido actualizado correctamente
-2023-02-19 13:17:52.914  INFO 1688 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 13:17:52.916  INFO 1688 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 13:17:52.927  INFO 1688 --- [http-nio-8081-exec-2] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 15:59:22.798  INFO 1688 --- [http-nio-8081-exec-3] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 15:59:22.802  INFO 1688 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=10.0, amountPayed=0.0, amountToRecover=15.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 15:59:08 PET 2023, description='', vouchers=[], category=Category [id=9, name=ABONO AHORRO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fplan-estrategico.png?alt=media&token=3cc5ddba-f07a-45f1-8f62-a44abd55a55d, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=10, accountNumber='847193951', accountName='EFECTIVO', balance=60.0, balanceOnlyInitial=60.0, balanceAvailable=180.0, enabled=true, statusAccount=INITIAL, createAt=Sun Feb 19 11:19:49 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=7, enabled=true, name=EFECTIVO, image=EFECTIVO_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@1d7b5e86, accountParentId=10, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=12}
-2023-02-19 15:59:22.803  INFO 1688 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 15:59:22.809  INFO 1688 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::El gasto asociado al pago ha sido actualizado correctamente
-2023-02-19 15:59:22.822  INFO 1688 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 15:59:22.824  INFO 1688 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 15:59:22.831  INFO 1688 --- [http-nio-8081-exec-3] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 16:01:19.563  INFO 1688 --- [http-nio-8081-exec-8] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 16:01:19.565  INFO 1688 --- [http-nio-8081-exec-8] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=10.0, amountPayed=0.0, amountToRecover=15.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 16:01:07 PET 2023, description='', vouchers=[], category=Category [id=9, name=ABONO AHORRO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fplan-estrategico.png?alt=media&token=3cc5ddba-f07a-45f1-8f62-a44abd55a55d, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=890.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@7cd4bcd, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=12}
-2023-02-19 16:01:19.566  INFO 1688 --- [http-nio-8081-exec-8] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 16:01:19.570  INFO 1688 --- [http-nio-8081-exec-8] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 16:02:48.659  INFO 1688 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-02-19 16:02:48.673  INFO 1688 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-02-19 16:02:48.679  INFO 1688 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-02-19 16:02:57.868  INFO 20820 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Starting ExpenseManagerApplication using Java 17.0.5 on DESKTOP-F4NTJ95 with PID 20820 (C:\Projects\workspace-backend\expense-manager\target\classes started by Ever in C:\Projects\workspace-backend\expense-manager)
-2023-02-19 16:02:57.873  INFO 20820 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : No active profile set, falling back to 1 default profile: "default"
-2023-02-19 16:02:57.983  INFO 20820 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-02-19 16:02:57.984  INFO 20820 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-02-19 16:03:00.355  INFO 20820 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-02-19 16:03:00.687  INFO 20820 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 312 ms. Found 22 JPA repository interfaces.
-2023-02-19 16:03:02.252  INFO 20820 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2023-02-19 16:03:02.277  INFO 20820 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-02-19 16:03:02.294  INFO 20820 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
-2023-02-19 16:03:02.761  INFO 20820 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-02-19 16:03:02.762  INFO 20820 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4777 ms
-2023-02-19 16:03:03.181  INFO 20820 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-02-19 16:03:03.294  INFO 20820 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
-2023-02-19 16:03:03.763  INFO 20820 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-02-19 16:03:04.008  INFO 20820 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-02-19 16:03:04.329  INFO 20820 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-02-19 16:03:04.354  INFO 20820 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2023-02-19 16:03:06.337  INFO 20820 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-02-19 16:03:06.359  INFO 20820 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-02-19 16:03:08.477  WARN 20820 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-02-19 16:03:09.001  INFO 20820 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-02-19 16:03:09.420  INFO 20820 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2023-02-19 16:03:10.658  INFO 20820 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Started ExpenseManagerApplication in 13.663 seconds (JVM running for 14.93)
-2023-02-19 16:03:27.504  INFO 20820 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-02-19 16:03:27.507  INFO 20820 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-02-19 16:03:27.512  INFO 20820 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
-2023-02-19 16:03:27.833  INFO 20820 --- [http-nio-8081-exec-2] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 16:03:28.007  INFO 20820 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=10.0, amountPayed=0.0, amountToRecover=15.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 16:03:21 PET 2023, description='', vouchers=[], category=Category [id=9, name=ABONO AHORRO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fplan-estrategico.png?alt=media&token=3cc5ddba-f07a-45f1-8f62-a44abd55a55d, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=890.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@45af5996, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=12}
-2023-02-19 16:03:28.008  INFO 20820 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 16:03:28.211  INFO 20820 --- [http-nio-8081-exec-2] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 16:03:53.411  INFO 20820 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-02-19 16:03:53.553  INFO 20820 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2023-02-19 16:03:53.590  INFO 20820 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2023-02-19 16:04:03.945  INFO 20080 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Starting ExpenseManagerApplication using Java 17.0.5 on DESKTOP-F4NTJ95 with PID 20080 (C:\Projects\workspace-backend\expense-manager\target\classes started by Ever in C:\Projects\workspace-backend\expense-manager)
-2023-02-19 16:04:03.948  INFO 20080 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : No active profile set, falling back to 1 default profile: "default"
-2023-02-19 16:04:04.086  INFO 20080 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-02-19 16:04:04.087  INFO 20080 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-02-19 16:04:06.500  INFO 20080 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-02-19 16:04:06.854  INFO 20080 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 332 ms. Found 22 JPA repository interfaces.
-2023-02-19 16:04:08.641  INFO 20080 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
-2023-02-19 16:04:08.669  INFO 20080 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2023-02-19 16:04:08.670  INFO 20080 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
-2023-02-19 16:04:08.897  INFO 20080 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2023-02-19 16:04:08.898  INFO 20080 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4810 ms
-2023-02-19 16:04:09.326  INFO 20080 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-02-19 16:04:09.439  INFO 20080 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
-2023-02-19 16:04:09.758  INFO 20080 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-02-19 16:04:10.017  INFO 20080 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2023-02-19 16:04:10.307  INFO 20080 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2023-02-19 16:04:10.332  INFO 20080 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
-2023-02-19 16:04:12.374  INFO 20080 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-02-19 16:04:12.391  INFO 20080 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-02-19 16:04:14.488  WARN 20080 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-02-19 16:04:14.993  INFO 20080 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2023-02-19 16:04:15.373  INFO 20080 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
-2023-02-19 16:04:16.641  INFO 20080 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Started ExpenseManagerApplication in 13.512 seconds (JVM running for 14.609)
-2023-02-19 16:05:36.849  INFO 20080 --- [http-nio-8081-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-02-19 16:05:36.849  INFO 20080 --- [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2023-02-19 16:05:36.854  INFO 20080 --- [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
-2023-02-19 16:08:54.535  INFO 20080 --- [http-nio-8081-exec-9] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 16:08:54.640  INFO 20080 --- [http-nio-8081-exec-9] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=90.0, amountPayed=0.0, amountToRecover=0.0, pendingPay=false, enabled=true, transactionType=EXPENSE, createAt=Sun Feb 19 16:08:38 PET 2023, description='', vouchers=[], category=Category [id=1, name=LUZ, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fluz.jpg?alt=media&token=2aa07c13-62d2-4ab3-bb9d-9d08bf9e8632, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=2, accountNumber='145597029', accountName='Budget 11', balance=60.0, balanceOnlyInitial=100.0, balanceAvailable=40.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:50 PET 2023, accountType=AccountType(id=2, typeName=CHILD), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@3a364e23, accountParentId=1, categories=[Category [id=1, name=LUZ, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fluz.jpg?alt=media&token=2aa07c13-62d2-4ab3-bb9d-9d08bf9e8632, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], Category [id=2, name=AGUA, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fagua_service.png?alt=media&token=84c2c043-9cbe-43f6-a244-22223ece7e8f, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], Category [id=3, name=MANTENIMIENTO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fmaintenance.png?alt=media&token=7c975f86-44fd-4ef1-824c-30a09dc99eca, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=0}
-2023-02-19 16:08:54.640  INFO 20080 --- [http-nio-8081-exec-9] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 16:08:54.644  INFO 20080 --- [http-nio-8081-exec-9] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 16:09:05.017  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 16:09:05.019  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=90.0, amountPayed=0.0, amountToRecover=0.0, pendingPay=false, enabled=true, transactionType=EXPENSE, createAt=Sun Feb 19 16:08:38 PET 2023, description='', vouchers=[], category=Category [id=8, name=GAS, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fgas.png?alt=media&token=2ea5c486-c637-4fc3-98ba-7ba355cb7a90, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=890.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@51eb72e, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=0}
-2023-02-19 16:09:05.020  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 16:09:05.099  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 16:09:05.106  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 16:09:05.184  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 16:11:53.600  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 16:11:53.603  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=5.0, amountPayed=0.0, amountToRecover=15.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 16:11:44 PET 2023, description='', vouchers=[], category=Category [id=9, name=ABONO AHORRO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fplan-estrategico.png?alt=media&token=3cc5ddba-f07a-45f1-8f62-a44abd55a55d, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=800.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@10b4f8dd, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=12}
-2023-02-19 16:11:53.604  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 16:11:53.608  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::El gasto asociado al pago ha sido actualizado correctamente
-2023-02-19 16:11:53.612  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 16:11:53.614  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 16:11:53.622  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 16:42:23.964  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 16:42:23.966  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=5.0, amountPayed=0.0, amountToRecover=50.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 16:40:38 PET 2023, description='', vouchers=[], category=Category [id=19, name=CARRO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fcarro.JPG?alt=media&token=f8a3578d-4ea1-4f59-b14f-3358e22d2fef, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=805.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@64a1aac8, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=11}
-2023-02-19 16:42:23.967  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 16:42:23.973  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::El gasto asociado al pago ha sido actualizado correctamente
-2023-02-19 16:42:23.979  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 16:42:23.982  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 16:42:23.994  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 16:45:47.649  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 16:45:47.651  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=10.0, amountPayed=0.0, amountToRecover=0.0, pendingPay=false, enabled=true, transactionType=EXPENSE, createAt=Sun Feb 19 16:45:36 PET 2023, description='', vouchers=[], category=Category [id=4, name=DEPARTAMENTO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fdepartment.png?alt=media&token=0612213c-1317-4e3c-9f2d-1a50433c7cde, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=6, accountNumber='951010038', accountName='Budget 2', balance=400.0, balanceOnlyInitial=400.0, balanceAvailable=400.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:37:13 PET 2023, accountType=AccountType(id=2, typeName=CHILD), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@a860226, accountParentId=1, categories=[Category [id=4, name=DEPARTAMENTO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fdepartment.png?alt=media&token=0612213c-1317-4e3c-9f2d-1a50433c7cde, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], Category [id=5, name=ABONO_MADRE, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fabono_renta.png?alt=media&token=dc3d7af5-f8c7-45f0-9e52-f6c3bb4f1cfc, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], Category [id=6, name=MOVIL, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fmovil.png?alt=media&token=6093f4af-4f9a-41fe-a17f-67929369936d, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=0}
-2023-02-19 16:45:47.652  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 16:45:47.658  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 16:45:47.661  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 16:45:47.677  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 16:46:27.179  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 16:46:27.182  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=10.0, amountPayed=0.0, amountToRecover=50.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 16:46:18 PET 2023, description='', vouchers=[], category=Category [id=19, name=CARRO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fcarro.JPG?alt=media&token=f8a3578d-4ea1-4f59-b14f-3358e22d2fef, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=810.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@4451c05f, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=11}
-2023-02-19 16:46:27.191  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 16:46:27.195  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::El gasto asociado al pago ha sido actualizado correctamente
-2023-02-19 16:46:27.201  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 16:46:27.203  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 16:46:27.208  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 16:48:44.202  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 16:48:44.206  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=10.0, amountPayed=0.0, amountToRecover=50.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 16:48:06 PET 2023, description='', vouchers=[], category=Category [id=19, name=CARRO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fcarro.JPG?alt=media&token=f8a3578d-4ea1-4f59-b14f-3358e22d2fef, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=820.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@6ef14102, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=11}
-2023-02-19 16:48:44.206  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 16:48:44.210  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::El gasto asociado al pago ha sido actualizado correctamente
-2023-02-19 16:48:44.215  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 16:48:44.227  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 16:48:44.233  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 17:34:00.806  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 17:34:00.808  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=15.0, amountPayed=0.0, amountToRecover=50.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 17:33:51 PET 2023, description='', vouchers=[], category=Category [id=19, name=CARRO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fcarro.JPG?alt=media&token=f8a3578d-4ea1-4f59-b14f-3358e22d2fef, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=830.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@3dfaaeee, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=11}
-2023-02-19 17:34:00.809  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 17:34:00.811  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::El gasto asociado al pago ha sido actualizado correctamente
-2023-02-19 17:34:00.817  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 17:34:00.819  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 17:34:00.825  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 17:36:37.263  INFO 20080 --- [http-nio-8081-exec-2] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 17:36:37.265  INFO 20080 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=11.0, amountPayed=0.0, amountToRecover=50.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 17:36:29 PET 2023, description='', vouchers=[], category=Category [id=19, name=CARRO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fcarro.JPG?alt=media&token=f8a3578d-4ea1-4f59-b14f-3358e22d2fef, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=845.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@bce365e, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=11}
-2023-02-19 17:36:37.265  INFO 20080 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 17:36:37.272  INFO 20080 --- [http-nio-8081-exec-2] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 17:36:48.574  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 17:36:48.575  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=10.0, amountPayed=0.0, amountToRecover=50.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 17:36:29 PET 2023, description='', vouchers=[], category=Category [id=19, name=CARRO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fcarro.JPG?alt=media&token=f8a3578d-4ea1-4f59-b14f-3358e22d2fef, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=845.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@5093332b, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=11}
-2023-02-19 17:36:48.576  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 17:36:48.580  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::El gasto asociado al pago ha sido actualizado correctamente
-2023-02-19 17:36:48.584  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 17:36:48.585  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 17:36:48.595  INFO 20080 --- [http-nio-8081-exec-10] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 17:40:52.915  INFO 20080 --- [http-nio-8081-exec-5] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 17:40:52.918  INFO 20080 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=65.0, amountPayed=0.0, amountToRecover=0.0, pendingPay=false, enabled=true, transactionType=EXPENSE, createAt=Sun Feb 19 17:40:27 PET 2023, description='', vouchers=[], category=Category [id=19, name=CARRO, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fcarro.JPG?alt=media&token=f8a3578d-4ea1-4f59-b14f-3358e22d2fef, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=7, accountNumber='452711094', accountName='Respaldo', balance=1165.0, balanceOnlyInitial=1200.0, balanceAvailable=765.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:37:41 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=3, enabled=true, name=SCOTIABANK, image=SCOTIABANK_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@146d6467, accountParentId=7, categories=[]}, reposition=[], tag=[Tag [id=1, tagName=LECHEOwner:  
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=0}
-2023-02-19 17:40:52.918  INFO 20080 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 17:40:52.919  INFO 20080 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE :: SAVING TAGS TO DB
-2023-02-19 17:40:52.936  INFO 20080 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 17:40:52.939  INFO 20080 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 17:40:52.945  INFO 20080 --- [http-nio-8081-exec-5] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 17:42:23.834  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 17:42:23.846  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=55.0, amountPayed=0.0, amountToRecover=55.0, pendingPay=false, enabled=true, transactionType=EXPENSE, createAt=Sun Feb 19 17:42:03 PET 2023, description='', vouchers=[], category=Category [id=8, name=GAS, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fgas.png?alt=media&token=2ea5c486-c637-4fc3-98ba-7ba355cb7a90, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=855.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@3a039369, accountParentId=1, categories=[]}, reposition=[Reposition{id=0, amountToRepo='55.0', partnerToPay=Partner(id=0, name=Freddy, email=, statusRequest=NOSENDED, dateSendRequest=Sun Feb 19 17:42:20 PET 2023, dateReceivedResponse=Sun Feb 19 17:42:20 PET 2023, ownerId=1)}], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=0}
-2023-02-19 17:42:23.846  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 17:42:23.847  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción se maracará como PENDIENTE DE PAGO, ya que su monto a devolver es nayor que CERO
-2023-02-19 17:42:23.847  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE :: SAVING PARTNER TO DB
-2023-02-19 17:42:23.856  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE :: SAVING REPOSITION TO DB
-2023-02-19 17:42:23.869  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 17:42:23.871  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 17:42:23.877  INFO 20080 --- [http-nio-8081-exec-3] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 22:11:56.033  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 22:11:56.035  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=50.0, amountPayed=0.0, amountToRecover=55.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 22:11:38 PET 2023, description='', vouchers=[], category=Category [id=8, name=GAS, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fgas.png?alt=media&token=2ea5c486-c637-4fc3-98ba-7ba355cb7a90, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=800.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@ccab229, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=32}
-2023-02-19 22:11:56.036  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 22:11:56.040  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::El gasto asociado al pago ha sido actualizado correctamente
-2023-02-19 22:11:56.045  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 22:11:56.047  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 22:11:56.055  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 22:12:23.930  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 22:12:23.932  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=100.0, amountPayed=0.0, amountToRecover=0.0, pendingPay=false, enabled=true, transactionType=EXPENSE, createAt=Sun Feb 19 22:12:09 PET 2023, description='', vouchers=[], category=Category [id=1, name=LUZ, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fluz.jpg?alt=media&token=2aa07c13-62d2-4ab3-bb9d-9d08bf9e8632, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=4, accountNumber='268890991', accountName='Budget 11', balance=350.0, balanceOnlyInitial=500.0, balanceAvailable=350.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:36:26 PET 2023, accountType=AccountType(id=2, typeName=CHILD), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=2, enabled=true, name=BBVA, image=BBVA_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@111e01e5, accountParentId=3, categories=[Category [id=20, name=OTROS, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fothers.png?alt=media&token=e7216d12-49e6-40e1-a81c-64d9a38884e0, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], Category [id=21, name=RECREACION, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Frecreacion.JPG?alt=media&token=86088d2f-034e-4c75-86c6-77b94af97bc5, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=0}
-2023-02-19 22:12:23.933  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 22:12:23.940  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 22:12:23.942  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 22:12:23.948  INFO 20080 --- [http-nio-8081-exec-1] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 22:12:46.485  INFO 20080 --- [http-nio-8081-exec-6] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 22:12:46.486  INFO 20080 --- [http-nio-8081-exec-6] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=34, amount=100.0, amountPayed=0.0, amountToRecover=100.0, pendingPay=false, enabled=true, transactionType=EXPENSE, createAt=Sun Feb 19 22:12:09 PET 2023, description='', vouchers=[], category=Category [id=1, name=LUZ, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fluz.jpg?alt=media&token=2aa07c13-62d2-4ab3-bb9d-9d08bf9e8632, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=4, accountNumber='268890991', accountName='Budget 11', balance=350.0, balanceOnlyInitial=500.0, balanceAvailable=250.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:36:26 PET 2023, accountType=AccountType(id=2, typeName=CHILD), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=2, enabled=true, name=BBVA, image=BBVA_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@3390a0b, accountParentId=3, categories=[Category [id=20, name=OTROS, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fothers.png?alt=media&token=e7216d12-49e6-40e1-a81c-64d9a38884e0, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], Category [id=21, name=RECREACION, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Frecreacion.JPG?alt=media&token=86088d2f-034e-4c75-86c6-77b94af97bc5, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]]}, reposition=[Reposition{id=0, amountToRepo='100.0', partnerToPay=Partner(id=2, name=Juan, email=, statusRequest=NOSENDED, dateSendRequest=Fri Feb 17 17:19:22 PET 2023, dateReceivedResponse=Fri Feb 17 17:19:22 PET 2023, ownerId=1)}], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=0}
-2023-02-19 22:12:46.487  INFO 20080 --- [http-nio-8081-exec-6] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 22:12:46.488  INFO 20080 --- [http-nio-8081-exec-6] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción se maracará como PENDIENTE DE PAGO, ya que su monto a devolver es nayor que CERO
-2023-02-19 22:12:46.488  INFO 20080 --- [http-nio-8081-exec-6] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE :: SAVING PARTNER TO DB
-2023-02-19 22:12:46.490  INFO 20080 --- [http-nio-8081-exec-6] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE :: SAVING REPOSITION TO DB
-2023-02-19 22:12:46.502  INFO 20080 --- [http-nio-8081-exec-6] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 22:12:46.504  INFO 20080 --- [http-nio-8081-exec-6] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 22:12:46.512  INFO 20080 --- [http-nio-8081-exec-6] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-19 22:19:49.580  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-19 22:19:49.582  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0, amount=100.0, amountPayed=0.0, amountToRecover=100.0, pendingPay=false, enabled=true, transactionType=PAYMENT, createAt=Sun Feb 19 22:19:38 PET 2023, description='', vouchers=[], category=Category [id=1, name=LUZ, active=true, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/categories%2Fluz.jpg?alt=media&token=2aa07c13-62d2-4ab3-bb9d-9d08bf9e8632, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]], account=Account{id=1, accountNumber='529497332', accountName='Saldo', balance=1490.0, balanceOnlyInitial=1500.0, balanceAvailable=850.0, enabled=true, statusAccount=INITIAL, createAt=Sat Feb 11 16:35:33 PET 2023, accountType=AccountType(id=1, typeName=PARENT), period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], financialEntity=FinancialEntity(id=1, enabled=true, name=BCP, image=BCP_ICON_SVG, owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]), typeCard=pe.com.erp.expensemanager.modules.account.model.TypeCard@25402a98, accountParentId=1, categories=[]}, reposition=[], tag=[], period=
- AccountingPeriodSummary 
-[Id=1,
- statusPeriod=true,
- startDate=Sun Jan 01 00:00:00 PET 2023,
- finalDate=Thu Mar 30 00:00:00 PET 2023,
- owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner= 
- Owner [id=1, name=Ever Rosales Peña, email=everjrosalesp@gmail.com, image=https://firebasestorage.googleapis.com/v0/b/usuarios-8190a.appspot.com/o/users%2Fever_1651713221827?alt=media&token=6f0bef77-a2d9-4ecd-855a-402b75be65b8, createAt=Tue Feb 02 00:00:00 PET 2010, username=ever, password=$2a$10$7C7fdMxPpvx.FVR1Mj8bBuTBdkVsGAvBgPkUM.noBJRvP9iVLWQye, enabled=true, roles=[Role [id=1, name=ROLE_ADMIN], Role [id=2, name=ROLE_USER]]]]], idExpenseToPay=34}
-2023-02-19 22:19:49.582  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-19 22:19:49.584  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::El gasto asociado al pago ha sido actualizado correctamente
-2023-02-19 22:19:49.589  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Modificando los montos de las cuentas.
-2023-02-19 22:19:49.591  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-19 22:19:49.597  INFO 20080 --- [http-nio-8081-exec-7] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
+ owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner=Ever Rosales Peña]]
+, idExpenseToPay=62
+}
+2023-02-24 10:05:09.095  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::validando parámetros del pago 
+2023-02-24 10:05:09.097  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Actualización del monto pagado de la cuenta TC BBVA
+2023-02-24 10:05:09.098  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se actualizó el monto pagado correctamente
+2023-02-24 10:05:09.098  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se procede a modificar los montos de las cuentas afectadas de la transacción principal de tipo : PAYMENT
+2023-02-24 10:05:09.102  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se actualizaron los montos de las cuentas correctamente
+2023-02-24 10:05:09.106  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
+2023-02-24 10:05:09.113  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 

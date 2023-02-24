@@ -357,7 +357,7 @@ public class AccountServiceImpl implements IAccountService {
 	}*/
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
 	public Response deleteAccountById(Long idAccount, String messageLog) {
 
 		Response response = new Response();
@@ -367,13 +367,12 @@ public class AccountServiceImpl implements IAccountService {
 		LOG.info(messageLog + " ::: BEGIN DELETE ACCOUNT  ::: ");
 
 		accountToDeleteFound = accountRepo.findById(idAccount).orElse(null);
-		LOG.error(messageLog + " ::: ACCOUNT TO DELETE DON'T EXIST  ::: " + accountToDeleteFound);
 		if(accountToDeleteFound == null) {
 			LOG.error(messageLog + " ::: ACCOUNT TO DELETE DON'T EXIST  ::: ");
 			throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_ACCOUNT_DONT_EXIST);
 		}
-
-		LOG.error(messageLog + " ::: VALIDATING IF EXIST´S EXPENSE OR TRANSFERENCE FOR THIS ACCOUNT SPECIFICALLY ::: ");
+		LOG.info(messageLog + " ::: ACCOUNT FOUNDED  ::: " + accountToDeleteFound);
+		LOG.info(messageLog + " ::: VALIDATING IF EXIST´S EXPENSE OR TRANSFERENCE FOR THIS ACCOUNT SPECIFICALLY ::: ");
 		if(accountToDeleteFound.getAccountType().getTypeName().equals("CHILD")) {
 
 			Account accountParent = accountRepo.findById(accountToDeleteFound.getAccountParentId()).orElse(null);
@@ -389,11 +388,11 @@ public class AccountServiceImpl implements IAccountService {
 			messageException = properties.RESPONSE_CUSTOMIZED_MESSAGE_ACCOUNT_TRANSFERENCE_EXIST_BY_ACCOUNT_SELECTED_DELETE_ITS_IMPOSSIBLE;
 			validExistsTransferencesByAccountId(accountToDeleteFound, messageLog, messageException);
 
-			LOG.error(messageLog + " ::: VALIDATING OK, PROCEED TO UPDATING AVAILABLE AMOUNT TO ACCOUNT PARENT ::: ");
+			LOG.info(messageLog + " ::: VALIDATING OK, PROCEED TO UPDATING AVAILABLE AMOUNT TO ACCOUNT PARENT ::: ");
 			accountParent.setBalanceAvailable(accountParent.getBalanceAvailable() + accountToDeleteFound.getBalanceAvailable());
 			accountRepo.save(accountParent);
 
-			LOG.error(messageLog + " ::: VALIDATING OK, PROCEED TO DELETE ::: ");
+			LOG.info(messageLog + " ::: VALIDATING OK, PROCEED TO DELETE ::: ");
 			accountToDeleteFound.setCategories(null);
 			accountRepo.deleteById(accountToDeleteFound.getId());
 		}
@@ -413,7 +412,7 @@ public class AccountServiceImpl implements IAccountService {
 				validExistsTransferencesByAccountId(accountChild, messageLog, messageException);
 			}
 
-			LOG.error(messageLog + " ::: VALIDATING OK, PROCEED TO DELETE ::: ");
+			LOG.info(messageLog + " ::: VALIDATING OK, PROCEED TO DELETE ::: ");
 			accountRepo.deleteAllByAccountParentId(accountToDeleteFound.getAccountParentId());
 		}
 

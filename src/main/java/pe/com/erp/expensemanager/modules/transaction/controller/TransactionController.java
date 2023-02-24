@@ -164,7 +164,7 @@ public class TransactionController {
 	@DeleteMapping("/expense/{idExpense}")
 	ResponseEntity<Response> deleteExpenseById(@PathVariable Long idExpense) {
 		Response response = new Response();
-		String ownerInfoMessage = "[X10598] EXPENSE SAVE ::";
+		String ownerInfoMessage = "[X10598] EXPENSE DELETE BEGIN ::";
 		try {
 			response =  iTransactionService.deleteTransactionById(idExpense, ownerInfoMessage);
 			if(!response.getStatus().equals(properties.RESPONSE_GENERIC_SUCCESS_STATUS)) {

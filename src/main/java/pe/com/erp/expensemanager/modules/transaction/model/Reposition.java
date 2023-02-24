@@ -79,7 +79,6 @@ public class Reposition {
         return "Reposition{" +
                 "id=" + id +
                 ", amountToRepo='" + amountToRepo + '\'' +
-                ", partnerToPay=" + partnerToPay +
                 '}';
     }
 }

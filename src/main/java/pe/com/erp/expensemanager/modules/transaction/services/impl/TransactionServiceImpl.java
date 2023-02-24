@@ -19,6 +19,8 @@ import pe.com.erp.expensemanager.modules.account.model.Transference;
 import pe.com.erp.expensemanager.modules.account.model.TypeTransference;
 import pe.com.erp.expensemanager.modules.account.repository.AccountRepository;
 import pe.com.erp.expensemanager.modules.account.repository.TransferenceRepository;
+import pe.com.erp.expensemanager.modules.categories.model.Category;
+import pe.com.erp.expensemanager.modules.categories.repository.CategoryRepository;
 import pe.com.erp.expensemanager.modules.partners.model.StatusInvitationsPartner;
 import pe.com.erp.expensemanager.modules.partners.repository.PartnerRepository;
 import pe.com.erp.expensemanager.modules.transaction.model.Reposition;
@@ -61,6 +63,8 @@ public class TransactionServiceImpl implements ITransactionService {
 	TransferenceRepository transferenceRepository;
 	@Autowired
 	private AccountRepository accountRepository;
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	@Override
 	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
@@ -69,59 +73,136 @@ public class TransactionServiceImpl implements ITransactionService {
 		Response response = new Response();
 		boolean modifyAccount = true;
 		Transaction transactionToSave = new Transaction();
+		Transaction expenseAssocToPay = new Transaction();
+
+		LOG.info(messageLog + "La transacción recibida es de tipo: " + transactionRequest.getTransactionType());
 		LOG.info(messageLog + "transaction request: " + transactionRequest.toString());
-		LOG.info(messageLog + "La transacción recibida es de tipo: " + TransactionType.EXPENSE);
-		if(transactionRequest.getTransactionType().equals(TransactionType.EXPENSE)) {
-			if(transactionRequest.getAmount() > transactionRequest.getAccount().getBalanceAvailable()){
-				throw new CustomException(properties.RESPONSE_AMOUNT_TO_EXPENSE_IS_GRATHER_THAN_TO_AVAILABLE_AMOUNT_ACCOUNT);
+
+		try {
+			if(transactionRequest.getIdExpenseToPay() != 0) {
+				expenseAssocToPay = transactionRepository.findById(transactionRequest.getIdExpenseToPay()).orElse(null);
+				if(expenseAssocToPay == null) {
+					throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_PAY_DONT_EXIST);
+				}
+
+				if(expenseAssocToPay != null && expenseAssocToPay.getAccount() != null
+						&& expenseAssocToPay.getAccount().getTypeCard().getName().toUpperCase().equals("CREDIT")) {
+					LOG.info(messageLog + "El gasto asociado al  pago en cuestión se realizó con una cuenta de tipo TARJETA DE CREDITO");
+					LOG.info(messageLog + "Se registrará una transacción de tipo gasto adicional al pago.");
+					LOG.info(messageLog + "Procesango registro de gasto para la cuenta recibida; " + transactionRequest.getAccount().getFinancialEntity().getName());
+					transactionRequest.setTransactionType(TransactionType.EXPENSE);
+					transactionRequest.setAmountToRecover(0.0);
+					transactionRequest.setAmountPayed(0.0);
+					transactionRequest.setReposition(new ArrayList<Reposition>());
+				}
 			}
 
-			if(transactionRequest.getAmountToRecover() > 0) {
-				LOG.info(messageLog + "La transacción se maracará como PENDIENTE DE PAGO, ya que su monto a devolver es nayor que CERO");
+			if(transactionRequest.getTransactionType().equals(TransactionType.EXPENSE)) {
+				LOG.info(messageLog + "Validando parámetros de cuenta y montos");
+				if(transactionRequest.getAmount() > transactionRequest.getAccount().getBalanceAvailable()){
+					throw new CustomException(properties.RESPONSE_AMOUNT_TO_EXPENSE_IS_GRATHER_THAN_TO_AVAILABLE_AMOUNT_ACCOUNT);
+				}
+
+				if(transactionRequest.getAmount() < transactionRequest.getAmountToRecover()) {
+					LOG.info(messageLog + "El monto es menor al monto a reponer");
+					throw new CustomException("El monto es menor al monto a reponer, ingrese un monto mayor o no genere reposición.");
+				}
+
+				if(transactionRequest.getAmountToRecover() < transactionRequest.getAmountPayed()) {
+					LOG.info(messageLog + "El monto a reponer es menor al monto pagado");
+					throw new CustomException("El monto a reponer es menor al monto pagado, ingrese un monto mayor.");
+				}
+
+				transactionRequest.setPendingPay(false);
+				if(transactionRequest.getAmountToRecover() > transactionRequest.getAmountPayed()) { //> 0 si es nuevo, else::
+					LOG.info(messageLog + "La transacción se marcará como PENDIENTE DE PAGO, ya que su monto a devolver es mayor que CERO");
+					transactionRequest.setPendingPay(true);
+					transactionRequest.setReposition(saveOrUpdateRepositions(transactionRequest, messageLog));
+				}
+
+				if(transactionRequest.getAccount().getTypeCard().getName().equals("CREDIT") && transactionRequest.getAmountToRecover() == 0) {
+					LOG.info(messageLog + "Se recibió el registro de gasto con Tarjeta de Crédito Y monto a reponer:0 , se procede a actualizar al monto gastado. " + transactionRequest.getAmount());
+					transactionRequest.setPendingPay(true);
+					transactionRequest.setAmountToRecover(transactionRequest.getAmount());
+					Reposition repositionOwner = new Reposition();
+					repositionOwner.setAmountToRepo(transactionRequest.getAmount());
+					repositionOwner.setAmountToRepoPayed(0.0);
+					transactionRequest.setReposition(saveOrUpdateRepositions(transactionRequest, messageLog));
+				}
+
+				if(expenseAssocToPay != null && expenseAssocToPay.getAccount()!= null
+						&& expenseAssocToPay.getAccount().getTypeCard().getName().toUpperCase().equals("CREDIT")) {
+					LOG.info(messageLog + "Seteando tag si existieran y actualizando montos de cuentas por el gasto a realizar");
+					transactionRequest.setTag(validateTagsAndSaveIfNotExists(transactionRequest, messageLog));
+					String description = "";
+					description = "Pago TC: " + transactionRequest.getDescription();
+					transactionRequest.setDescription(description);
+					transactionRequest.setPendingPay(false);
+					LOG.info(messageLog + "Validación de montos y cuentas pasaron correctamente");
+					modifyAmountAccountFromTransaction(transactionRequest, "SAVE");
+
+					transactionRepository.save(transactionRequest);
+					LOG.info(messageLog + "Registro de gasto producto del pago de TC fue realizado correctamente");
+					LOG.info(messageLog + "----------------------------------------------------------------------");
+					LOG.info(messageLog + "Procesango registro de PAGO para la cuenta TC; ");
+					transactionRequest.setTransactionType(TransactionType.PAYMENT);
+				}
+			}
+
+			if(transactionRequest.getTransactionType().equals(TransactionType.REMINDER)) {
+				LOG.info(messageLog + "La transacción se marcará como PENDIENTE DE PAGO, por ser recoradotorio");
 				transactionRequest.setPendingPay(true);
-				transactionRequest.setReposition(saveOrUpdateRepositions(transactionRequest, messageLog));
+				modifyAccount = false;
 			}
+
+			if(transactionRequest.getTransactionType().equals(TransactionType.INCOME)) {
+				transactionRequest.setPendingPay(false);
+			}
+
+			if(transactionRequest.getTransactionType().equals(TransactionType.PAYMENT)) {
+				LOG.info(messageLog + "validando parámetros del pago ");
+				double expensePendingAmount = expenseAssocToPay.getAmountToRecover() - expenseAssocToPay.getAmountPayed();
+				if(transactionRequest.getAmount() > expensePendingAmount){
+					throw new CustomException(properties.RESPONSE_AMOUNT_TO_PAYMENT_IS_GRATHER_THAN_TO_AMOUNT_PENDING_EXPENSE + " [ de S./" + expensePendingAmount + "]");
+				}
+				LOG.info(messageLog + "Actualización del monto pagado de la cuenta TC " + expenseAssocToPay.getAccount().getFinancialEntity().getName());
+				expenseAssocToPay.setAmountPayed(expenseAssocToPay.getAmountPayed() + transactionRequest.getAmount());
+
+				if(expenseAssocToPay.getAmountToRecover() == expenseAssocToPay.getAmountPayed()) {
+					LOG.info(messageLog + "Monto PAGADO de TC es IGUAL al monto a reponer ");
+					LOG.info(messageLog + "El gasto se maracará como RESPUESTO en su totalidad ");
+					expenseAssocToPay.setPendingPay(false);
+				}
+
+				transactionRepository.save(expenseAssocToPay);
+				LOG.info(messageLog + "Se actualizó el monto pagado correctamente");
+
+				if(expenseAssocToPay.getAccount().getTypeCard().getName().toUpperCase().equals("CREDIT")) {
+					transactionRequest.setAccount(expenseAssocToPay.getAccount());
+				}
+			}
+
+			if(transactionRequest.getCategory().getId() == 0){
+				LOG.info(messageLog + "Se encontró una categoría nueva, se procede a registrarla.");
+				Category newCategorySave = transactionRequest.getCategory();
+				transactionRequest.setCategory(categoryRepository.save(newCategorySave));
+				LOG.info(messageLog + "Registro de la categoría realizada correctamente.");
+			}
+
+			transactionRequest.setTag(validateTagsAndSaveIfNotExists(transactionRequest, messageLog));
+
+			LOG.info(messageLog + "Se procede a modificar los montos de las cuentas afectadas de la transacción principal de tipo : " +  transactionRequest.getTransactionType());
+			if(modifyAccount)
+				modifyAmountAccountFromTransaction(transactionRequest, "SAVE");
+
+			LOG.info(messageLog + "Se actualizaron los montos de las cuentas correctamente");
+			transactionToSave = transactionRepository.save(transactionRequest);
+
+			LOG.info(messageLog + properties.RESPONSE_GENERIC_SAVE_SUCCESS_MESSAGE);
+		} catch( Exception e) {
+			LOG.info(messageLog + e);
+			throw new CustomException(e.getMessage());
 		}
-
-		if(transactionRequest.getTransactionType().equals(TransactionType.REMINDER)) {
-			LOG.info(messageLog + "La transacción se marcará como PENDIENTE DE PAGO, por ser recoradotorio");
-			transactionRequest.setPendingPay(true);
-			modifyAccount = false;
-		}
-
-		if(transactionRequest.getTransactionType().equals(TransactionType.PAYMENT)) {
-
-			Transaction expenseAssocToPay = transactionRepository.findById(transactionRequest.getIdExpenseToPay()).orElse(null);
-
-			if(expenseAssocToPay == null) {
-				throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_PAY_DONT_EXIST);
-			}
-
-			double expensePendingAmount = expenseAssocToPay.getAmountToRecover() - expenseAssocToPay.getAmountPayed();
-			if(transactionRequest.getAmount() > expensePendingAmount){
-				throw new CustomException(properties.RESPONSE_AMOUNT_TO_PAYMENT_IS_GRATHER_THAN_TO_AMOUNT_PENDING_EXPENSE + " [ de S./" + expensePendingAmount + "]");
-			}
-
-			expenseAssocToPay.setAmountPayed(expenseAssocToPay.getAmountPayed() + transactionRequest.getAmount());
-
-			if(expenseAssocToPay.getAmountToRecover() == expenseAssocToPay.getAmountPayed()) {
-				expenseAssocToPay.setPendingPay(false);
-			}
-
-			transactionRepository.save(expenseAssocToPay);
-			LOG.info(messageLog + "El gasto asociado al pago ha sido actualizado correctamente");
-		}
-
-		transactionRequest.setTag(validateTagsAndSaveIfNotExists(transactionRequest, messageLog));
-		//transactionRequest.setVouchers(validateVouchersAndSaveIfNotExists(transactionRequest, messageLog));
-
-		transactionToSave = transactionRepository.save(transactionRequest);
-
-		LOG.info(messageLog + "Modificando los montos de las cuentas.");
-		if(modifyAccount)
-			modifyAmountAccountFromTransaction(transactionRequest, "SAVE");
-
-		LOG.info(messageLog + properties.RESPONSE_GENERIC_SAVE_SUCCESS_MESSAGE);
 
 		response.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
 		response.setStatus(properties.RESPONSE_GENERIC_SUCCESS_STATUS);
@@ -132,7 +213,7 @@ public class TransactionServiceImpl implements ITransactionService {
 	}
 
 	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
-	private void modifyAmountAccountFromTransaction(Transaction transactionRequest, String action) {
+	private Account modifyAmountAccountFromTransaction(Transaction transactionRequest, String action) {
 		Account accountAssoc = new Account();
 		accountAssoc = transactionRequest.getAccount();
 
@@ -147,7 +228,6 @@ public class TransactionServiceImpl implements ITransactionService {
 
 			if(transactionRequest.getTransactionType().equals(TransactionType.INCOME) ) {
 				accountAssoc.setBalanceAvailable(accountAssoc.getBalanceAvailable() + transactionRequest.getAmount());
-				accountAssoc.setBalance(accountAssoc.getBalance() + transactionRequest.getAmount());
 			}
 		} else if(action.equals("DELETE") || action.equals("UPDATE")) {
 			if(transactionRequest.getTransactionType().equals(TransactionType.EXPENSE)) {
@@ -160,11 +240,10 @@ public class TransactionServiceImpl implements ITransactionService {
 
 			if(transactionRequest.getTransactionType().equals(TransactionType.INCOME) ) {
 				accountAssoc.setBalanceAvailable(accountAssoc.getBalanceAvailable() - transactionRequest.getAmount());
-				accountAssoc.setBalance(accountAssoc.getBalance() - transactionRequest.getAmount());
 			}
 		}
 
-		accountRepository.save(accountAssoc);
+		return accountRepository.save(accountAssoc);
 	}
 
 	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
@@ -232,14 +311,12 @@ public class TransactionServiceImpl implements ITransactionService {
 		List<Reposition> repositions = new ArrayList<>();
 		if(expenseRequest.getReposition().size() > 0) {
 			for ( Reposition reposition: expenseRequest.getReposition()) {
-				LOG.info(messageLog + " SAVING PARTNER TO DB");
 				//reposition.setTransaction(expenseSaved);
 				reposition.setPartnerToPay(partnerRepository.save(reposition.getPartnerToPay()));
 				//LOG.info(messageLog + " SAVING NOTIFICATIONS WHEN PARTNER ITS SENDED STATUS TO DB");
 				//if(reposition.getPartnerToPay().getStatusRequest().equals(StatusInvitationsPartner.SENDED)) {
 					//notifRepo.save();
 				//}
-				LOG.info(messageLog + " SAVING REPOSITION TO DB");
 				repositions.add(repositionRepo.save(reposition));
 			}
 		}
@@ -254,44 +331,76 @@ public class TransactionServiceImpl implements ITransactionService {
 	@Override
 	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
 	public Response deleteTransactionById(Long idTransaction, String messageLog) {
-
+		LOG.info(messageLog + " Inicio de ELIMINACIÓN de registro");
 		Response response = new Response();
-		Transaction transactionDeleted = transactionRepository.findById(idTransaction).orElse(null);
-		if(transactionDeleted == null) {
-			throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_ASSOC_DONT_EXIST);
-		}
-
-		if(!transactionDeleted.getAccount().getTypeCard().getName().equals("CREDIT")) {
+		try {
+			Transaction transactionDeleted = transactionRepository.findById(idTransaction).orElse(null);
+			if(transactionDeleted == null) {
+				LOG.info(messageLog + " No se encontró el registro a eliminar por ID obtenido: " + idTransaction);
+				throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_ASSOC_DONT_EXIST);
+			}
+			LOG.info(messageLog + " El registro a eliminar es el siguiente: " + transactionDeleted.toString());
+			LOG.info(messageLog + " Registro a eliminar es de tipo: " + transactionDeleted.getTransactionType());
 
 			if(transactionDeleted.getTransactionType().equals(TransactionType.EXPENSE)) {
-				if((transactionDeleted.isPendingPay() && transactionDeleted.getAmountPayed() > 0 ) || !transactionDeleted.isPendingPay() ) {
-					List<Transaction> paymentsAssocToExpenseToDelete = transactionRepository.findPaymentsAssocToExpenseDeleteByExpenseId(idTransaction, transactionDeleted.getPeriod().getId());
+				LOG.info(messageLog + " Se procede a efectuar las devoluciones de los montos gastados a sus respectivas cuentas");
+
+				if(transactionDeleted.getAmountPayed() > 0 ) {
+					LOG.info(messageLog + " Se encontró que el monto pagado es mayor CERO, por tanto existen pagos asociados, se procede a ubicarlos y eliminarlos");
+					List<Transaction> paymentsAssocToExpenseToDelete = transactionRepository.findPaymentsAssocToExpenseDeleteByExpenseIdAndPeriodId(idTransaction, transactionDeleted.getPeriod().getId());
+					if(paymentsAssocToExpenseToDelete.size() == 0){
+						paymentsAssocToExpenseToDelete = transactionRepository.findPaymentsAssocToExpenseDeleteByExpenseIdAndWorkspaceId(idTransaction, transactionDeleted.getPeriod().getWorkspace().getId());
+					}
+
+					if(paymentsAssocToExpenseToDelete.size() == 0) {
+						throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_NOTFOUND_PAYMENTS_ASSOC_TO_EXPENSE_TO_DELETE);
+					}
+
 					for ( Transaction paymentAssocToDelete : paymentsAssocToExpenseToDelete) {
 						modifyAmountAccountFromTransaction(paymentAssocToDelete, "DELETE");
 						transactionRepository.deleteById(paymentAssocToDelete.getId());
 					}
+					LOG.info(messageLog + " Los pagos asociados fueron procesados y eliminados correctamente. el monto fue descontado de sus cuentas respectivamente");
+
 				}
 			}
 
 			if(transactionDeleted.getTransactionType().equals(TransactionType.PAYMENT)) {
-				Transaction expenseAssocToPayment = transactionRepository.findExpenseAssocToPaymentByIdExpenseToPayment(transactionDeleted.getIdExpenseToPay(), transactionDeleted.getPeriod().getId());
+				Transaction expenseAssocToPayment = transactionRepository.findExpenseAssocToPaymentByIdExpenseToPaymentAndPeriodId(transactionDeleted.getIdExpenseToPay(), transactionDeleted.getPeriod().getId());
+
+				if(expenseAssocToPayment == null){
+					expenseAssocToPayment = transactionRepository.findExpenseAssocToPaymentByIdExpenseToPaymentAndWorkspaceId(transactionDeleted.getIdExpenseToPay(), transactionDeleted.getPeriod().getWorkspace().getId());
+				}
+
+				if(expenseAssocToPayment == null) {
+					throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_NOTFOUND_EXPENSE_ASSOC_TO_PAYMENT_TO_DELETE);
+				}
+
 				expenseAssocToPayment.setAmountPayed(expenseAssocToPayment.getAmountPayed() - transactionDeleted.getAmount());
 				expenseAssocToPayment.setPendingPay(true);
 				transactionRepository.save(expenseAssocToPayment);
+				LOG.info(messageLog + " Se realizó el descuento del monto pagado al registro de gasto asociado, ya que el pago no existirá más. ");
+				if(transactionDeleted.getAccount().getBalanceAvailable() < transactionDeleted.getAmount()) {
+					throw new CustomException("La cuenta no tiene fondos suficiente para procesar el descuento correspondiente producto del intento de eliminación de la transacción, aumente el saldo de la cuenta.");
+				}
 			}
 
-		} else {
-			List<Transference> transferencesAssocToExpenseDeleteWithAccCreditCard = transactionRepository.findTransferencesAssocExpenseToDeleteWithAccountCreditCardByExpenseId(idTransaction, transactionDeleted.getPeriod().getId());
-			for ( Transference transferenceAssocToDelete : transferencesAssocToExpenseDeleteWithAccCreditCard) {
-				modifyAmountAccountFromTransference(transferenceAssocToDelete);
-				transferenceRepository.deleteById(transferenceAssocToDelete.getId());
+			if(transactionDeleted.getTransactionType().equals(TransactionType.INCOME)) {
+				if(transactionDeleted.getAccount().getBalanceAvailable() < transactionDeleted.getAmount()) {
+					throw new CustomException("La cuenta no tiene fondos suficiente para procesar el descuento correspondiente producto del intento de eliminación de la transacción, aumente el saldo de la cuenta.");
+				}
 			}
+
+			modifyAmountAccountFromTransaction(transactionDeleted, "DELETE");
+			transactionRepository.deleteById(transactionDeleted.getId());
+
+			LOG.info(messageLog + properties.RESPONSE_GENERIC_DELETE_SUCCESS_MESSAGE);
+
+		} catch(Exception e) {
+			LOG.error(e.getMessage());
+			throw new CustomException(e.getMessage());
 		}
 
-		modifyAmountAccountFromTransaction(transactionDeleted, "DELETE");
-		transactionRepository.deleteById(transactionDeleted.getId());
-
-		LOG.info(messageLog + properties.RESPONSE_GENERIC_DELETE_SUCCESS_MESSAGE);
 
 		response.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
 		response.setStatus(properties.RESPONSE_GENERIC_SUCCESS_STATUS);
@@ -306,58 +415,125 @@ public class TransactionServiceImpl implements ITransactionService {
 
 		Response response = new Response();
 		Transaction transactionToSave = new Transaction();
-
+		boolean bothAccountsEquals = false;
+		LOG.info(messageLog + " Inicio de ACTUALIZACIÓN de registro");
 		Transaction transactionFounded = transactionRepository.findById(idTransaction).orElse(null);
+
+		LOG.info(messageLog + " - " + transactionFounded.getAccount().getBalanceAvailable());
 
 		if(transactionFounded == null) {
 			throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_EXPENSE_TO_ASSOC_DONT_EXIST);
 		}
 
-		modifyAmountAccountFromTransaction(transactionFounded, "UPDATE");
+		//Return money to account
+		LOG.info(messageLog + " - " + transactionFounded.getTransactionType());
+
+		if(transactionRequest.getAccount().getId() == transactionFounded.getAccount().getId()) {
+			bothAccountsEquals = true;
+			LOG.info(messageLog + " - IGUALES - " + transactionRequest.getAccount().getBalanceAvailable());
+		}
+
+		LOG.info(messageLog + "Se procede a realizar las devoluciones o descuentos previos a actualizar los nuevos parámetros al registro.");
 
 		if(transactionFounded.getTransactionType().equals(TransactionType.EXPENSE)) {
-			if(transactionRequest.getAmount() < transactionFounded.getAmountPayed()) {
-				throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_NEW_AMOUNT_IS_GRATHER_THAN_AMOUNT_PAYED_TO_UPDATE);
+			if(bothAccountsEquals) {
+				transactionRequest.setAccount(modifyAmountAccountFromTransaction(transactionFounded, "UPDATE"));
+			} else {
+				modifyAmountAccountFromTransaction(transactionFounded, "UPDATE");
 			}
+		}
 
-			if(transactionRequest.getAmount() > transactionRequest.getAccount().getBalanceAvailable()){
-				throw new CustomException(properties.RESPONSE_AMOUNT_TO_EXPENSE_IS_GRATHER_THAN_TO_AVAILABLE_AMOUNT_ACCOUNT);
-			}
-
-			transactionRequest.setAmountToRecover(transactionRequest.getAmount());
-
-			if(transactionRequest.getAmountToRecover() > transactionFounded.getAmountPayed()) {
-				LOG.info(messageLog + "La transacción se maracará como PENDIENTE DE PAGO, ya que su monto a devolver es mayor que el monto pagado.");
-				transactionRequest.setPendingPay(true);
-				transactionRequest.setReposition(saveOrUpdateRepositions(transactionRequest, messageLog));
+		if(transactionFounded.getTransactionType().equals(TransactionType.INCOME)) {
+			if(transactionRequest.getTransactionType().equals(TransactionType.INCOME)) {
+				if(bothAccountsEquals) {
+					if ((transactionRequest.getAmount() - transactionFounded.getAmount()) > 0 ){
+						transactionRequest.setAccount(modifyAmountAccountFromTransaction(transactionFounded, "UPDATE"));
+					} else if(transactionFounded.getAccount().getBalanceAvailable() >= Math.abs(transactionRequest.getAmount() - transactionFounded.getAmount()) ) {
+						transactionRequest.setAccount(modifyAmountAccountFromTransaction(transactionFounded, "UPDATE"));
+					} else {
+						throw new CustomException("La cuenta no tiene fondos suficiente para procesar el nuevo monto, ingrese un nuevo monto de ingreso mayor.");
+					}
+				} else {
+					if(transactionFounded.getAccount().getBalanceAvailable() >= transactionFounded.getAmount()) {
+						modifyAmountAccountFromTransaction(transactionFounded, "UPDATE");
+					} else {
+						throw new CustomException("La cuenta no tiene fondos suficiente para procesar el nuevo monto, ingrese un nuevo monto de ingreso mayor.");
+					}
+				}
+			} else {
+				if(transactionFounded.getAccount().getBalanceAvailable() >= transactionFounded.getAmount()) {
+					if(bothAccountsEquals) {
+						transactionRequest.setAccount(modifyAmountAccountFromTransaction(transactionFounded, "UPDATE"));
+					} else {
+						modifyAmountAccountFromTransaction(transactionFounded, "UPDATE");
+					}
+				} else {
+					throw new CustomException("La cuenta no tiene fondos suficiente para procesar la actualización.");
+				}
 			}
 		}
 
 		if(transactionFounded.getTransactionType().equals(TransactionType.PAYMENT)) {
-			Transaction expenseAssocToPayment = transactionRepository.findExpenseAssocToPaymentByIdExpenseToPayment(transactionFounded.getIdExpenseToPay(), transactionFounded.getPeriod().getId());
+			Transaction expenseAssocToPayment = transactionRepository.findExpenseAssocToPaymentByIdExpenseToPaymentAndPeriodId(transactionFounded.getIdExpenseToPay(), transactionFounded.getPeriod().getId());
+
+			if(expenseAssocToPayment == null){
+				expenseAssocToPayment = transactionRepository.findExpenseAssocToPaymentByIdExpenseToPaymentAndWorkspaceId(transactionFounded.getIdExpenseToPay(), transactionFounded.getPeriod().getWorkspace().getId());
+			}
+
+			if(expenseAssocToPayment == null) {
+				throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_NOTFOUND_EXPENSE_ASSOC_TO_PAYMENT_TO_DELETE);
+			}
+
 			expenseAssocToPayment.setAmountPayed(expenseAssocToPayment.getAmountPayed() - transactionFounded.getAmount());
 			expenseAssocToPayment.setPendingPay(true);
 			transactionRepository.save(expenseAssocToPayment);
 
-			Response responseEditPayment = saveTransaction(transactionFounded, messageLog);
-			responseEditPayment.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
-			responseEditPayment.setMessage(properties.RESPONSE_GENERIC_UPDATE_SUCCESS_MESSAGE);
-			return response;
+			if(transactionRequest.getTransactionType().equals(TransactionType.PAYMENT) ) {
+				if(bothAccountsEquals) {
+					if ((transactionRequest.getAmount() - transactionFounded.getAmount()) > 0 ){
+						transactionRequest.setAccount(modifyAmountAccountFromTransaction(transactionFounded, "UPDATE"));
+					} else if(transactionFounded.getAccount().getBalanceAvailable() >= Math.abs(transactionRequest.getAmount() - transactionFounded.getAmount()) ) {
+						transactionRequest.setAccount(modifyAmountAccountFromTransaction(transactionFounded, "UPDATE"));
+					} else {
+						throw new CustomException("La cuenta no tiene fondos suficiente para procesar el nuevo monto, ingrese un nuevo monto de ingreso mayor.");
+					}
+				} else {
+					if(transactionFounded.getAccount().getBalanceAvailable() >= transactionFounded.getAmount()) {
+						modifyAmountAccountFromTransaction(transactionFounded, "UPDATE");
+					} else {
+						throw new CustomException("La cuenta no tiene fondos suficiente para procesar el nuevo monto, ingrese un nuevo monto de ingreso mayor.");
+					}
+				}
+			} else {
+				if(transactionFounded.getAccount().getBalanceAvailable() >= transactionFounded.getAmount()) {
+					if(bothAccountsEquals) {
+						transactionRequest.setAccount(modifyAmountAccountFromTransaction(transactionFounded, "UPDATE"));
+					} else {
+						modifyAmountAccountFromTransaction(transactionFounded, "UPDATE");
+					}
+
+					transactionRequest.setIdExpenseToPay(0L);
+					transactionRequest.setAmountToRecover(0.0);
+					transactionRequest.setAmountPayed(0.0);
+				} else {
+					throw new CustomException("La cuenta no tiene fondos suficiente para procesar la actualización.");
+				}
+			}
 		}
 
-		transactionRequest.setTag(validateTagsAndSaveIfNotExists(transactionRequest, messageLog));
-		transactionRequest.setVouchers(validateVouchersAndSaveIfNotExists(transactionRequest, messageLog));
+		LOG.info(messageLog + "Devoluciones y descuentos realizados existosamente.");
+		LOG.info(messageLog + "Se inicia con el registro y actualización de los nuevos valores de la transacción emitida.");
+		Response responseSave = saveTransaction(transactionRequest, messageLog);
+		if(!responseSave.getStatus().equals("success")) {
+			throw new CustomException(response.getMessage());
+		}
 
-		modifyAmountAccountFromTransaction(transactionRequest, "SAVE");
-
-		transactionToSave = transactionRepository.save(transactionRequest);
-
-		LOG.info(messageLog + properties.RESPONSE_GENERIC_SAVE_SUCCESS_MESSAGE);
+		LOG.info(messageLog + "ACTUALIZACIÓN COMPLETA..");
+		response.setObject(responseSave.getObject());
 
 		response.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
 		response.setStatus(properties.RESPONSE_GENERIC_SUCCESS_STATUS);
 		response.setMessage(properties.RESPONSE_GENERIC_UPDATE_SUCCESS_MESSAGE);
-		response.setObject(transactionToSave);
 
 		return response;
 	}

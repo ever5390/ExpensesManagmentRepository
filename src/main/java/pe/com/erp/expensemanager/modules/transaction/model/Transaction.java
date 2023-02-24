@@ -77,22 +77,22 @@ public class Transaction {
 	@Override
 	public String toString() {
 		return "Transaction{" +
-				"id=" + id +
-				", amount=" + amount +
-				", amountPayed=" + amountPayed +
-				", amountToRecover=" + amountToRecover +
-				", pendingPay=" + pendingPay +
-				", enabled=" + enabled +
-				", transactionType=" + transactionType +
-				", createAt=" + createAt +
-				", description='" + description + '\'' +
-				", vouchers=" + vouchers +
-				", category=" + category +
-				", account=" + account +
-				", reposition=" + reposition +
-				", tag=" + tag +
-				", period=" + period +
-				", idExpenseToPay=" + idExpenseToPay +
+				"id=" + id + '\n' +
+				", amount=" + amount + '\n' +
+				", amountPayed=" + amountPayed + '\n' +
+				", amountToRecover=" + amountToRecover + '\n' +
+				", pendingPay=" + pendingPay + '\n' +
+				", enabled=" + enabled + '\n' +
+				", transactionType=" + transactionType + '\n' +
+				", createAt=" + createAt + '\n' +
+				", description='" + description + '\'' + '\n' +
+				", vouchers=" + vouchers.size() + '\n' +
+				", category=" + category.getName() + '\n' +
+				", account=" + account + '\n' +
+				", reposition=" + reposition + '\n' +
+				", tag=" + tag + '\n' +
+				", period=" + period + '\n' +
+				", idExpenseToPay=" + idExpenseToPay + '\n' +
 				'}';
 	}
 }

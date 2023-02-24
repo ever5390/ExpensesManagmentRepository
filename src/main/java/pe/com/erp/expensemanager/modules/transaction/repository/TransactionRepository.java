@@ -16,18 +16,29 @@ import pe.com.erp.expensemanager.modules.transaction.model.Transaction;
 @Repository
 public interface TransactionRepository extends CrudRepository<Transaction, Long>{
 
-    @Query("Select p from Transaction p where p.idExpenseToPay =: idTransaction and p.period.id =: idPeriod")
-    List<Transaction> findPaymentsAssocToExpenseDeleteByExpenseId(Long idTransaction, Long idPeriod);
-    @Query("Select e from Transaction e where e.id =: idTransaction and e.period.id =: idPeriod")
-    Transaction findExpenseAssocToPaymentByIdExpenseToPayment(Long idTransaction, Long id);
-    @Query("Select tf from Transference tf where tf.idExpenseAssoc =: idTransaction and tf.period.id =: idPeriod")
-    List<Transference> findTransferencesAssocExpenseToDeleteWithAccountCreditCardByExpenseId(Long idTransaction, Long id);
+    @Query("Select p from Transaction p where p.idExpenseToPay =:idTransaction and p.period.id =:idPeriod")
+    List<Transaction> findPaymentsAssocToExpenseDeleteByExpenseIdAndPeriodId(Long idTransaction, Long idPeriod);
 
-    @Query("Select t from Transaction t where t.period.workspace.id = :idWorkspace and t.createAt BETWEEN :dateBegin and :dateEnd ORDER BY t.createAt DESC")
+    @Query("Select p from Transaction p where p.idExpenseToPay =:idTransaction and p.period.workspace.id =:idWorkspace")
+    List<Transaction> findPaymentsAssocToExpenseDeleteByExpenseIdAndWorkspaceId(Long idTransaction, Long idWorkspace);
+
+    @Query("Select e from Transaction e where e.id =:idTransaction and e.period.id =:idPeriod")
+    Transaction findExpenseAssocToPaymentByIdExpenseToPaymentAndPeriodId(Long idTransaction, Long idPeriod);
+
+    @Query("Select e from Transaction e where e.id =:idExpenseToPay and e.period.workspace.id =:idWorkspace")
+    Transaction findExpenseAssocToPaymentByIdExpenseToPaymentAndWorkspaceId(Long idExpenseToPay, Long idWorkspace);
+    @Query("Select tf from Transference tf where tf.idExpenseAssoc =:idTransaction and tf.period.id =:idPeriod")
+    List<Transference> findTransferencesAssocExpenseToDeleteWithAccountCreditCardByExpenseIdAndPeriodId(Long idTransaction, Long id);
+
+    @Query("Select tf from Transference tf where tf.idExpenseAssoc =:idTransaction and tf.period.workspace.id =:idWorkspace")
+    List<Transference> findTransferencesAssocExpenseToDeleteWithAccountCreditCardByExpenseIdAndWorkspaceId(Long idTransaction, Long idWorkspace);
+
+    @Query("Select t from Transaction t where t.period.workspace.id =:idWorkspace and t.createAt BETWEEN :dateBegin and :dateEnd ORDER BY t.createAt DESC")
     List<Transaction> findTransactionByWorskpaceIdAndDateRange(Long idWorkspace, Date dateBegin, Date dateEnd);
 
     @Query("Select t from Transaction t where t.account.id = :idAccount and t.period.id = :idPeriod ORDER BY t.createAt DESC")
     List<Transaction> findTransactionByAccountIdAndPeriodId(Long idAccount, Long idPeriod);
+
 
 	/*
 	@Query("Select COALESCE(sum(amount),0) from Expense e where e.period.id =:idPeriod")
