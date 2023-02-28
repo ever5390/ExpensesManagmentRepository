@@ -52,7 +52,7 @@ public class TransferenceController {
 	public ResponseEntity<Response> save(@RequestBody Transference transferenceRequest) {
 		
 		Response response = new Response();
-		String ownerInfoMessage = "[X10598] TRANSFERENCE :: ";
+		String ownerInfoMessage = "[X10598] TRANSFERENCE BEGIN:: ";
 		try {
 			response = itransferenceService.saveTransference(transferenceRequest, ownerInfoMessage);
 
@@ -81,10 +81,10 @@ public class TransferenceController {
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/transference/{id}")
-	public ResponseEntity<Response> deleteRegisterTransference(@PathVariable Long idTransference) {
+	@DeleteMapping("/transference/{idTransference}")
+	public ResponseEntity<Response> deleteRegisterTransference(@PathVariable("idTransference") Long idTransference) {
 		Response response = new Response();
-		String ownerInfoMessage = "[X10598] TRANSFERENCE :: ";
+		String ownerInfoMessage = "[X10598] TRANSFERENCE DELETE BEGIN :: ";
 		try {
 			response = itransferenceService.deleteTransferenceByIdTransfer(idTransference, ownerInfoMessage);
 			if(!response.getStatus().equals(properties.RESPONSE_GENERIC_SUCCESS_STATUS))

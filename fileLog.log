@@ -1,28 +1,90 @@
-2023-02-24 09:40:13.151  WARN 24240 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9h52m32s40ms998µs300ns).
-2023-02-24 10:03:32.830  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-24 10:03:32.837  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
-2023-02-24 10:03:32.897  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0
-, amount=150.0
+2023-02-27 00:01:52.827 ERROR 24412 --- [http-nio-8081-exec-5] p.c.e.e.m.a.c.TransferenceController     : [X10598] TRANSFERENCE BEGIN::  ::: TRANSFERENCE SAVE END  ::: 
+2023-02-27 00:04:30.533  INFO 24412 --- [http-nio-8081-exec-6] p.c.e.e.m.a.s.i.TransferenceServiceImpl  : [X10598] TRANSFERENCE ::  ::: INICIO DE ACTUALIZACIÓN DE TRANSFERENCIA  ::: 
+2023-02-27 00:04:30.535  INFO 24412 --- [http-nio-8081-exec-6] p.c.e.e.m.a.s.i.TransferenceServiceImpl  : [X10598] TRANSFERENCE ::  ::: Se realizan el proceso reverso de las cuentas asociadas a la tansferencia  ::: 
+2023-02-27 00:04:30.541  INFO 24412 --- [http-nio-8081-exec-6] p.c.e.e.m.a.s.i.TransferenceServiceImpl  : [X10598] TRANSFERENCE ::  ::: Proceso de reversa exitosa, se envían a guardar los nuevos datos de la transferencia.  ::: 
+2023-02-27 00:04:30.556 ERROR 24412 --- [http-nio-8081-exec-6] p.c.e.e.m.a.c.TransferenceController     : [X10598] TRANSFERENCE ::  ::: TRANSFERENCE SAVE END  ::: 
+2023-02-27 00:30:27.277  INFO 24412 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 00:30:27.286  INFO 24412 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-02-27 00:30:27.293  INFO 24412 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-02-27 09:24:52.930  INFO 1672 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Starting ExpenseManagerApplication using Java 17.0.5 on DESKTOP-F4NTJ95 with PID 1672 (C:\Projects\workspace-backend\expense-manager\target\classes started by Ever in C:\Projects\workspace-backend\expense-manager)
+2023-02-27 09:24:52.934  INFO 1672 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-02-27 09:24:53.040  INFO 1672 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-27 09:24:53.040  INFO 1672 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-27 09:24:55.740  INFO 1672 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-27 09:24:56.117  INFO 1672 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 355 ms. Found 22 JPA repository interfaces.
+2023-02-27 09:24:57.828  INFO 1672 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-02-27 09:24:57.854  INFO 1672 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-27 09:24:57.855  INFO 1672 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2023-02-27 09:24:58.108  INFO 1672 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-27 09:24:58.109  INFO 1672 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5068 ms
+2023-02-27 09:24:58.625  INFO 1672 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-27 09:24:58.748  INFO 1672 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-02-27 09:24:59.203  INFO 1672 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-27 09:24:59.635  INFO 1672 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-27 09:25:00.122  INFO 1672 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-27 09:25:00.163  INFO 1672 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-02-27 09:25:02.872  INFO 1672 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-27 09:25:02.890  INFO 1672 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 09:25:05.459  WARN 1672 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-27 09:25:06.112  INFO 1672 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-02-27 09:25:06.510  INFO 1672 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-02-27 09:25:07.759  INFO 1672 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Started ExpenseManagerApplication in 15.928 seconds (JVM running for 17.309)
+2023-02-27 09:28:38.572  INFO 1672 --- [http-nio-8081-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-27 09:28:38.584  INFO 1672 --- [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-02-27 09:28:38.592  INFO 1672 --- [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2023-02-27 17:27:18.931  INFO 1672 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 17:27:18.941  INFO 1672 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-02-27 17:27:18.952  INFO 1672 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-02-27 17:27:27.971  INFO 12416 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Starting ExpenseManagerApplication using Java 17.0.5 on DESKTOP-F4NTJ95 with PID 12416 (C:\Projects\workspace-backend\expense-manager\target\classes started by Ever in C:\Projects\workspace-backend\expense-manager)
+2023-02-27 17:27:27.973  INFO 12416 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-02-27 17:27:28.101  INFO 12416 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-27 17:27:28.102  INFO 12416 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-27 17:27:30.167  INFO 12416 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-27 17:27:30.500  INFO 12416 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 312 ms. Found 22 JPA repository interfaces.
+2023-02-27 17:27:32.059  INFO 12416 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-02-27 17:27:32.079  INFO 12416 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-27 17:27:32.080  INFO 12416 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2023-02-27 17:27:32.244  INFO 12416 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-27 17:27:32.245  INFO 12416 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4142 ms
+2023-02-27 17:27:32.601  INFO 12416 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-27 17:27:32.705  INFO 12416 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-02-27 17:27:33.103  INFO 12416 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-27 17:27:33.398  INFO 12416 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-27 17:27:33.790  INFO 12416 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-27 17:27:33.820  INFO 12416 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-02-27 17:27:37.814  INFO 12416 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-27 17:27:37.835  INFO 12416 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 17:27:41.528  WARN 12416 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-27 17:27:42.313  INFO 12416 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-02-27 17:27:43.008  INFO 12416 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-02-27 17:27:45.149  INFO 12416 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Started ExpenseManagerApplication in 17.951 seconds (JVM running for 18.889)
+2023-02-27 17:30:34.516  INFO 12416 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-27 17:30:34.517  INFO 12416 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-02-27 17:30:34.519  INFO 12416 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-02-27 17:37:59.666  INFO 12416 --- [http-nio-8081-exec-3] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
+2023-02-27 17:37:59.673  INFO 12416 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: INCOME
+2023-02-27 17:37:59.747  INFO 12416 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0
+, amount=100.0
 , amountPayed=0.0
 , amountToRecover=100.0
 , pendingPay=false
 , enabled=true
-, transactionType=EXPENSE
-, createAt=Fri Feb 24 10:03:11 PET 2023
-, description=''
+, transactionType=INCOME
+, createAt=Mon Feb 27 17:36:42 PET 2023
+, description='Test registro de préstamo recibido, Si un INGRESO se registra como pendiente al tener reposición, entonces hace referencia a un préstamo recibido y que nosotros como propietarios debemos pagar.'
 , vouchers=0
-, category=INTERNET Y TELF
-, account=Account{id=13, accountNumber='726743898
-, accountName='saldo
-, balance=3000.0
-, balanceOnlyInitial=3000.0
-, balanceAvailable=1000.0
+, category=préstamo
+, account=Account{id=12, accountNumber='346581395
+, accountName='SALDO
+, balance=1047.2
+, balanceOnlyInitial=2000.0
+, balanceAvailable=0.0
 , statusAccount=INITIAL
-, createAt=Wed Feb 22 19:11:46 PET 2023
+, createAt=Wed Feb 22 19:11:22 PET 2023
 , accountType=PARENT
-, financialEntity=BBVA
+, financialEntity=BCP
 , typeCard=DEBIT
-, accountParentId=13
+, accountParentId=12
 }
 , reposition=[Reposition{id=0, amountToRepo='100.0'}]
 , tag=[]
@@ -35,36 +97,66 @@
  owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner=Ever Rosales Peña]]
 , idExpenseToPay=0
 }
-2023-02-24 10:03:32.897  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Validando parámetros de cuenta y montos
-2023-02-24 10:03:32.898  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción se marcará como PENDIENTE DE PAGO, ya que su monto a devolver es mayor que CERO
-2023-02-24 10:03:32.916  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se procede a modificar los montos de las cuentas afectadas de la transacción principal de tipo : EXPENSE
-2023-02-24 10:03:32.926  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se actualizaron los montos de las cuentas correctamente
-2023-02-24 10:03:32.940  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-24 10:03:32.956  INFO 24240 --- [http-nio-8081-exec-5] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
-2023-02-24 10:05:09.087  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
-2023-02-24 10:05:09.089  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: PAYMENT
-2023-02-24 10:05:09.090  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0
-, amount=99.0
+2023-02-27 17:37:59.748  INFO 12416 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción se marcará como PENDIENTE DE PAGO, ya que su monto a devolver es mayor que CERO
+2023-02-27 17:37:59.841  INFO 12416 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se encontró una categoría nueva, se procede a registrarla.
+2023-02-27 17:37:59.889  INFO 12416 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Registro de la categoría realizada correctamente.
+2023-02-27 17:37:59.897  INFO 12416 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se procede a modificar los montos de las cuentas afectadas de la transacción principal de tipo : INCOME
+2023-02-27 17:37:59.917  INFO 12416 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se actualizaron los montos de las cuentas correctamente
+2023-02-27 17:37:59.933  INFO 12416 --- [http-nio-8081-exec-3] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
+2023-02-27 17:37:59.978  INFO 12416 --- [http-nio-8081-exec-3] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
+2023-02-27 18:10:19.924  INFO 12416 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 18:10:19.928  INFO 12416 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-02-27 18:10:19.935  INFO 12416 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-02-27 18:10:32.412  INFO 13296 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Starting ExpenseManagerApplication using Java 17.0.5 on DESKTOP-F4NTJ95 with PID 13296 (C:\Projects\workspace-backend\expense-manager\target\classes started by Ever in C:\Projects\workspace-backend\expense-manager)
+2023-02-27 18:10:32.420  INFO 13296 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-02-27 18:10:32.565  INFO 13296 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-27 18:10:32.565  INFO 13296 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-27 18:10:35.076  INFO 13296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-27 18:10:35.512  INFO 13296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 407 ms. Found 22 JPA repository interfaces.
+2023-02-27 18:10:37.883  INFO 13296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-02-27 18:10:37.908  INFO 13296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-27 18:10:37.909  INFO 13296 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2023-02-27 18:10:38.116  INFO 13296 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-27 18:10:38.117  INFO 13296 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5550 ms
+2023-02-27 18:10:38.470  INFO 13296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-27 18:10:38.655  INFO 13296 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-02-27 18:10:39.135  INFO 13296 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-27 18:10:39.358  INFO 13296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-27 18:10:39.703  INFO 13296 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-27 18:10:39.736  INFO 13296 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-02-27 18:10:42.029  INFO 13296 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-27 18:10:42.049  INFO 13296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 18:10:44.401  WARN 13296 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-27 18:10:45.128  INFO 13296 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-02-27 18:10:45.614  INFO 13296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-02-27 18:10:47.091  INFO 13296 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Started ExpenseManagerApplication in 15.601 seconds (JVM running for 16.66)
+2023-02-27 18:11:27.802  INFO 13296 --- [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-27 18:11:27.802  INFO 13296 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-02-27 18:11:27.805  INFO 13296 --- [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-02-27 18:13:37.585  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
+2023-02-27 18:13:37.590  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: PAYMENT
+2023-02-27 18:13:37.648  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0
+, amount=100.0
 , amountPayed=0.0
 , amountToRecover=100.0
 , pendingPay=false
 , enabled=true
 , transactionType=PAYMENT
-, createAt=Fri Feb 24 10:03:42 PET 2023
+, createAt=Mon Feb 27 18:13:06 PET 2023
 , description=''
 , vouchers=0
-, category=INTERNET Y TELF
-, account=Account{id=36, accountNumber='638329338
-, accountName='lñklñk
-, balance=899.0
-, balanceOnlyInitial=899.0
-, balanceAvailable=899.0
+, category=préstamo
+, account=Account{id=13, accountNumber='726743898
+, accountName='saldo
+, balance=3000.0
+, balanceOnlyInitial=3000.0
+, balanceAvailable=1442.0
 , statusAccount=INITIAL
-, createAt=Thu Feb 23 21:02:12 PET 2023
+, createAt=Wed Feb 22 19:11:46 PET 2023
 , accountType=PARENT
-, financialEntity=INTERBANK
-, typeCard=RECARGABLE
-, accountParentId=36
+, financialEntity=BBVA
+, typeCard=DEBIT
+, accountParentId=13
 }
 , reposition=[]
 , tag=[]
@@ -75,12 +167,183 @@
  startDate=Sun Jan 01 00:00:00 PET 2023,
  finalDate=Thu Mar 30 00:00:00 PET 2023,
  owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner=Ever Rosales Peña]]
-, idExpenseToPay=62
+, idExpenseToPay=65
 }
-2023-02-24 10:05:09.095  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::validando parámetros del pago 
-2023-02-24 10:05:09.097  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Actualización del monto pagado de la cuenta TC BBVA
-2023-02-24 10:05:09.098  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se actualizó el monto pagado correctamente
-2023-02-24 10:05:09.098  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se procede a modificar los montos de las cuentas afectadas de la transacción principal de tipo : PAYMENT
-2023-02-24 10:05:09.102  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se actualizaron los montos de las cuentas correctamente
-2023-02-24 10:05:09.106  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
-2023-02-24 10:05:09.113  INFO 24240 --- [http-nio-8081-exec-10] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
+2023-02-27 18:13:37.655  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::validando parámetros del pago 
+2023-02-27 18:13:37.658  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Actualización del monto pagado de la cuenta TC BCP
+2023-02-27 18:13:37.658  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Monto PAGADO de TC es IGUAL al monto a reponer 
+2023-02-27 18:13:37.659  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::El gasto se maracará como RESPUESTO en su totalidad 
+2023-02-27 18:13:37.675  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se actualizó el monto pagado correctamente
+2023-02-27 18:13:37.676  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se procede a modificar los montos de las cuentas afectadas de la transacción principal de tipo : EXPENSE
+2023-02-27 18:13:37.695  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se actualizaron los montos de las cuentas correctamente
+2023-02-27 18:13:37.718  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
+2023-02-27 18:13:37.753  INFO 13296 --- [http-nio-8081-exec-7] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
+2023-02-27 18:16:43.507  INFO 13296 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 18:16:43.513  INFO 13296 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-02-27 18:16:43.559  INFO 13296 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-02-27 18:16:55.090  INFO 16856 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Starting ExpenseManagerApplication using Java 17.0.5 on DESKTOP-F4NTJ95 with PID 16856 (C:\Projects\workspace-backend\expense-manager\target\classes started by Ever in C:\Projects\workspace-backend\expense-manager)
+2023-02-27 18:16:55.092  INFO 16856 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-02-27 18:16:55.235  INFO 16856 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-27 18:16:55.236  INFO 16856 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-27 18:16:57.409  INFO 16856 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-27 18:16:57.945  INFO 16856 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 513 ms. Found 22 JPA repository interfaces.
+2023-02-27 18:16:59.956  INFO 16856 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-02-27 18:16:59.984  INFO 16856 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-27 18:16:59.985  INFO 16856 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2023-02-27 18:17:00.219  INFO 16856 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-27 18:17:00.220  INFO 16856 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4983 ms
+2023-02-27 18:17:00.717  INFO 16856 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-27 18:17:00.803  INFO 16856 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-02-27 18:17:01.220  INFO 16856 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-27 18:17:01.494  INFO 16856 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-27 18:17:02.581  INFO 16856 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-27 18:17:02.618  INFO 16856 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-02-27 18:17:04.859  INFO 16856 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-27 18:17:04.875  INFO 16856 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 18:17:07.471  WARN 16856 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-27 18:17:07.954  INFO 16856 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-02-27 18:17:08.430  INFO 16856 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-02-27 18:17:09.857  INFO 16856 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Started ExpenseManagerApplication in 15.571 seconds (JVM running for 16.634)
+2023-02-27 18:17:24.776  INFO 16856 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 18:17:24.786  INFO 16856 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-02-27 18:17:24.808  INFO 16856 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-02-27 18:17:37.347  INFO 18580 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Starting ExpenseManagerApplication using Java 17.0.5 on DESKTOP-F4NTJ95 with PID 18580 (C:\Projects\workspace-backend\expense-manager\target\classes started by Ever in C:\Projects\workspace-backend\expense-manager)
+2023-02-27 18:17:37.349  INFO 18580 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-02-27 18:17:37.456  INFO 18580 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-27 18:17:37.456  INFO 18580 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-27 18:17:40.235  INFO 18580 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-27 18:17:40.794  INFO 18580 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 537 ms. Found 22 JPA repository interfaces.
+2023-02-27 18:17:42.766  INFO 18580 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-02-27 18:17:42.839  INFO 18580 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-27 18:17:42.840  INFO 18580 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2023-02-27 18:17:43.093  INFO 18580 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-27 18:17:43.094  INFO 18580 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5637 ms
+2023-02-27 18:17:43.464  INFO 18580 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-27 18:17:43.626  INFO 18580 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-02-27 18:17:44.084  INFO 18580 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-27 18:17:44.327  INFO 18580 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-27 18:17:44.710  INFO 18580 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-27 18:17:44.747  INFO 18580 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-02-27 18:17:47.184  INFO 18580 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-27 18:17:47.226  INFO 18580 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 18:17:50.425  WARN 18580 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-27 18:17:51.440  INFO 18580 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-02-27 18:17:52.215  INFO 18580 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-02-27 18:17:53.564  INFO 18580 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Started ExpenseManagerApplication in 17.271 seconds (JVM running for 18.495)
+2023-02-27 18:18:08.238  INFO 18580 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 18:18:08.247  INFO 18580 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-02-27 18:18:08.295  INFO 18580 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-02-27 18:18:21.881  INFO 17708 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Starting ExpenseManagerApplication using Java 17.0.5 on DESKTOP-F4NTJ95 with PID 17708 (C:\Projects\workspace-backend\expense-manager\target\classes started by Ever in C:\Projects\workspace-backend\expense-manager)
+2023-02-27 18:18:21.884  INFO 17708 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : No active profile set, falling back to 1 default profile: "default"
+2023-02-27 18:18:22.058  INFO 17708 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-02-27 18:18:22.058  INFO 17708 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-02-27 18:18:24.722  INFO 17708 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-02-27 18:18:25.238  INFO 17708 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 481 ms. Found 22 JPA repository interfaces.
+2023-02-27 18:18:27.510  INFO 17708 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2023-02-27 18:18:27.554  INFO 17708 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-02-27 18:18:27.567  INFO 17708 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.69]
+2023-02-27 18:18:27.899  INFO 17708 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-02-27 18:18:27.904  INFO 17708 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5844 ms
+2023-02-27 18:18:30.170  INFO 17708 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-02-27 18:18:30.321  INFO 17708 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.14.Final
+2023-02-27 18:18:30.764  INFO 17708 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-02-27 18:18:31.035  INFO 17708 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-02-27 18:18:31.388  INFO 17708 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-02-27 18:18:31.419  INFO 17708 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-02-27 18:18:33.926  INFO 17708 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-02-27 18:18:33.946  INFO 17708 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-02-27 18:18:37.783  WARN 17708 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-02-27 18:18:38.648  INFO 17708 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-02-27 18:18:40.595  INFO 17708 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2023-02-27 18:18:43.321  INFO 17708 --- [restartedMain] p.c.e.e.ExpenseManagerApplication        : Started ExpenseManagerApplication in 22.334 seconds (JVM running for 23.38)
+2023-02-27 18:19:22.507  INFO 17708 --- [http-nio-8081-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-02-27 18:19:22.509  INFO 17708 --- [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-02-27 18:19:22.511  INFO 17708 --- [http-nio-8081-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-02-27 18:25:21.884  INFO 17708 --- [http-nio-8081-exec-7] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: BEGIN 
+2023-02-27 18:25:21.889  INFO 17708 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: INCOME
+2023-02-27 18:25:21.976  INFO 17708 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=0
+, amount=80.0
+, amountPayed=0.0
+, amountToRecover=0.0
+, pendingPay=false
+, enabled=true
+, transactionType=INCOME
+, createAt=Mon Feb 27 18:25:15 PET 2023
+, description=''
+, vouchers=0
+, category=ALMUERZO
+, account=Account{id=12, accountNumber='346581395
+, accountName='SALDO
+, balance=1047.2
+, balanceOnlyInitial=2000.0
+, balanceAvailable=100.0
+, statusAccount=INITIAL
+, createAt=Wed Feb 22 19:11:22 PET 2023
+, accountType=PARENT
+, financialEntity=BCP
+, typeCard=DEBIT
+, accountParentId=12
+}
+, reposition=[]
+, tag=[]
+, period=
+ AccountingPeriodSummary 
+[Id=1,
+ statusPeriod=true,
+ startDate=Sun Jan 01 00:00:00 PET 2023,
+ finalDate=Thu Mar 30 00:00:00 PET 2023,
+ owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner=Ever Rosales Peña]]
+, idExpenseToPay=0
+}
+2023-02-27 18:25:21.977  INFO 17708 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se procede a modificar los montos de las cuentas afectadas de la transacción principal de tipo : INCOME
+2023-02-27 18:25:22.019  INFO 17708 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se actualizaron los montos de las cuentas correctamente
+2023-02-27 18:25:22.077  INFO 17708 --- [http-nio-8081-exec-7] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
+2023-02-27 18:25:22.130  INFO 17708 --- [http-nio-8081-exec-7] p.c.e.e.m.t.c.TransactionController      : [X10598] EXPENSE SAVE :: END 
+2023-02-27 18:25:48.626  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::=====================================
+2023-02-27 18:25:48.627  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE :: Inicio de ACTUALIZACIÓN de registro
+2023-02-27 18:25:48.628  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::======================================
+2023-02-27 18:25:48.634  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE :: La tipología de la transacción a actualizar es: INCOME
+2023-02-27 18:25:48.634  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE :: La Transacción a modificar es: 180.0
+2023-02-27 18:25:48.635  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se procede a realizar las devoluciones o descuentos previos a actualizar los nuevos parámetros al registro.
+2023-02-27 18:25:48.635  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Devoluciones y descuentos realizados existosamente.
+2023-02-27 18:25:48.636  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se inicia con el registro y actualización de los nuevos valores de la transacción inicial seleccionada para sus edición.
+2023-02-27 18:25:48.636  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::La transacción recibida es de tipo: EXPENSE
+2023-02-27 18:25:48.640  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::transaction request: Transaction{id=67
+, amount=80.0
+, amountPayed=0.0
+, amountToRecover=0.0
+, pendingPay=false
+, enabled=true
+, transactionType=EXPENSE
+, createAt=Mon Feb 27 18:25:15 PET 2023
+, description=''
+, vouchers=0
+, category=ALMUERZO
+, account=Account{id=12, accountNumber='346581395
+, accountName='SALDO
+, balance=1047.2
+, balanceOnlyInitial=2000.0
+, balanceAvailable=100.0
+, statusAccount=INITIAL
+, createAt=2023-02-22 19:11:22.787
+, accountType=PARENT
+, financialEntity=BCP
+, typeCard=DEBIT
+, accountParentId=12
+}
+, reposition=[]
+, tag=[]
+, period=
+ AccountingPeriodSummary 
+[Id=1,
+ statusPeriod=true,
+ startDate=Sun Jan 01 00:00:00 PET 2023,
+ finalDate=Thu Mar 30 00:00:00 PET 2023,
+ owner=WorkSpace [id=1, name=Workspace, typeWSPC=TypeWorkSpace [id=1, typeName=SINGLE], owner=Ever Rosales Peña]]
+, idExpenseToPay=0
+}
+2023-02-27 18:25:48.641  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Validando parámetros de cuenta y montos
+2023-02-27 18:25:48.641  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se procede a modificar los montos de las cuentas afectadas de la transacción principal de tipo : EXPENSE
+2023-02-27 18:25:48.642  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se actualizaron los montos de las cuentas correctamente
+2023-02-27 18:25:48.651  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::Se realizó el registro correctamente
+2023-02-27 18:25:48.651  INFO 17708 --- [http-nio-8081-exec-2] p.c.e.e.m.t.s.i.TransactionServiceImpl   : [X10598] EXPENSE SAVE ::ACTUALIZACIÓN COMPLETA..

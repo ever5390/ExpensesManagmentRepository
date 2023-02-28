@@ -49,8 +49,6 @@ public class TransferenceServiceImpl implements ITransferenceService {
 		Account accountOrigin = new Account();
 		Transference transferenceToSave = new Transference();
 
-		LOG.info(messageLog + "BEGIN TRANSFERENCE");
-
 		accountDestiny = transferenceRequest.getAccountDestiny();
 		accountOrigin = transferenceRequest.getAccountOrigin();
 
@@ -78,6 +76,11 @@ public class TransferenceServiceImpl implements ITransferenceService {
 				throw new CustomException(properties.RESPONSE_CUSTOMIZED_TRANSFER_INFO_AMOUNTTOTRANSFER_BETTERTHAN_AVAILABLEAMOUNT_ORIGINACCOUNT);
 			}
 
+			if(accountOrigin.getId() == accountDestiny.getId()) {
+				LOG.info(messageLog + properties.RESPONSE_CUSTOMIZED_TRANSFER_ERROR_SELF_ACCOUNT_DONT_POSIBLE_TRANSFER);
+				throw new CustomException(properties.RESPONSE_CUSTOMIZED_TRANSFER_ERROR_SELF_ACCOUNT_DONT_POSIBLE_TRANSFER);
+			}
+
 			accountOrigin.setBalanceAvailable(accountOrigin.getBalanceAvailable() - transferenceRequest.getAmount());
 			accountDestiny.setBalanceAvailable(accountDestiny.getBalanceAvailable() + transferenceRequest.getAmount());
 
@@ -85,19 +88,6 @@ public class TransferenceServiceImpl implements ITransferenceService {
 				transferenceRequest.setTypeTransference(TypeTransference.EXTERN);
 			}
 
-			/*
-			if(accountOrigin.getAccountType().getTypeName().equals(accountDestiny.getAccountType().getTypeName())) {
-				if(accountOrigin.getAccountType().getTypeName().equals("PARENT")) {
-					transferenceRequest.setTypeTransference(TypeTransference.EXTERN);
-				}
-				accountOrigin.setBalance(accountOrigin.getBalance() - transferenceRequest.getAmount());
-				accountDestiny.setBalance(accountDestiny.getBalance() + transferenceRequest.getAmount());
-			} else if(accountOrigin.getAccountType().getTypeName().equals("PARENT")){
-				accountDestiny.setBalance(accountDestiny.getBalance() + transferenceRequest.getAmount());
-			} else if(accountDestiny.getAccountType().getTypeName().equals("PARENT")){
-				accountOrigin.setBalance(accountOrigin.getBalance() - transferenceRequest.getAmount());
-			}
-			*/
 			accountRepo.save(accountDestiny);
 			accountRepo.save(accountOrigin);
 		}
@@ -129,16 +119,19 @@ public class TransferenceServiceImpl implements ITransferenceService {
 		Response response = new Response();
 		Account accountOrigin = new Account();
 		Account accountDestiny = new Account();
-		Transference transferenceToDelete = new Transference();
+		Transference transferenceToModify = new Transference();
 
-		transferenceToDelete = transferRepo.findById(idTransference).orElse(null);
+		transferenceToModify = transferRepo.findById(idTransference).orElse(null);
 
-		if (transferenceToDelete == null) {
+		if (transferenceToModify == null) {
 			LOG.error(messageLog + " ::: TRANSFERENCE TO DELETE DON'T EXIST  ::: ");
 			throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_TRANSFERENCE_DONT_EXIST);
 		}
 
-		reversarTransferencesToAccountPrevDeleteTransfer(messageLog, transferenceToDelete);
+		LOG.info(messageLog + " :::Transferencia encontrada a borrar  ::: ");
+		LOG.info(messageLog + transferenceToModify.toString());
+
+		reversarTransferencesToAccountPrevModifyTransfer(messageLog, transferenceToModify);
 
 		transferRepo.deleteById(idTransference);
 
@@ -151,16 +144,16 @@ public class TransferenceServiceImpl implements ITransferenceService {
 	}
 
 	@Transactional(rollbackFor = {CustomException.class, ValidationException.class})
-	private void reversarTransferencesToAccountPrevDeleteTransfer(String messageLog, Transference transferenceToDelete) {
+	private Transference reversarTransferencesToAccountPrevModifyTransfer(String messageLog, Transference transferenceToModify) {
 		Account accountOrigin;
 		Account accountDestiny;
-		accountDestiny = transferenceToDelete.getAccountDestiny();
-		accountOrigin = transferenceToDelete.getAccountOrigin();
+		accountDestiny = transferenceToModify.getAccountDestiny();
+		accountOrigin = transferenceToModify.getAccountOrigin();
 
-		accountOrigin = accountRepo.findById(transferenceToDelete.getAccountOrigin().getId()).orElse(null);
-		accountDestiny = accountRepo.findById(transferenceToDelete.getAccountDestiny().getId()).orElse(null);
+		accountOrigin = accountRepo.findById(transferenceToModify.getAccountOrigin().getId()).orElse(null);
+		accountDestiny = accountRepo.findById(transferenceToModify.getAccountDestiny().getId()).orElse(null);
 
-		if(!transferenceToDelete.getTypeTransference().equals(TypeTransference.EXTERN) && accountOrigin == null) {
+		if(!transferenceToModify.getTypeTransference().equals(TypeTransference.EXTERN) && accountOrigin == null) {
 			LOG.info(messageLog + properties.RESPONSE_CUSTOMIZED_TRANSFER_INFO_SOMEACCOUNT_DONT_FOUND);
 			throw new CustomException(properties.RESPONSE_CUSTOMIZED_TRANSFER_INFO_SOMEACCOUNT_DONT_FOUND);
 		}
@@ -171,50 +164,18 @@ public class TransferenceServiceImpl implements ITransferenceService {
 		}
 
 		//Valida que el saldo disponible actual de la cuenta reversar[destino] sea el suficiente para poder aplicarle el descuento, de lo contrario no dejará hacerlo.
-		if((accountDestiny.getBalanceAvailable() - transferenceToDelete.getAmount()) < 0) {
+		if((accountDestiny.getBalanceAvailable() - transferenceToModify.getAmount()) < 0) {
 			LOG.info(messageLog + properties.RESPONSE_CUSTOMIZED_TRANSFER_INFO_AVAILABLE_ACCOUNT_ITS_INSUFFICIENT_FOR_DISCOUNT_AMOUNT_TRANSFERENCE_DONT_POSSIBLE_REVERSAL);
 			throw new CustomException(properties.RESPONSE_CUSTOMIZED_TRANSFER_INFO_AVAILABLE_ACCOUNT_ITS_INSUFFICIENT_FOR_DISCOUNT_AMOUNT_TRANSFERENCE_DONT_POSSIBLE_REVERSAL);
 		}
 
-		if(transferenceToDelete.getTypeTransference().equals(TypeTransference.INTERN)) {
-			accountOrigin.setBalanceAvailable(accountOrigin.getBalanceAvailable() + transferenceToDelete.getAmount());
-			accountDestiny.setBalanceAvailable(accountDestiny.getBalanceAvailable() - transferenceToDelete.getAmount());
-/*
-			if (accountOrigin.getAccountType().getTypeName().equals("PARENT") &&
-					accountDestiny.getAccountType().getTypeName().equals("PARENT")) {
-				accountOrigin.setBalance(accountOrigin.getBalance() + transferenceToDelete.getAmount());
-				accountDestiny.setBalance(accountDestiny.getBalance() - transferenceToDelete.getAmount());
-			} else if (accountOrigin.getAccountType().getTypeName().equals("PARENT")) {
-				accountDestiny.setBalance(accountDestiny.getBalance() - transferenceToDelete.getAmount());
-			} else if (accountDestiny.getAccountType().getTypeName().equals("PARENT")) {
-				accountOrigin.setBalance(accountOrigin.getBalance() + transferenceToDelete.getAmount());
-			} else {
-				accountOrigin.setBalance(accountOrigin.getBalance() + transferenceToDelete.getAmount());
-				accountDestiny.setBalance(accountDestiny.getBalance() - transferenceToDelete.getAmount());
-			}
-*/
-			accountRepo.save(accountOrigin);
-			accountRepo.save(accountDestiny);
-		} else {
-			accountDestiny.setBalanceAvailable(accountDestiny.getBalanceAvailable() - transferenceToDelete.getAmount());
-			accountDestiny.setBalanceAvailable(accountDestiny.getBalanceAvailable() - transferenceToDelete.getAmount());
-			accountRepo.save(accountDestiny);
-		}
-/*
-		//REVERSAL CASE: CREDIT CARD EXPENSE
-		if(transferenceToDelete.getIdExpenseAssoc() != null) {
-			Transaction expenseByCreditCard = transactionRepository.findById(transferenceToDelete.getIdExpenseAssoc()).orElse(null);
-			if (expenseByCreditCard == null) {
-				LOG.error(messageLog + " ::: EXPENE CREDIT CARD ASSOC DONT EXIS'T  ::: ");
-				throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_ASSOC_CREDIT_CARD_DONT_EXIST);
-			}
+		accountOrigin.setBalanceAvailable(accountOrigin.getBalanceAvailable() + transferenceToModify.getAmount());
+		accountDestiny.setBalanceAvailable(accountDestiny.getBalanceAvailable() - transferenceToModify.getAmount());
 
-			expenseByCreditCard.setAmountPayed(expenseByCreditCard.getAmountPayed() - transferenceToDelete.getAmount());
-			expenseByCreditCard.setPendingPay(true);
-			transactionRepository.save(expenseByCreditCard);
-		}
+		transferenceToModify.setAccountOrigin(accountRepo.save(accountOrigin));
+		transferenceToModify.setAccountDestiny(accountRepo.save(accountDestiny));
 
- */
+		return transferenceToModify;
 	}
 
 	@Override
@@ -226,6 +187,8 @@ public class TransferenceServiceImpl implements ITransferenceService {
 		Account accountDestiny = new Account();
 		Transference transferenceToUpdateFounded = new Transference();
 
+		LOG.info(messageLog + " ::: INICIO DE ACTUALIZACIÓN DE TRANSFERENCIA  ::: ");
+
 		transferenceToUpdateFounded = transferRepo.findById(idTransference).orElse(null);
 
 		if (transferenceToUpdateFounded == null) {
@@ -233,19 +196,14 @@ public class TransferenceServiceImpl implements ITransferenceService {
 			throw new CustomException(properties.RESPONSE_CUSTOMIZED_MESSAGE_TRANSFERENCE_DONT_EXIST);
 		}
 
-		reversarTransferencesToAccountPrevDeleteTransfer(messageLog, transferenceToUpdateFounded);
-
+		LOG.info(messageLog + " ::: Se realizan el proceso reverso de las cuentas asociadas a la tansferencia  ::: ");
+		reversarTransferencesToAccountPrevModifyTransfer(messageLog, transferenceToUpdateFounded);
+		LOG.info(messageLog + " ::: Proceso de reversa exitosa, se envían a guardar los nuevos datos de la transferencia.  ::: ");
 		saveTransference(transaferenceUpdateRequest, messageLog);
-
+		
 		response.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
 		response.setStatus(properties.RESPONSE_GENERIC_SUCCESS_STATUS);
 		response.setMessage(properties.RESPONSE_GENERIC_UPDATE_SUCCESS_MESSAGE);
-		response.setObject(null);
-
-
-		response.setTitle(properties.RESPONSE_GENERIC_SUCCESS_TITLE);
-		response.setStatus(properties.RESPONSE_GENERIC_SUCCESS_STATUS);
-		response.setMessage(properties.RESPONSE_GENERIC_DELETE_SUCCESS_MESSAGE);
 		response.setObject(null);
 
 		return response;

@@ -12,7 +12,6 @@ import lombok.ToString;
 import pe.com.erp.expensemanager.modules.period.model.Period;
 import pe.com.erp.expensemanager.modules.transaction.model.Transaction;
 
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -50,5 +49,20 @@ public class Transference {
 	private Date createDate;
 
 	private Long idExpenseAssoc;
-		
+
+	@Override
+	public String toString() {
+		return "Transference{" +
+				"id=" + id +
+				", accountOrigin=" + accountOrigin +  '\n' +
+				", accountDestiny=" + accountDestiny +  '\n' +
+				", amount=" + amount +  '\n' +
+				", reason='" + reason +  '\n' +
+				", enabled=" + enabled +  '\n' +
+				", typeTransference=" + typeTransference +  '\n' +
+				", period=" + period +  '\n' +
+				", createDate=" + createDate +  '\n' +
+				", idExpenseAssoc=" + idExpenseAssoc +  '\n' +
+				'}';
+	}
 }

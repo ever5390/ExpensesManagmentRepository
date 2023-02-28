@@ -5,7 +5,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PropertiesExtern {
-	@Value("${response.customized.message.expense.notfound.payments.assoctoexpense.todelete}")
+	@Value("${response.customized.message.transferences.selfaccount.dontpossibletransfer}")
+    public String RESPONSE_CUSTOMIZED_TRANSFER_ERROR_SELF_ACCOUNT_DONT_POSIBLE_TRANSFER;
+    @Value("${response.customized.message.expense.notfound.payments.assoctoexpense.todelete}")
     public String RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_NOTFOUND_PAYMENTS_ASSOC_TO_EXPENSE_TO_DELETE;
 	@Value("${response.customized.message.expense.notfound.expenses.assoctopayment.todelete}")
 	public String  RESPONSE_CUSTOMIZED_MESSAGE_EXPENSE_NOTFOUND_EXPENSE_ASSOC_TO_PAYMENT_TO_DELETE;

@@ -39,6 +39,11 @@ public interface TransactionRepository extends CrudRepository<Transaction, Long>
     @Query("Select t from Transaction t where t.account.id = :idAccount and t.period.id = :idPeriod ORDER BY t.createAt DESC")
     List<Transaction> findTransactionByAccountIdAndPeriodId(Long idAccount, Long idPeriod);
 
+    @Query("Select p from Transaction p where p.id =:idTransactionAssoc and p.period.workspace.id =:idWorkspace")
+    Transaction findTransactionAssocByIdTransactionAssocAndWorkspaceId(Long idTransactionAssoc, Long idWorkspace);
+
+    @Query("Select e from Transaction e where e.idExpenseToPay =:idTransaction and e.period.workspace.id =:idWorkspace")
+    Transaction findTransactionAssocByIdTransactionAndWorkspaceId(Long idTransaction, Long idWorkspace);
 
 	/*
 	@Query("Select COALESCE(sum(amount),0) from Expense e where e.period.id =:idPeriod")
