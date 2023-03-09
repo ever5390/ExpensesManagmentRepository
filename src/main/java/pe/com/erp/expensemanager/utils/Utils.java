@@ -1,6 +1,8 @@
 package pe.com.erp.expensemanager.utils;
 
 //import java.text.DateFormat;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -16,6 +18,14 @@ import org.slf4j.LoggerFactory;
 public class Utils {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Utils.class);
+
+
+	public static double roundTwoDecimalWithBigDecimal(double value) {
+		BigDecimal bd = new BigDecimal(value);
+		bd = bd.setScale(2, RoundingMode.HALF_UP);
+		double roundedValue = bd.doubleValue();
+		return value;
+	}
 
 	public static int getGeneratorNumber() {
 		return (int) (Math.random() * (999999999 - 100000000 + 1) + 100000000);

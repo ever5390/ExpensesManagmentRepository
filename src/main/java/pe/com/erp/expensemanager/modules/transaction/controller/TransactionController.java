@@ -59,27 +59,33 @@ public class TransactionController {
 	public ResponseEntity<Response> save( @RequestBody Transaction expenseRequest) {
 		
 		Response response =  new Response();
-		String ownerInfoMessage = "[X10598] EXPENSE SAVE ::";
+		String messageLog = "[X10598] EXPENSE SAVE ::";
+		LOG.info(messageLog + "=====================================");
+		LOG.info(messageLog + " INICIO SAVE TRANSACCIÓN");
+		LOG.info(messageLog + "======================================");
 		try {
-			LOG.info(ownerInfoMessage + " BEGIN " );
-			response = iTransactionService.saveTransaction(expenseRequest, ownerInfoMessage);
+			response = iTransactionService.saveTransaction(expenseRequest, messageLog);
 
 		} catch (CustomException ce) {
+			LOG.info(messageLog + ce.getMessage());
 			response.setTitle(properties.RESPONSE_GENERIC_INFO_TITLE);
 			response.setStatus(properties.RESPONSE_GENERIC_INFO_STATUS);
 			response.setMessage(ce.getMessage());
 			response.setObject(null);
 			return new ResponseEntity<Response>(response, HttpStatus.CONFLICT);
 		} catch(RuntimeException  e) {
+			LOG.error(messageLog + e.getMessage());
 			response.setTitle(properties.RESPONSE_GENERIC_ERROR_TITLE);
 			response.setStatus(properties.RESPONSE_GENERIC_ERROR_STATUS);
 			response.setMessage(properties.RESPONSE_GENERIC_SAVE_ERROR_INTERNALSERVER_MESSAGE);
 			response.setObject(null);
 			return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		} finally {
-			LOG.info(ownerInfoMessage + " END " );
+			LOG.info(messageLog + "=====================================");
+			LOG.info(messageLog + " FINAL SAVE TRANSACCIÓN");
+			LOG.info(messageLog + "======================================");
 		}
-		 		
+
 		return new ResponseEntity<Response>(response, HttpStatus.CREATED);
 	}
 	/*
@@ -123,13 +129,19 @@ public class TransactionController {
 	@PutMapping("/expense/update-vouchers")
 	Transaction updateVouchers(@RequestBody Transaction expenseRequest) {
 		Transaction transactionSaved = new Transaction();
-		String ownerInfoMessage = "[X10598] EXPENSE UPDATE VOUCHER ::";
+		String messageLog = "[X10598] EXPENSE UPDATE VOUCHER ::";
+		LOG.info(messageLog + "=====================================");
+		LOG.info(messageLog + " INICIO UPDATE VOUCHER AL REGISTRO DE TRANSACCIÓN GUARDADA PREVIAMENTE");
+		LOG.info(messageLog + "======================================");
 		try {
-			transactionSaved = iTransactionService.updateVouchers(expenseRequest, ownerInfoMessage);
-			LOG.error("Se actualizaron los vouchers a la transacción almacenada previamente!!");
+			transactionSaved = iTransactionService.updateVouchers(expenseRequest, messageLog);
 		} catch(Exception e) {
 			LOG.error(e.getMessage());
 			transactionSaved = new Transaction();
+		} finally {
+			LOG.info(messageLog + "=====================================");
+			LOG.info(messageLog + " FINAL UPDATE VOUCHER AL REGISTRO DE TRANSACCIÓN GUARDADA PREVIAMENTE");
+			LOG.info(messageLog + "======================================");
 		}
 		return transactionSaved;
 	}
@@ -137,25 +149,34 @@ public class TransactionController {
 	@PutMapping("/expense/{idExpense}")
 	ResponseEntity<Response> updateExpense(@RequestBody Transaction expenseRequest, @PathVariable Long idExpense) {
 		Response response = new Response();
-		String ownerInfoMessage = "[X10598] EXPENSE SAVE ::";
+		String messageLog = "[X10598] EXPENSE UPDATE ::";
+		LOG.info(messageLog + "=====================================");
+		LOG.info(messageLog + " INICIO UPDATE TRANSACCIÓN");
+		LOG.info(messageLog + "======================================");
 		try {
-			response = iTransactionService.updateTransactionById(expenseRequest, idExpense, ownerInfoMessage);
+			response = iTransactionService.updateTransactionById(expenseRequest, idExpense, messageLog);
 			if(!response.getStatus().equals(properties.RESPONSE_GENERIC_SUCCESS_STATUS)) {
 				return new ResponseEntity<Response>(response, HttpStatus.CONFLICT);
 			}
 			
 		} catch (CustomException ce) {
+			LOG.info(messageLog + ce.getMessage());
 			response.setTitle(properties.RESPONSE_GENERIC_INFO_TITLE);
 			response.setStatus(properties.RESPONSE_GENERIC_INFO_STATUS);
 			response.setMessage(ce.getMessage());
 			response.setObject(null);
 			return new ResponseEntity<Response>(response, HttpStatus.CONFLICT);
 		} catch(RuntimeException  e) {
+			LOG.info(messageLog + e.getMessage());
 			response.setTitle(properties.RESPONSE_GENERIC_ERROR_TITLE);
 			response.setStatus(properties.RESPONSE_GENERIC_ERROR_STATUS);
 			response.setMessage(properties.RESPONSE_GENERIC_SAVE_ERROR_INTERNALSERVER_MESSAGE);
 			response.setObject(null);
 			return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} finally {
+			LOG.info(messageLog + "=====================================");
+			LOG.info(messageLog + " FINAL UPDATE TRANSACCIÓN");
+			LOG.info(messageLog + "======================================");
 		}
 		
 		return new ResponseEntity<Response>(response, HttpStatus.OK);
@@ -164,30 +185,40 @@ public class TransactionController {
 	@DeleteMapping("/expense/{idExpense}")
 	ResponseEntity<Response> deleteExpenseById(@PathVariable Long idExpense) {
 		Response response = new Response();
-		String ownerInfoMessage = "[X10598] EXPENSE DELETE BEGIN ::";
+		String messageLog = "[X10598] EXPENSE DELETE ::";
+		LOG.info(messageLog + "=====================================");
+		LOG.info(messageLog + " INICIO DELETE TRANSACCIÓN");
+		LOG.info(messageLog + "======================================");
 		try {
-			response =  iTransactionService.deleteTransactionById(idExpense, ownerInfoMessage);
+			response =  iTransactionService.deleteTransactionById(idExpense, messageLog);
 			if(!response.getStatus().equals(properties.RESPONSE_GENERIC_SUCCESS_STATUS)) {
 				return new ResponseEntity<Response>(response, HttpStatus.BAD_REQUEST);
 			}
 			
 		} catch (CustomException ce) {
+			LOG.info(messageLog + ce.getMessage());
 			response.setTitle(properties.RESPONSE_GENERIC_INFO_TITLE);
 			response.setStatus(properties.RESPONSE_GENERIC_INFO_STATUS);
 			response.setMessage(ce.getMessage());
 			response.setObject(null);
 			return new ResponseEntity<Response>(response, HttpStatus.CONFLICT);
 		} catch(RuntimeException  e) {
+			LOG.info(messageLog + e.getMessage());
 			response.setTitle(properties.RESPONSE_GENERIC_ERROR_TITLE);
 			response.setStatus(properties.RESPONSE_GENERIC_ERROR_STATUS);
 			response.setMessage(properties.RESPONSE_GENERIC_SAVE_ERROR_INTERNALSERVER_MESSAGE);
 			response.setObject(null);
 			return new ResponseEntity<Response>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		} finally {
+			LOG.info(messageLog + "=====================================");
+			LOG.info(messageLog + " FINAL DELETE TRANSACCIÓN");
+			LOG.info(messageLog + "======================================");
 		}
 
 		return new ResponseEntity<Response>(response, HttpStatus.OK);	
 	}
-	/*
+
+/*
 	@GetMapping("/workspace/{idWorkspace}/period/{idPeriod}/expenses")
 	public ResponseEntity<List<Expense>> findExpensessByWorskpaceIdAndIdPeriod(@PathVariable Long idWorkspace, @PathVariable Long idPeriod) {
 		return new ResponseEntity<>(expenseService.findExpensesByIdWorkspaceAndIdPeriod(

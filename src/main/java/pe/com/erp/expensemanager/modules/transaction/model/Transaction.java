@@ -28,10 +28,10 @@ public class Transaction {
 	private Long id;
 
 	@Column(nullable = false)
-	private Double amount;
+	private double amount;
 
 	@Column(nullable = false)
-	private Double amountPayed;
+	private double amountPayed;
 
 	private double amountToRecover;
 
